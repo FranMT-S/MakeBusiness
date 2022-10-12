@@ -1,0 +1,11 @@
+{
+  "name": "makebusiness",
+  "version": "1.0.0",
+  "description": "Proyecto de Disenio Web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "FranMT-S",
+  "license": "ISC"
+}
