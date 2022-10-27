@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+.bg-purple-deg-1{
+    background: rgb(112,7,75);
+    background: linear-gradient(27deg, rgba(112,7,75,1) 21%, rgba(170,14,123,1) 60%, rgba(144,2,105,1) 100%);
+}
+
+.text{
+    &-yellow{
+            color: #D9CF77  
+    }
+
+    &-white{
+        color: white;
+    }
+}
+
+
+.column__basis-75{
+    flex-basis: 60%;
+}
+
+
+
+html, body{
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-family: var(--font-family);
+    background-color: var(--surface-b);
+}
+/* html, body { height: 100%; } */
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.row > * {
+    padding: 0 ;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

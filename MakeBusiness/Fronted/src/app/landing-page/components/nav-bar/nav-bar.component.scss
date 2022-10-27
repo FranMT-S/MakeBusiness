@@ -1,0 +1,38 @@
+.border-nav{
+
+   border-color: #ff8ae2;
+   border-width: 0 0 2px 0 ;
+   border-style: solid;
+
+}
+
+@mixin name {
+    
+}
+
+
+div{
+    color:white
+}
+ul{
+    overflow: hidden;
+}
+
+li{
+    color:white;
+ 
+    a{
+        color:white;
+
+        &:hover{
+          
+           background-color: #b01a79;
+           text-decoration: underline;
+        }
+    }
+}
+
+.header__logo{
+    width: 120px;
+    height: 100%;
+}
