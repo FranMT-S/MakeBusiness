@@ -10,13 +10,35 @@
 
 .text{
     &-yellow{
-            color: #D9CF77  
+        color: #D9CF77  
     }
 
     &-white{
         color: white;
     }
+    
+    &-purple{
+        color: #942C70;
+    }
 }
+
+.bg{
+    &-yellow{
+        background-color: #D9CF77  
+    }
+
+    &-white{
+        background-color: white;
+    }
+    
+    &-purple{
+        background-color: #942C70;
+    }
+}
+
+
+
+
 
 
 .column__basis-75{

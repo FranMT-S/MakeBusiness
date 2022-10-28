@@ -1,17 +1,48 @@
 <div class="container-fluid mt-5 p-0 w-100">
     <div class="w-100 ">
-        <div class="row bg-purple-deg-1 mx-auto px-5" style="width: 100%; height: 500px;">
-            <div class="col-4 my-auto">
-                <mat-card class="bg-primary">
-                    
-                </mat-card>
+        <div class="row bg-purple-deg-1 mx-auto px-5" style="width: 100%; ">
+            <div class="col-4 my-auto p-3 text-center rounded" *ngFor="let plain of getPlains()">
+                <mat-card class="plains__card w-100">
+                    <mat-card-title class="text-purple mb-5" >{{plain.name}}</mat-card-title>
+                  
+                    <mat-card-content class="text-purple fw-bold mb-4">
+                        <p>
+                            <span class="fs-4">{{plain.price == 0 ? 'Free' :  ('$ ' + plain.price)}} </span>
+                            <span>{{plain.price == 0 ? '' : '/' + ' ' + plain.annuity}}</span>
+                        </p>
+                    </mat-card-content>
+
+                    <mat-card-content class="px-4 plains__card--h70">
+                        <p class=" text-start text-justify fw-bold">{{plain.description}}</p>
+                      </mat-card-content>
+
+                      <mat-card-content>
+                        <p>limites:</p>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                              Paginas:
+                              <span class="badge badge-primary badge bg-purple rounded-pill">{{plain.limitPage}}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                              Productos en la web:
+                              <span class="badge badge-primary badge bg-purple rounded-pill">{{plain.limitProducts}}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                              Subida de archivos:
+                              <span class="badge badge bg-purple rounded-pill">{{plain.limitFiles}}</span>
+                            </li>
+                          </ul>
+                      </mat-card-content>
+
+                    <mat-card-actions>
+                         <button mat-raised-button  class="bg-purple text-white" >Comprar ahora</button>
+                    </mat-card-actions>
+                  </mat-card>
             </div>
             <div class="col-4">
-
+ 
             </div>
-            <div class="col-4">
-
-            </div>
+        
         </div>
     </div>
 </div>

@@ -1,1 +1,62 @@
-<p>contact-us works!</p>
+<div class="m-5">
+    <div class="row" >
+        <div class="col">
+            <h1 class="mb-0">Contactanos</h1>
+            <svg height="10" width="300">
+            <line x1="0" y1="0" x2="150" y2="0" style="stroke:#3f51b5;stroke-width:8" />
+        </svg>
+            <p>Para obtener nuestros servicios</p>
+        </div>
+        <div class="row py-2">
+            <form  autocomplete="off"  class="col col-sm-6 mb-5 me-2 p-3 d-flex row" style="background-color: rgba(63, 81, 181, 0.065); border-radius: 15px;">
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre completo <sup style="color:red">*</sup></mat-label>
+                    <input matInput formControlName="nombre">
+                </mat-form-field>
+                <!-- <div >
+                    <sup class="text-danger" >Ingrese un email válido.</sup>
+                </div> -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Email <sup style="color:red">*</sup></mat-label>
+                    <input matInput formControlName="email">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Organización o empresa <sup style="color:red">*</sup></mat-label>
+                    <input matInput formControlName="organizacion">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Mensaje <sup style="color:red">*</sup></mat-label>
+                    <textarea matInput cols="30" rows="8" formControlName="mensaje"></textarea>
+                    <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+                </mat-form-field>
+                <button mat-raised-button color="accent" >Enviar</button>
+            </form>
+            <div class="col col-sm-6">
+                <span>LA CONEXIÓN ES TODO</span>
+                <h3>Contáctese con</h3>
+                <h3> nosotros</h3>
+                <span>Contáctenos para más información detallada sobre nuestro trabajo.</span>
+                <div class="row mt-3">
+                    <div class="col">
+                        <div style="font-size: 0.6rem;">
+                            <ul id="social">
+                                <li>
+                                    <i class="fab fa-facebook fa-2x"></i>
+                                </li>
+                                <li>
+                                    <i class="fab fa-youtube fa-2x"></i>
+                                </li>
+                                <li>
+                                    <i class="fab fa-twitter fa-2x"></i>
+                                </li>
+                                <li>
+                                    <i class="fab fa-instagram fa-2x"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
