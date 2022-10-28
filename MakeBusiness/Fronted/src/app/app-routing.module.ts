@@ -8,10 +8,14 @@ const routes: Routes = [
     path: "landing-page" , 
     component: LandingComponent
   },
-  // { 
-  //   path: "auth", 
-  //   loadChildren: () => import("./auth/auth.module").then( module => module.AuthModule)
-  // },
+  { 
+    path: "auth", 
+    loadChildren: () => import("./auth/auth.module").then( module => module.AuthModule)
+  },
+  {
+    path:"registry",
+    loadChildren: () => import("./registry/registry.module").then(module => module.RegistryModule)
+  },
  
   { path: "", redirectTo: "landing-page", pathMatch: "full"},
   { path: "**", component: Page404Component}];

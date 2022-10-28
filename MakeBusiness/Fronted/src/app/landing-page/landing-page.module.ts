@@ -12,6 +12,7 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
 import { PlainsComponent } from './components/plains/plains.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { MaterialModule } from '../material/material.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     LandingPageRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FontAwesomeModule
   ],
   exports:[
     LandingComponent,

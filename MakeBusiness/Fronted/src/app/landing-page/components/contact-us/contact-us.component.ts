@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 
 @Component({
   selector: 'app-contact-us',
@@ -7,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact-us.component.scss']
 })
 export class ContactUsComponent implements OnInit {
+  faFacebook = faFacebook
+  constructor() {
 
-  constructor() { }
 
+   }
+  
   ngOnInit(): void {
+   
   }
 
 }
