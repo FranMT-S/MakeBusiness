@@ -16,6 +16,18 @@ const routes: Routes = [
     path:"registry",
     loadChildren: () => import("./registry/registry.module").then(module => module.RegistryModule)
   },
+  {
+    path:"client",
+    loadChildren: () => import("./client/client.module").then(module => module.ClientModule)
+  },
+  {
+    path:"business",
+    loadChildren: () => import("./business/business.module").then(module => module.BusinessModule)
+  },
+  {
+    path:"admin",
+    loadChildren: () => import("./admin/admin.module").then(module => module.AdminModule)
+  },
  
   { path: "", redirectTo: "landing-page", pathMatch: "full"},
   { path: "**", component: Page404Component}];

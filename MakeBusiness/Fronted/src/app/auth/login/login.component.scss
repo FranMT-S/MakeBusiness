@@ -1,0 +1,40 @@
+@import "../../../styles/_forms";
+
+.background{
+    
+
+    &-back{
+        background-image: url("../../../assets/Auth/Auth\ 01.jpg");
+        // background: linear-gradient(90deg, rgba(2,24,41,1) 0%, rgba(19,58,77,1) 48%, rgba(20,46,57,1) 100%);
+    }
+
+    /* font-size: 14px; 
+        &-transparent-black{     
+        background-color: #051d24cc;     
+    }*/
+}
+
+.form{
+    background: linear-gradient(90deg, rgba(91,0,63,1) 0%, rgba(78,0,54,1) 48%, rgba(59,0,41,1) 100%);
+    height: 500px;
+    width: 450px;
+    
+ 
+
+    mat-label{
+        height: 100px;
+        color:#BD1C90;
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+
+}
+
+
+.text-pink2{
+    color:#E50F9D;
+}
+
+
+

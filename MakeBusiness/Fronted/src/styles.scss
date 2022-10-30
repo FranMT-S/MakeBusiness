@@ -8,6 +8,7 @@
     background: linear-gradient(27deg, rgba(112,7,75,1) 21%, rgba(170,14,123,1) 60%, rgba(144,2,105,1) 100%);
 }
 
+// Texto
 .text{
     &-yellow{
         color: #D9CF77  
@@ -20,8 +21,13 @@
     &-purple{
         color: #942C70;
     }
+
+    &-pink{
+        color:#F0A6E0
+    }
 }
 
+// Background
 .bg{
     &-yellow{
         background-color: #D9CF77  
@@ -33,11 +39,27 @@
     
     &-purple{
         background-color: #942C70;
+        
     }
+
+    &-transparent{
+        background-color: transparent;
+    }
+
+
 }
 
 
+// Botones
+.btn{
 
+    &-purple{
+        background-color: #AA3180;
+        &:hover{
+            background-color: #a1317a;
+        }
+    }
+}
 
 
 
@@ -61,5 +83,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .row > * {
     padding: 0 ;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+

@@ -1,0 +1,37 @@
+<div class="background background-back ">
+    <div class="background background-transparent-black d-flex justify-content-center align-items-center">       
+        <form  [formGroup]="myForm" autocomplete="off" (ngSubmit)="login()">
+            <div class="form  mx-auto  p-3 rounded text-center text-white">              
+                <div class="col-12">
+                    <img src="../../../assets/Logo V3.png" alt="" width="150" >
+                    
+                    <h1 class="mt-5 text-pink2 mb-4">Bienvenido</h1>
+                    <mat-form-field appearance="legacy" color="accent">
+                        <mat-label >Correo</mat-label>
+                        <input matInput formControlName="email" placeholder="">
+                        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                        <!-- <mat-hint>Hint</mat-hint> -->
+                    </mat-form-field>
+                    
+                    
+                    
+                    
+                    
+                    <mat-form-field appearance="legacy" color="accent" class="lastInput">
+                        <mat-label style="overflow: visible;">Contraseña</mat-label>
+                    <input  [type]="hide ? 'password' : 'text'" type="password" matInput formControlName="password">
+                    <mat-icon class="me-2" matPrefix>lock</mat-icon>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" type="button" >
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    </mat-form-field>
+                    <p>
+                        <button type="submit" class="btn btn-purple text-white mt-5">Acceder</button>
+                    </p>
+                </div>
+            </div>     
+        </form>
+    </div>
+</div>
+
+

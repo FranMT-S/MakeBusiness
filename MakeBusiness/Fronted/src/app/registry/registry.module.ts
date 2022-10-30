@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RegistryRoutingModule } from './registry-routing.module';
 import { ClientComponent } from './client/client.component';
 import { BusinessComponent } from './business/business.component';
+import { MaterialModule } from '../material/material.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { BusinessComponent } from './business/business.component';
   ],
   imports: [
     CommonModule,
-    RegistryRoutingModule
+    RegistryRoutingModule,
+    MaterialModule
   ]
 })
 export class RegistryModule { }

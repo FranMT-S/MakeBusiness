@@ -1,0 +1,50 @@
+
+
+.background{
+    width:100%;
+    height:100vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    &-back{
+        @extend .background;
+        background: {
+            position: center;
+            repeat:no-repeat;
+            size: cover;
+        };
+  
+    }
+   
+    &-transparent-black{
+        @extend .background;
+        background-color: #051d24cc;
+      
+    }
+  
+}
+
+.form{
+
+    height: 550px;
+    width: 450px;
+
+    background:  {
+        color: #8d1764b5
+    };
+
+    mat-form-field{
+        text-align: center;
+        width: 75%;
+        margin-bottom: 8px;
+    }
+
+    .lastInput{
+        margin-bottom: 5px;
+    }
+
+    mat-label{
+        color:#F0A6E0;
+        font-weight: 500;
+        font-size: 19px;
+    }
+}

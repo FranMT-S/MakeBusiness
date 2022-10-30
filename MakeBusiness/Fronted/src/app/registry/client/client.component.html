@@ -1,1 +1,44 @@
-<p>client works!</p>
+<div class="background-back">
+    <div class="background-transparent-black ">
+        <div class="d-flex w-50 h-100  mx-auto  ">
+            <form  class="w-50 h-75 my-auto myForm  mx-auto  p-5 rounded text-center text-white" autocomplete="off">
+                <h1 class="mt-5">Registro</h1>
+                <mat-form-field appearance="legacy" color="accent">
+                    <mat-label >Nombre</mat-label>
+                    <input matInput placeholder="">
+                    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                    <!-- <mat-hint>Hint</mat-hint> -->
+                </mat-form-field>
+                <mat-form-field appearance="legacy" color="accent">
+                    <mat-label >Correo</mat-label>
+                    <input matInput placeholder="">
+                    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                    <!-- <mat-hint>Hint</mat-hint> -->
+                </mat-form-field>
+ 
+
+                  
+
+                <mat-form-field appearance="legacy" color="accent" class="lastInput">
+                    <mat-label>Contraseña</mat-label>
+                    <input  [type]="hide ? 'password' : 'text'" type="password" matInput formControlName="password2">
+                    <mat-icon class="me-2" matPrefix>lock</mat-icon>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" type="button" >
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                  <p>
+                      <button type="submit" class="btn btn-purple text-white mt-4">Submit</button>
+                  </p>
+
+                  <p class="mt-4">
+                    ¿Ya tienes un cuenta? <a style="color:#4F72CD">Inicia Sesion</a>
+                 </p>
+                    
+          </form>
+          
+          
+    </div>
+</div>
+
+
