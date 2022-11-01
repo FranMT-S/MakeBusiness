@@ -3,9 +3,16 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
-.bg-purple-deg-1{
-    background: rgb(112,7,75);
-    background: linear-gradient(27deg, rgba(112,7,75,1) 21%, rgba(170,14,123,1) 60%, rgba(144,2,105,1) 100%);
+.bg-purple-deg{
+    &-1{
+        background: rgb(112,7,75);
+        background: linear-gradient(27deg, rgba(112,7,75,1) 21%, rgba(170,14,123,1) 60%, rgba(144,2,105,1) 100%);
+    }
+
+    &-2{
+        background: rgb(253,9,68);
+        background: linear-gradient(286deg, rgba(253,9,68,1) 0%, rgba(170,49,128,1) 48%, rgba(204,16,106,1) 100%);
+    }
 }
 
 // Texto
@@ -24,6 +31,15 @@
 
     &-pink{
         color:#F0A6E0
+    }
+
+    &-deg-purple{
+        &-1 {
+            color: #aa3180;
+            background: -webkit-linear-gradient(280deg, rgba(253,9,68,1) 0%, rgba(170,49,128,1) 48%, rgba(204,16,106,1) 100%);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     }
 }
 
