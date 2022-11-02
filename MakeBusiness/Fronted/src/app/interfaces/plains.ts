@@ -1,4 +1,5 @@
-export interface Plains {
+export interface Plain {
+    id: string,
     name: string;
     description: string;
     price: number;

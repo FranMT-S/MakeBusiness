@@ -1,1 +1,39 @@
-<p>templates works!</p>
+<div class="m-5" >  
+    <h1 class="text-center"> Plantillas</h1>
+    <div class="bg-light rounded">
+        <mat-divider class="mb-5"> </mat-divider>
+        <div class="d-flex justify-content-center mb-5">
+            <span class=" buttonsContainer text-deg-purple-1">
+                <button><i class="fa fa-solid fa-circle-plus"></i></button>
+                <!-- Filtro -->
+                <!-- <button><i class="fa fa-solid fa-filter" aria-hidden="true"></i></button> -->
+                <button><i class="fa fa-solid fa-search" aria-hidden="true"></i></button>
+            </span>
+        </div>
+    </div>
+ 
+    <div class="container w-100">
+        <div class="row">
+            <div class="col-4 mb-3" *ngFor="let template of templates">
+                <mat-card  class="avatar-card">
+                    <mat-card-header class="justify-content-center ms-4">
+             
+                      <mat-card-title>{{template.title}}</mat-card-title>
+                    </mat-card-header>
+
+                   
+                    <mat-card-content class="ms-4 avatar-card-information">
+                        <p class="avatar-card-mail text-center"><span>Descripcion</span></p>
+                        <p class="text-center">{{template.description}} </p>
+
+                    </mat-card-content>
+                    <img mat-card-image src="../../../../../assets/Template/01.jpg" alt="Photo of a Shiba Inu">
+                    <mat-card-actions class="MathbuttonsContainer text-deg-purple-1 d-flex justify-content-center">
+                        <button><i class="fa fa-solid fa-pen-to-square" aria-hidden="true"></i></button>
+                        <button><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    </mat-card-actions>
+                  </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

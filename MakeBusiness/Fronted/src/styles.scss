@@ -2,6 +2,10 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+@import '../src/styles/_tables';
+
+$deg-purple-1:280deg, rgba(253,9,68,1) 0%, rgba(170,49,128,1) 48%, rgba(204,16,106,1) 100%;
+
 
 .bg-purple-deg{
     &-1{
@@ -36,7 +40,7 @@
     &-deg-purple{
         &-1 {
             color: #aa3180;
-            background: -webkit-linear-gradient(280deg, rgba(253,9,68,1) 0%, rgba(170,49,128,1) 48%, rgba(204,16,106,1) 100%);
+            background: -webkit-linear-gradient($deg-purple-1);
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -101,5 +105,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 
+//  Contenedor Botones
 
+
+.buttonsContainer{
+    width: 200px;
+    height: 60px;
+    text-align: center;
+    border: {
+      image-slice: 1;
+      image-source: linear-gradient(to left, #743ad5, #d53a9d);
+      width:3px;
+      style:solid;     
+    };
+    button{
+        display: contents;
+        .fa{
+            padding: 10px 0px 0px 0px;
+            font-size: 35px;
+            margin: 0 10px 0 10px;
+        }
+    }
+}
 

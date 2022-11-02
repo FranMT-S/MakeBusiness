@@ -48,6 +48,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
 /**
  * NgModule that includes all Material modules.
 */
@@ -86,7 +87,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   MatPaginatorModule,
   MatSortModule,
   MatStepperModule,
-
+  MatDividerModule,
   MatProgressSpinnerModule
   
   ]

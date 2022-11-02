@@ -12,6 +12,7 @@ import { MaterialModule } from '../material/material.module';
 
 
 
+
 @NgModule({
   declarations: [
     HomeComponent
@@ -23,8 +24,8 @@ import { MaterialModule } from '../material/material.module';
     PlainsModule,
     TemplatesModule,
     UsersModule,
-    MaterialModule,
-    
-  ]
+    MaterialModule,  
+  ],
+
 })
 export class AdminModule { }
