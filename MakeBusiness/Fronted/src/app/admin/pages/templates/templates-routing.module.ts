@@ -1,11 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddTemplateComponent } from './pages/add-template/add-template.component';
+import { EditTemplateComponent } from './pages/edit-template/edit-template.component';
+import { ListTemplatesComponent } from './pages/list-templates/list-templates.component';
 import { TemplatesComponent } from './templates/templates.component';
 
 const routes: Routes = [
   {
     path:"",
-    component:TemplatesComponent
+    component:TemplatesComponent,
+    children:[
+      {
+        path:"list",
+        component:ListTemplatesComponent,
+      },
+      {
+        path:"add-template",
+        component:AddTemplateComponent,
+      },
+      {
+        path:":id/edit-template",
+        component:EditTemplateComponent,
+      },
+      {
+        path:"",
+        redirectTo:"list"
+      },
+    ]
   }
 ];
 

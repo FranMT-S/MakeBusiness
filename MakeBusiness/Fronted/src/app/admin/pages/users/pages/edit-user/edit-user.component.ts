@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Params } from '@angular/router';
+import { User } from 'src/app/interfaces/user';
+import { UserService } from 'src/app/services/user.service';
+// import { switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-user',
@@ -8,14 +11,19 @@ import { ActivatedRoute,Params } from '@angular/router';
 })
 export class EditUserComponent implements OnInit {
 
-  id:string = ""
-  constructor(private activatedRoute:ActivatedRoute) { 
+  // Vars
+  user:User = {} as User;
+
+
+  constructor(private activatedRoute:ActivatedRoute,private userService:UserService) { 
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(
-      (params:Params) => this.id = params['id']
-    )
+    this.activatedRoute.params.subscribe( (params:Params) => {
+        let data = this.userService.getUser(params['id']);
+        if(data != undefined)
+          this.user = data; 
+      }
+    ) 
   }
-
 }
