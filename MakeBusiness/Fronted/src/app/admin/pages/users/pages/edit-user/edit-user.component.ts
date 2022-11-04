@@ -21,8 +21,12 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (params:Params) => {
         let data = this.userService.getUser(params['id']);
-        if(data != undefined)
+        if(data != undefined){
           this.user = data; 
+          const type = document.getElementById("typeUser") as HTMLSelectElement;
+          let index = this.user.type == "client" ? 1 : this.user.type == "company" ? 2 : this.user.type == "admin" ? 3 : 0;
+          type.selectedIndex = index ;
+        }
       }
     ) 
   }

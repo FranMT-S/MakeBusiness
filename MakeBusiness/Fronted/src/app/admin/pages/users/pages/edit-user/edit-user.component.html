@@ -1,1 +1,43 @@
-<p >Editando al usuario {{user.id}}</p>
+<div class="m-5" >  
+    <h1 class="text-center"> Editar Usuario</h1>
+
+    <i [routerLink]="['../../']"  class="backPage fa fa-circle-arrow-left" aria-hidden="true"></i>
+
+    <form class="form mx-auto text-center py-5 bg-body rounder" action="">
+        <div class="row w-50 mx-auto mb-4">
+            
+            <div class="mb-3 col-md-12 ">
+              <span class="form-label">Name </span>
+              <input type="text"
+                class="form-control" name="name" id="name" aria-describedby="helpId" placeholder="" [value]="user.name">
+            </div>
+    
+            <div class="mb-3 col-md-12">
+              <span class="form-label">Contraseña </span>
+              <input type="password" class="form-control" name="password" id="password" placeholder="" [value]="user.password">
+            </div>
+
+            <div class="mb-3 col-12">
+              <span class="form-label">Correo</span>
+              <input type="email" class="form-control" name="mail" id="mail" aria-describedby="emailHelpId" placeholder="correo@mail.com"
+              [value]="user.email"
+              >
+            </div>
+
+            <div class="mb-3 col-12">
+                <span class="form-label">Tipo: </span>
+                <select class="form-select form-select-lg" name="typeUser" id="typeUser">
+                    <option selected>Tipo Usuario</option>
+                    <option value="client">Cliente</option>
+                    <option value="company">Compañia</option>
+                    <option value="admin">Administrador</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-purple">Guardar Cambios</button>
+
+    </form>
+    
+</div>
+
+

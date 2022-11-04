@@ -74,10 +74,13 @@ $deg-purple-1:280deg, rgba(253,9,68,1) 0%, rgba(170,49,128,1) 48%, rgba(204,16,1
 .btn{
 
     &-purple{
-        background-color: #AA3180;
+        background-color: #AA3180 !important;
+        color:white !important;
         &:hover{
-            background-color: #a1317a;
+            background-color: #a1317a !important;       
         }
+        
+  
     }
 }
 
@@ -136,3 +139,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
 }
 
+
+
+.backPage{
+    position:absolute;
+    top: 120px;
+    left: 150px;
+    font-size: 50px;
+    color: rgb(149, 37, 126);
+    cursor: pointer;
+    
+}

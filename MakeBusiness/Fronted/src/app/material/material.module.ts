@@ -13,7 +13,7 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
 import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
@@ -88,8 +88,8 @@ import { MatDividerModule } from '@angular/material/divider';
   MatSortModule,
   MatStepperModule,
   MatDividerModule,
-  MatProgressSpinnerModule
-  
+  MatProgressSpinnerModule,
+  MatSlideToggleModule
   ]
 })
 export class MaterialModule {}

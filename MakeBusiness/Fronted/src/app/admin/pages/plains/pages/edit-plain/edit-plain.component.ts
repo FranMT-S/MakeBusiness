@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Plain } from 'src/app/interfaces/plains';
+import { PlainService } from 'src/app/services/plain.service';
 
 @Component({
   selector: 'app-edit-plain',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditPlainComponent implements OnInit {
 
-  constructor() { }
+  // Vars
+  plain:Plain = {} as Plain;
+
+
+  constructor(private activatedRoute:ActivatedRoute,private plainService:PlainService) { 
+  }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe( (params:Params) => {
+        let data = this.plainService.getPlain(params['id']);
+        if(data != undefined){
+          this.plain = data; 
+        }
+      }
+    ) 
   }
 
 }

@@ -6,7 +6,7 @@
             <span class=" buttonsContainer text-deg-purple-1">
                 <button (click)="addPlain()"><i class="fa fa-light fa-circle-plus"></i></button>
                 <button [disabled]="selectedRowIndex == ''" (click)="editPlain()"><i class="fa fa-solid fa-pen-to-square" aria-hidden="true"></i></button>
-                <button><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button [disabled]="selectedRowIndex == ''"><i class="fa fa-trash" aria-hidden="true"></i></button>
             </span>
         </div>
     </div>

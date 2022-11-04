@@ -46,16 +46,18 @@ const ELEMENT_DATA:Plain[] =[
 export class ListPlainsComponent implements OnInit {
   selectedRowIndex = "";
   selectedPlain:Plain = {} as Plain;
-  displayedColumns: string[] = ['id', 'name', 'description', 'price'];
-  // dataSource = new MatTableDataSource<Plain>(ELEMENT_DATA);
-  dataSource = ELEMENT_DATA;
 
+  displayedColumns: string[] = ['id', 'name', 'description', 'price'];
+ 
   plains:Plain[] = [];
+  dataSource = new MatTableDataSource<Plain>();
+ 
 
   constructor(private router:Router,private plainService:PlainService) { }
 
   ngOnInit(): void {
     this.plains = this.plainService.getAllPlains;
+    this.dataSource.data = this.plains;
   }
 
   addPlain(){
@@ -68,6 +70,7 @@ export class ListPlainsComponent implements OnInit {
   }
 
   selectRow(row:Plain){
+    this.selectedPlain = row;
     this.selectedRowIndex = row.id;
   }
 

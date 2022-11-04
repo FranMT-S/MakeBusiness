@@ -10,7 +10,12 @@ import { ListUserComponent } from './pages/list-user/list-user.component';
 
 
 @NgModule({
-  declarations: [UsersComponent,  AddUserComponent, ListUserComponent],
+  declarations: [
+    UsersComponent,  
+    AddUserComponent, 
+    ListUserComponent,
+    EditUserComponent
+  ],
   imports: [
     CommonModule,
     UsersRoutingModule,

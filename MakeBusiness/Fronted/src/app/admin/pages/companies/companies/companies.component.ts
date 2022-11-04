@@ -28,6 +28,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./companies.component.scss']
 })
 export class CompaniesComponent implements OnInit {
+  
   selectedRowIndex = -1;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','test'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
