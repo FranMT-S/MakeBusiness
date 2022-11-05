@@ -17,7 +17,7 @@ export class ListTemplatesComponent implements OnInit {
   constructor(private router:Router,private templateService:TemplateService) { }
 
   ngOnInit(): void {
-    this.templates = this.templateService.getAllTemplates;
+    this.templates = this.templateService.getAllTemplatesDescription;
   }
 
   editTemplate(template:TemplateDescription){

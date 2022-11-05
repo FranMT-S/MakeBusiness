@@ -53,11 +53,11 @@ export class TemplateService {
 
   constructor() { }
 
-  get getAllTemplates():TemplateDescription[]{
+  get getAllTemplatesDescription():TemplateDescription[]{
     return [...Data]
   }
 
-  geTemplate(id:string):TemplateDescription | undefined{
+  getTemplateDescription(id:string):TemplateDescription | undefined{
     return Data.find( e => e.id == id );
   }
 }

@@ -18,7 +18,7 @@ export class EditTemplateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (params:Params) => {
-        let data = this.templateService.geTemplate(params['id']);
+        let data = this.templateService.getTemplateDescription(params['id']);
         if(data != undefined)
           this.template = data; 
       }

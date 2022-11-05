@@ -18,7 +18,7 @@ export interface Block{
     size: number,
     HTML: String,
     CSS:String,
-    js:String,
+    position:number,
     type:String,
 }
 
