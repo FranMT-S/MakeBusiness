@@ -1,24 +1,38 @@
-export interface TemplateDescription {
+
+export interface page{
     id: string,
-    title: String,
-    description: String,
+    title: string,
+    description: string,
+    js?:string,
+    blocks: Block[]
 }
 
-export interface TemplateRaw{
-    id: string,
-    title: String,
-    description: String,
-    js:String,
-    Blocks: Block[]
+export interface pageCompany extends page{
+    images?: string[]
+    useGenericHeader: boolean,
+    useGenericFooter: boolean,
+    idWeb: string,
+}
+
+// TemplateRaw y pageCompany son las que se editaran
+export interface TemplateRaw extends page{
     images: string[]
 }
+
+// Template solo para mostrar la informacion mas basica
+export interface TemplateDescription {
+    id: string,
+    title: string,
+    description: string,
+}
+
 
 export interface Block{
     id: string,
     size: number,
-    HTML: String,
-    CSS:String,
+    HTML: string,
+    CSS:string,
     position:number,
-    type:String,
+    type:string,
 }
 

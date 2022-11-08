@@ -22,6 +22,7 @@ export class EditPlainComponent implements OnInit {
         let data = this.plainService.getPlain(params['id']);
         if(data != undefined){
           this.plain = data; 
+          
         }
       }
     ) 

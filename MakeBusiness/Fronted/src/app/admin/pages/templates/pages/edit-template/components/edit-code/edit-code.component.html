@@ -1,1 +1,31 @@
-<p>edit-code works!</p>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Texto de prueba</title>
+        <style type="text/css">
+            button {
+                background-color: red;
+            }
+        </style>    
+        <script>console.log("hola mundo")</script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- {{editor.textArea.nativeElement.innerHTML}} -->
+                <angular-editor #editor [placeholder]="'Enter text here...'" [(ngModel)]="template.blocks[0].HTML"></angular-editor>
+                
+                <div *ngFor="let block of template.blocks" [id]="'block-' + block.id" [class]="'col-' + block.size" 
+                [innerHTML]="block.HTML"  >
+
+                    <!-- {{template.blocks[0].HTML}} -->
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>
+

@@ -1,5 +1,6 @@
+
 import { Injectable } from '@angular/core';
-import { TemplateDescription } from '../interfaces/page';
+import { TemplateDescription, TemplateRaw } from '../interfaces/page';
 
 
 const Data:TemplateDescription[] = [
@@ -46,6 +47,24 @@ const Data:TemplateDescription[] = [
   }
 ] 
 
+const DataRaw:TemplateRaw[] = [ {
+  "id": "1",
+  "title": "Miran",
+  "description": "ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus in sagittis dui vel nisl duis",
+  "js": "saludo(){ console.log('hola')}",
+  "blocks": [
+    {
+      "id":"1",
+      "size":12,
+      "HTML":"<button class='bg bg-primary'>test</button>",
+      "CSS":"background",
+      "position":1,
+      "type":"1",
+    }
+],
+  "images": [],
+}];
+
 @Injectable({
   providedIn: 'root'
 })
@@ -59,5 +78,9 @@ export class TemplateService {
 
   getTemplateDescription(id:string):TemplateDescription | undefined{
     return Data.find( e => e.id == id );
+  }
+
+  getTemplate(id:string):TemplateRaw | undefined{
+    return DataRaw.find( e => e.id == id );
   }
 }

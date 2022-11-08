@@ -150,3 +150,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     cursor: pointer;
     
 }
+
+// Cursor
+
+.cursor{
+    &-pointer{
+        cursor: pointer;
+    }
+}

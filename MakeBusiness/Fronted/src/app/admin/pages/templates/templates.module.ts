@@ -8,14 +8,25 @@ import { AddTemplateComponent } from './pages/add-template/add-template.componen
 import { EditTemplateComponent } from './pages/edit-template/edit-template.component';
 import { ListTemplatesComponent } from './pages/list-templates/list-templates.component';
 import { EditCodeComponent } from './pages/edit-template/components/edit-code/edit-code.component';
+import { EditorWYSIWYGModule } from 'src/app/editor-wysiwyg/editor-wysiwyg.module';
+import { FormsModule } from '@angular/forms';
+import { HtmlDecoderPipe } from './pipes/html-decoder.pipe';
+
 
 
 @NgModule({
-  declarations: [TemplatesComponent, AddTemplateComponent, EditTemplateComponent, ListTemplatesComponent, EditCodeComponent],
+  declarations: [
+    TemplatesComponent, 
+    AddTemplateComponent, 
+    EditTemplateComponent, 
+    ListTemplatesComponent, 
+    EditCodeComponent, HtmlDecoderPipe],
   imports: [
     CommonModule,
     TemplatesRoutingModule,
-    MaterialModule
+    MaterialModule,
+    EditorWYSIWYGModule,
+    FormsModule
   ]
 })
 export class TemplatesModule { }

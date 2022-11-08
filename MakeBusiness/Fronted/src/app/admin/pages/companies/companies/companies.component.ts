@@ -48,7 +48,6 @@ export class CompaniesComponent implements OnInit {
 
   selectRow(row:PeriodicElement){
     this.selectedRowIndex = row.position;
-    console.log(row)
   }
 
 
