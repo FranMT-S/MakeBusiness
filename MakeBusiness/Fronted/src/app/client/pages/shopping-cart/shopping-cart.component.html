@@ -1,1 +1,46 @@
-<p>shopping-cart works!</p>
+<div class="main-container">
+    <div class="container shop-container">
+        <h2 class="title">Carrito de compra</h2>
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Producto</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">SubTotal</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let product of products | paginate: { itemsPerPage: 3, currentPage: page }">
+                <td>{{product.name}} <img [src]="product.image" class="product-image mx-2" alt=""></td>
+                <td>{{product.price}}</td>
+                <td><input  class="form-control" type="number" [value]="product.quantity"></td>
+                <td>{{product.quantity * product.price}}</td>
+                <td>
+                  <button mat-icon-button color="warn">
+                    <mat-icon>delete_outline</mat-icon>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Total: {{total}}</td>
+            </tfoot>
+        </table>
+
+        <pagination-controls 
+              (pageChange)="page = $event" 
+              previousLabel="Anterior" 
+              nextLabel="Siguiente"
+              class="pagination"
+              >
+        </pagination-controls>
+
+    </div>
+
+</div>

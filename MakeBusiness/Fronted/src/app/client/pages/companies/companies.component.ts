@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompaniesComponent implements OnInit {
 
+  public page:number | undefined;
+
   companies = [
     {
       'id':1,
@@ -35,7 +37,62 @@ export class CompaniesComponent implements OnInit {
       'image':'https://img.lalr.co/cms/2019/01/11175242/Bimbo.jpg',
       'description':'qrwwerwtyrtutrfcyhrtruyyuf6trftfgur',
       'category':'food'
-    }
+    }, {
+      'id':1,
+      'nameCompany':'apple',
+      'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0QpFZugy5noYtXwlio3uynoFJ64oMexU8JERO9h3o0-WqWktQe9vmw66yMCVTlhbATrA&usqp=CAU',
+      'description':'lorensdifneojgyfyfuiufyiufuasds',
+      'category':'tecnology'
+    }, {
+      'id':1,
+      'nameCompany':'apple',
+      'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0QpFZugy5noYtXwlio3uynoFJ64oMexU8JERO9h3o0-WqWktQe9vmw66yMCVTlhbATrA&usqp=CAU',
+      'description':'lorensdifneojgyfyfuiufyiufuasds',
+      'category':'tecnology'
+    }, {
+      'id':1,
+      'nameCompany':'apple',
+      'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0QpFZugy5noYtXwlio3uynoFJ64oMexU8JERO9h3o0-WqWktQe9vmw66yMCVTlhbATrA&usqp=CAU',
+      'description':'lorensdifneojgyfyfuiufyiufuasds',
+      'category':'tecnology'
+    },
+    {
+      'id':1,
+      'nameCompany':'apple',
+      'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0QpFZugy5noYtXwlio3uynoFJ64oMexU8JERO9h3o0-WqWktQe9vmw66yMCVTlhbATrA&usqp=CAU',
+      'description':'lorensdifneojgyfyfuiufyiufuasds',
+      'category':'tecnology'
+    },{
+      'id':1,
+      'nameCompany':'apple',
+      'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0QpFZugy5noYtXwlio3uynoFJ64oMexU8JERO9h3o0-WqWktQe9vmw66yMCVTlhbATrA&usqp=CAU',
+      'description':'lorensdifneojgyfyfuiufyiufuasds',
+      'category':'tecnology'
+    },{
+      'id':1,
+      'nameCompany':'apple',
+      'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0QpFZugy5noYtXwlio3uynoFJ64oMexU8JERO9h3o0-WqWktQe9vmw66yMCVTlhbATrA&usqp=CAU',
+      'description':'lorensdifneojgyfyfuiufyiufuasds',
+      'category':'tecnology'
+    },{
+      'id':1,
+      'nameCompany':'apple',
+      'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0QpFZugy5noYtXwlio3uynoFJ64oMexU8JERO9h3o0-WqWktQe9vmw66yMCVTlhbATrA&usqp=CAU',
+      'description':'lorensdifneojgyfyfuiufyiufuasds',
+      'category':'tecnology'
+    },{
+      'id':1,
+      'nameCompany':'apple',
+      'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0QpFZugy5noYtXwlio3uynoFJ64oMexU8JERO9h3o0-WqWktQe9vmw66yMCVTlhbATrA&usqp=CAU',
+      'description':'lorensdifneojgyfyfuiufyiufuasds',
+      'category':'tecnology'
+    },{
+      'id':1,
+      'nameCompany':'apple',
+      'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0QpFZugy5noYtXwlio3uynoFJ64oMexU8JERO9h3o0-WqWktQe9vmw66yMCVTlhbATrA&usqp=CAU',
+      'description':'lorensdifneojgyfyfuiufyiufuasds',
+      'category':'tecnology'
+    },
   ]
 
   constructor() { }
