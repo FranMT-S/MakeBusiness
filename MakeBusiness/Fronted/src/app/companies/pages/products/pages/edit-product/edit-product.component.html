@@ -1,0 +1,47 @@
+<div class="m-5" >  
+    <h1 class="text-center"> Editar Producto</h1>
+
+    <i [routerLink]="['../../']"  class="backPage fa fa-circle-arrow-left" aria-hidden="true"></i>
+
+    <form class="form mx-auto text-center py-5 bg-body rounder" action="">
+        <div class="row w-50 mx-auto mb-4">
+            
+            <div class="mb-3 col-md-12 ">
+              <span class="form-label">Nombre </span>
+              <input type="text"
+                class="form-control"  [value]="product.name" name="name" id="name" aria-describedby="helpId" placeholder="">
+            </div>
+    
+            <div class="mb-3 col-md-12">
+              <span class="form-label">Descripcion </span>
+              <textarea type="text" [value]="product.description" class="form-control" name="description" id="description" placeholder=""></textarea>
+            </div>
+
+            <div class="mb-3 col-md-12">
+                <span class="form-label">Precio </span>
+                <input type="text"  [value]="product.price" class="form-control" name="price" id="price" placeholder=""/>        
+             </div>
+             <div class="mb-3 col-md-12">
+                 <span class="form-label">Categoria </span>
+                 <input type="text" [value]="product.categories" class="form-control" name="limitProducts" id="limitProducts" placeholder=""/>               
+             </div>
+
+
+             <div class="mb-3 col-md-12">
+                <span class="form-label">Imagen </span>
+               <div class="row pt-3 justify-content-center mx-auto">
+                    <div class="col-3">
+                        <img src="../../../../../../assets/img-default.png" style="height: 80px;" name="image" id="image">
+                    </div>
+                    <div class="col-3 pt-2">
+                        <i class="fa fa-solid fa-upload fa-4x text-deg-purple-1 cursor-pointer" aria-hidden="true"></i>
+                    </div>
+               </div>                 
+            </div>
+        
+        </div>
+        <button type="submit" class="btn btn-purple">Guardar Cambios</button>
+    </form>
+    
+</div>
+

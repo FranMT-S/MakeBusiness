@@ -1,0 +1,45 @@
+<mat-sidenav-container class="contenerdor h-100" [hasBackdrop]="true">
+
+    <!-- ========== Start Section ========== -->
+    <!-- Sidenav--> 
+    <!-- ========== End Section ========== -->
+ 
+    <mat-sidenav #sideNav class="sidenav h-100 bg-purple"  mode="side">
+      <div class="d-flex flex-column h-100 justify-content-between overflow-hidden">
+        <mat-toolbar class="justify-content-between bg-purple-deg-1 p-0 sidenav__header"  >
+          <img src="../../../assets/Logo V3.png" class="sidenav__logo ms-3">
+          <button mat-icon-button class="text-white" (click)="sideNav.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </mat-toolbar>    
+
+        <div class="sidenav__options bg-body  py-5  d-flex flex-column container">
+             <button class="btn ts-4  text-start" 
+             *ngFor="let option of optionButtons"
+             [routerLink]="option.path" >
+                <i [class]="option.icon + ' text-deg-purple-1 me-3'" style="width: 40px; height: 100%;" aria-hidden="true"></i> 
+                <span>{{option.text}}</span>
+              </button>
+        </div>
+
+        <mat-toolbar class="justify-content-between bg-purple p-0 sidenav__footer ">
+          <!-- <img src="../../../assets/Logo V3.png" class="sidenav__logo ms-3"> -->
+    
+        </mat-toolbar>  
+      </div>
+    </mat-sidenav>     
+
+  <!-- Contenido-->
+    <mat-sidenav-content >
+      <!-- NavBar-->
+      <mat-toolbar class="bg-purple">
+        <button mat-icon-button  (click)="sideNav.toggle()">
+          <mat-icon class="text-white">menu</mat-icon>
+        </button>
+      </mat-toolbar>
+      <div >
+          <router-outlet></router-outlet>
+      </div>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

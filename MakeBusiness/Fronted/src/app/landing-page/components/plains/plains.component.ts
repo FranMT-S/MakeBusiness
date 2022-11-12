@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Plains } from 'src/app/interfaces/plains';
+import { Plain } from 'src/app/interfaces/plains';
 
 @Component({
   selector: 'app-plains',
@@ -9,8 +9,9 @@ import { Plains } from 'src/app/interfaces/plains';
 export class PlainsComponent implements OnInit {
 
 
-  plains:Plains[] = [
+  plains:Plain[] = [
                       {
+                        id:"1",
                         name: "Free",
                         description: "Licencia de prueba de productos por 1 semana",
                         price: 0,
@@ -20,6 +21,7 @@ export class PlainsComponent implements OnInit {
                         limitFiles: 10,
                       },
                       {
+                        id:"2",
                         name: "Basico",
                         description: "Licencia  con basica con lo que podras tener los recursos basicos para crear una pagina web",
                         price: 30,
@@ -29,6 +31,7 @@ export class PlainsComponent implements OnInit {
                         limitFiles: 20,
                       },
                       {
+                        id:"3",
                         name: "Premium",
                         description: "Licencia de sin limites, aprovecha nuestro servicio sin restricciones",
                         price: 330,
@@ -44,7 +47,7 @@ export class PlainsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getPlains():Plains[]{
+  getPlains():Plain[]{
 
     return this.plains;
   }

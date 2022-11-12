@@ -1,0 +1,109 @@
+
+
+<mat-sidenav-container [hasBackdrop]="false">
+    
+ 
+    
+    <mat-sidenav #sidenav opened mode="side" style="width: 30vh;" class="d-flex flex-column">
+
+        <section class="sidenav-options ps-3">
+            <label><input type="checkbox" name="border" [(ngModel)]="border" > mostrar bordes</label><br>
+        </section>
+
+        <mat-selection-list #shoes [multiple]="false">
+        <mat-list-option *ngFor="let block of template.blocks" [value]="block" (click)="edit(block)">
+            {{block.id}}
+        </mat-list-option>
+        </mat-selection-list>
+ 
+    </mat-sidenav>
+
+    <!-- El sidenav obtiene el tam del content -->
+    <mat-sidenav-content style="height:91vh">
+
+ 
+        <div >
+            <div class="container-fluid">
+
+                <div class="row  position-fixed editor-container bg-light" style="width: 82%;"  
+                    [ngClass]="{'visible': pureActive == 0}"
+                    #editor
+                >
+                    <angular-editor 
+                    #editor [placeholder]="'Ingrese su texto'" 
+                    [config]="editorConfig" 
+                    [(ngModel)]="blockSelected.HTML"              
+                    >
+                    </angular-editor>
+                </div>
+
+                <div class="row  position-fixed editor-container bg-light ps-2 pt-2" style="width: 82%;"  
+                [ngClass]="{'visible': pureActive == 1}"
+                #editor
+            >
+              
+                <textarea 
+                #editorPure [placeholder]="'Ingrese su texto'" 
+                style="height: 300px;" tabindex="-1" resize="none"
+                [(ngModel)]="blockSelected.HTML" 
+                class="editor-textarea "             
+                >
+                </textarea>
+            </div>
+                <div class="row"
+                    [ngClass]="{'block-container-active': editing}"
+                >
+                    
+                
+                    <div *ngFor="let block of template.blocks" 
+                         [class]="'block position-relative ' + 'col-' + block.size"
+                         [id]="'block-' + block.id"  
+                         [ngClass]="{'border': border}"
+                    >
+                        <p class="position-absolute start-0 mt-3 ms-3 text-secondary "
+                           [ngClass]="{'editor': editing}"
+                            >
+                            {{block.id}}
+                        </p>
+                        <div [innerHTML]="block.HTML | safeHtml">
+                            
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+
+        </div>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+<!-- <div class="container-fluid">
+
+    <div class="row editor" id="editor">
+        <angular-editor 
+        #editor [placeholder]="'Enter text here...'" 
+        [config]="editorConfig" 
+        [(ngModel)]="template.blocks[0].HTML"
+        class="position-fixed mb-5 navbar-fixed-top"
+        
+        >
+        </angular-editor>
+    </div>
+    <div class="row block-container">
+        
+        <div *ngFor="let block of template.blocks" class="block position-relative" [id]="'block-' + block.id" [class]="'col-' + block.size" 
+        >
+            <p class="position-absolute start-0 mt-3 ms-3 text-secondary ">"texto</p>
+            <div class="d-flex position-absolute end-0 me-3 block__detail">               
+                <button class="btn btn-outline-purple mt-3 mx-2" >Editar</button>
+                <button class="btn btn-outline-danger mt-3 mx-2 ">Eliminar</button>
+            </div>
+        </div>
+     
+    </div>
+</div> -->
+        <!-- [innerHTML]="block.HTML | safeHtml"  -->
+
+        <!-- {{editor.textArea.nativeElement.innerHTML}} -->
+

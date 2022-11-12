@@ -1,0 +1,45 @@
+<div class="m-5" >  
+    <h1 class="text-center"> Editar Plan</h1>
+
+    <i [routerLink]="['../../']"  class="backPage fa fa-circle-arrow-left" aria-hidden="true"></i>
+
+    <form class="form mx-auto text-center py-5 bg-body rounder" 
+    [formGroup]="myForm" autocomplete="off" (ngSubmit)="save()"
+    >
+    <div class="row w-50 mx-auto mb-4">
+        
+        <div class="mb-3 col-md-12 ">
+          <span class="form-label">Nombre </span>
+          <input type="text"
+            class="form-control" formControlName="name" id="name" aria-describedby="helpId" placeholder="">
+        </div>
+
+        <div class="mb-3 col-md-12">
+          <span class="form-label">Descripción </span>
+          <textarea type="text" class="form-control" formControlName="description" id="description" placeholder=""></textarea>
+        </div>
+
+        <div class="mb-3 col-md-12">
+            <span class="form-label">Precio </span>
+            <input type="text"  class="form-control" formControlName="price" id="price" placeholder=""/>        
+         </div>
+        <div class="mb-3 col-md-12">
+            <span class="form-label">Límite Página  </span>
+            <input type="text"  class="form-control" formControlName="limitPage" id="limitPage" placeholder=""/>        
+         </div>
+        <div class="mb-3 col-md-12">
+            <span class="form-label">Límite Productos </span>
+            <input type="text"  class="form-control" formControlName="limitProducts" id="limitProducts" placeholder=""/>        
+         </div>
+        <div class="mb-3 col-md-12">
+            <span class="form-label">Límite Archivos </span>
+            <input type="text"  class="form-control" formControlName="limitFiles" id="limitFiles" placeholder=""/>        
+         </div>
+       
+    </div>
+    <button type="submit" class="btn btn-purple">Guardar Plan</button>
+
+</form>
+    
+</div>
+

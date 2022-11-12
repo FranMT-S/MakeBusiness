@@ -1,0 +1,47 @@
+.sidenav{
+    width: 350px;
+    border: 0px;
+    overflow: hidden;
+    
+    mat-toolbar{
+        width: 100%; 
+    }
+
+
+   &__logo{
+    height: 70px;
+   }
+
+   &__header{
+     //position: absolute;
+     top: 0px;
+   }
+
+   &__footer{
+        bottom: 0px;
+        height: 70px; 
+        border-top: 0.5px solid rgb(211, 139, 194);
+    }
+
+    &__options{
+        width: 300px;
+        height: 400px;
+        // box-shadow: #254C58 5px 51px;
+        border-radius: 10px;
+
+        .fa{
+            font-size: 30px;
+        }
+
+        .btn{
+            font-size: 20px;
+            margin-bottom: 3px;
+            color: #FF2FAC;
+            &:hover{             
+                border: solid 1px #f871af;  
+            }
+        }
+    
+    }   
+}
+

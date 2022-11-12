@@ -2,10 +2,21 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+@import '../src/styles/_tables';
 
-.bg-purple-deg-1{
-    background: rgb(112,7,75);
-    background: linear-gradient(27deg, rgba(112,7,75,1) 21%, rgba(170,14,123,1) 60%, rgba(144,2,105,1) 100%);
+$deg-purple-1:280deg, rgba(253,9,68,1) 0%, rgba(170,49,128,1) 48%, rgba(204,16,106,1) 100%;
+
+
+.bg-purple-deg{
+    &-1{
+        background: rgb(112,7,75);
+        background: linear-gradient(27deg, rgba(112,7,75,1) 21%, rgba(170,14,123,1) 60%, rgba(144,2,105,1) 100%);
+    }
+
+    &-2{
+        background: rgb(253,9,68);
+        background: linear-gradient(286deg, rgba(253,9,68,1) 0%, rgba(170,49,128,1) 48%, rgba(204,16,106,1) 100%);
+    }
 }
 
 // Texto
@@ -24,6 +35,15 @@
 
     &-pink{
         color:#F0A6E0
+    }
+
+    &-deg-purple{
+        &-1 {
+            color: #aa3180;
+            background: -webkit-linear-gradient($deg-purple-1);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     }
 }
 
@@ -53,10 +73,18 @@
 // Botones
 .btn{
 
+    &-outline{
+        &-purple{
+            border-color: #aa3180 !important;
+            color:#aa3180 !important;
+        }
+    }
+
     &-purple{
-        background-color: #AA3180;
+        background-color: #AA3180 !important;
+        color:white !important;
         &:hover{
-            background-color: #a1317a;
+            background-color: #a1317a !important;       
         }
     }
 }
@@ -85,8 +113,70 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 
+//  Contenedor Botones
+
+
+.buttonsContainer{
+    width: 200px;
+    height: 60px;
+    text-align: center;
+    border: {
+      image-slice: 1;
+      image-source: linear-gradient(to left, #743ad5, #d53a9d);
+      width:3px;
+      style:solid;     
+    };
+    button{
+        display: contents;
+        .fa{
+            padding: 10px 0px 0px 0px;
+            font-size: 35px;
+            margin: 0 10px 0 10px;
+        }
+        
+        &:disabled .fa{
+          
+            background-color: #9a2d75 !important;
+            opacity: 0.7;
+            background-clip: text!important;
+            -webkit-text-fill-color: transparent !important;
+        }
+    }
+}
 
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.backPage{
+    position:absolute;
+    top: 120px;
+    left: 150px;
+    font-size: 50px;
+    color: rgb(149, 37, 126);
+    cursor: pointer;
+    
+}
+
+// Cursor
+
+.cursor{
+    &-pointer{
+        cursor: pointer;
+    }
+}
+
+
+// estilos de los bloques
+.block{
+    min-height: 100px;
+    
+    &:hover &__detail{
+        visibility: visible !important;      
+    }
+
+    
+
+}
+
+.block__detail{      
+    visibility: hidden !important;
+}

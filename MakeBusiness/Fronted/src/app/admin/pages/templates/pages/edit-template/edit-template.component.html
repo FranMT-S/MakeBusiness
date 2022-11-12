@@ -1,0 +1,38 @@
+<div class="m-5" >  
+    <h1 class="text-center"> Editar Plantilla</h1>
+
+    <i [routerLink]="['../../']"  class="backPage fa fa-circle-arrow-left" aria-hidden="true"></i>
+
+    <form class="form mx-auto text-center py-5 bg-body rounder" action="">
+        <div class="row w-50 mx-auto mb-4">
+            
+            <div class="mb-3 col-md-12 ">
+              <span class="form-label">Titulo </span>
+              <input type="text"
+                class="form-control" name="title" id="title" aria-describedby="helpId" placeholder="">
+            </div>
+
+             <div class="mb-3 col-md-12">
+               <label class="form-label">Descripcion</label>
+               <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+             </div>
+         
+
+            <div class="mb-3 col-12">
+              <label class="form-label">Lista de Imagenes</label>
+
+              <h1>Insertar Carrusel slick</h1>
+              <button class="btn-fa text-purple"><i class="fa fa-solid fa-image" aria-hidden="true"></i></button>
+              <!-- <input type="email" class="form-control" name="mail" id="mail" aria-describedby="emailHelpId" placeholder="correo@mail.com"> -->
+            </div>
+
+            <div class="mb-3 col-12">
+                <h4><label class="form-label">Cambiar Estilo</label></h4>          
+                <button [routerLink]="['code']" class="btn-fa text-purple"><i class="fa fa-solid fa-code" aria-hidden="true"></i></button>
+                <!-- <input type="email" class="form-control" name="mail" id="mail" aria-describedby="emailHelpId" placeholder="correo@mail.com"> -->
+            </div>
+        </div>
+        <button type="submit" class="btn btn-purple">Guardar Cambios</button>
+    </form>
+    
+</div>

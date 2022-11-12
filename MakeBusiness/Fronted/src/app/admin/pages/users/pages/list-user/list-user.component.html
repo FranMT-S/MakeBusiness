@@ -1,0 +1,38 @@
+<div class="m-5" >  
+    <h1 class="text-center"> Usuarios</h1>
+    <div class="bg-light rounded">
+        <mat-divider class="mb-5"> </mat-divider>
+        <div class="d-flex justify-content-center mb-5">
+            <span class=" buttonsContainer text-deg-purple-1">
+                <button [routerLink]="[ '../add-user']"><i class="fa fa-solid fa-circle-plus"></i></button>
+                <!-- Filtro -->
+                <!-- <button><i class="fa fa-solid fa-filter" aria-hidden="true"></i></button> -->
+                <button><i class="fa fa-solid fa-search" aria-hidden="true"></i></button>
+            </span>
+        </div>
+    </div>
+ 
+    <div class="container w-100">
+        <div class="row">
+            <div class="col-4 mb-3" *ngFor="let user of users">
+                <mat-card  class="avatar-card">
+                    <mat-card-header class="justify-content-center">
+                      <div mat-card-avatar class="avatar-header-image"></div>
+                      <mat-card-title>{{user.name}}</mat-card-title>
+                      <mat-card-subtitle>{{user.type}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="ms-4 avatar-card-information">
+                        <p class="avatar-card-mail"><span>Correo: </span>{{user.email}} </p>
+                        <p class="avatar-card-phone"><span>Teléfono: </span>{{user.phone}} </p>
+                        <p class="avatar-card-state"><span>Estado: </span>{{user.state}} </p>
+                        <p class="avatar-card-password"><span>Contraseña: </span>{{user.password}}</p>
+                    </mat-card-content>
+                    <mat-card-actions class="MathbuttonsContainer text-deg-purple-1 d-flex justify-content-center">
+                        <button (click)="editUser(user)"><i class="fa fa-solid fa-pen-to-square" aria-hidden="true"></i></button>
+                        <button><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    </mat-card-actions>
+                  </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

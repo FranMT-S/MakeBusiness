@@ -1,0 +1,24 @@
+.table-container {
+    width: 100%;
+}
+  
+.mat-row{ 
+    .mat-cell {
+        border-bottom: 1px solid transparent;
+        border-top: 1px solid transparent;
+        cursor: pointer;
+    }
+    
+    &:hover{
+        .mat-cell{
+            background-color: #f9f9f9;
+        }
+    }
+}
+
+.highlight{
+    .mat-cell{
+        background: #83167ffa !important; /* green */
+        color: white;
+    }
+}

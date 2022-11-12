@@ -13,7 +13,7 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
 import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
@@ -27,6 +27,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -36,7 +37,7 @@ import { MatRadioModule } from '@angular/material/radio';
 
 // pruebas botones sidenar
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatListModule } from '@angular/material/list';
+import { MatList, MatListModule } from '@angular/material/list';
 
 //setting
 import { MatTabsModule } from '@angular/material/tabs';
@@ -48,6 +49,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 /**
  * NgModule that includes all Material modules.
 */
@@ -68,6 +71,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
+  ScrollingModule,
   MatSelectModule,
   MatIconModule,
   MatMenuModule,
@@ -86,10 +90,12 @@ import { MatNativeDateModule } from '@angular/material/core';
   MatPaginatorModule,
   MatSortModule,
   MatStepperModule,
-
-  MatProgressSpinnerModule
-  
-  ]
+  MatDividerModule,
+  MatProgressSpinnerModule,
+  MatSlideToggleModule,
+  MatDialogModule,
+  DragDropModule  
+]
 })
 export class MaterialModule {}
 
