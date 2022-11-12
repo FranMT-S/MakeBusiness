@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-add-plain',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPlainComponent implements OnInit {
 
-  constructor() { }
+  myForm:FormGroup = this.fb.group({
+    name   : ["",[],[]],
+    description: ["",[],[]],
+    price: ["",[],[]],
+    limitPage: ["",[],[]],
+    limitProducts: ["",[],[]],
+    limitFiles: ["",[],[]],
+  });
+
+  constructor(private fb:FormBuilder) { }
 
   ngOnInit(): void {
   }
 
+
+  save(){
+    console.log(this.myForm.value)
+  }
 }

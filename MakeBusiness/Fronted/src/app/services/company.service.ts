@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Company } from '../interfaces/company';
 import { fileCompany } from '../interfaces/fileCompany';
 import { Product } from '../interfaces/product';
+import { webCompany } from '../interfaces/web';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class CompanyService {
   constructor() { }
 
   private currentCompany:Company = {} as Company;
+  private currentWeb:webCompany = {} as webCompany;
   private currentProducts:Product[] = [];
   private currentFiles:fileCompany[] = [];
 
@@ -22,17 +24,34 @@ export class CompanyService {
     return this.currentCompany;
   }
 
+  set setCurrentCompany(company:Company){
+    this.currentCompany = company;
+  }
+
   get getCurrentProducts():Product[]{
     return [...this.currentProducts];
+  }
+
+  set setCurrentProducts(products:Product[]){
+    this.currentProducts = products;
   }
 
   get getCurrentFiles():fileCompany[]{
     return [...this.currentFiles];
   }
 
-  set setCurrentCompany(company:Company){
-     this.currentCompany = company;
+  set setCurrentFiles(filesCompany:fileCompany[]){
+    this.currentFiles = filesCompany;
   }
+
+  get getCurrentWeb():webCompany{
+    return this.currentWeb;
+  }
+
+  set setCurrentWeb(webCompany:webCompany){
+    this.currentWeb = webCompany;
+  }
+
 
   getCompanyById(id:string):Company{
     let company = Data.find( e => e.id == id )
@@ -40,11 +59,23 @@ export class CompanyService {
       throw new Error("el servicio no pudo encontrar la compania con el id: " + id)
   
     return company;
-    
   }
 
-  getCompanyByUser(idUser:string):Company | undefined{
-    return Data.find( e => e.idUser == idUser );
+  inicializatedCurrentData(idCompany:string){
+      this.currentCompany = this.getCompanyById(idCompany);
+      this.currentFiles = this.getCompanyFiles(this.currentCompany.id);
+      this.currentWeb = this.getWebById(this.currentCompany.idWeb);
+      this.currentProducts = this.getCompanyProducts(this.currentCompany.id);
+
+
+  }
+
+  getCompanyByUser(idUser:string):Company{
+    let user = Data.find( e => e.idUser == idUser );
+    if(user == null)
+        throw new Error("No se puede obtener el usuario con id: " + idUser);
+    
+    return user;
   }
 
   changeStateCompany(id:string):boolean{
@@ -60,9 +91,7 @@ export class CompanyService {
 
   getCompanyProducts(idCompany:string):Product[]{
      let products:Product[] = [];
-
      products = productsData.filter(e => e.idCompany == idCompany);
-     this.currentProducts = products;
 
      return products;
   }
@@ -71,7 +100,6 @@ export class CompanyService {
     let files:fileCompany[] = [];
 
     files = filesData.filter(e => e.idCompany == idCompany);
-    this.currentFiles = files;
 
     return files;
  }
@@ -92,6 +120,17 @@ export class CompanyService {
 
     return product;
  }
+
+  getWebById(idWeb:string):webCompany{
+
+    let web = webData.find(e => e.id == idWeb);
+    
+    if(web == undefined)
+        throw new Error("No se encontro la web con le id: " + idWeb)
+
+    return web;
+  }
+
 }
 
 const Data:Company[] =[{
@@ -103,7 +142,7 @@ const Data:Company[] =[{
   "location": "2 Crownhardt Plaza",
   "state": true,
   "idPlan": "3",
-  "idWeb": '2',
+  "idWeb": '1',
   "idUser": '8'
 }, {
   "id": '2',
@@ -128,6 +167,51 @@ const Data:Company[] =[{
   "idWeb": '3',
   "idUser": '10'
 }]
+
+/////////////////////////////////////
+
+const webData: webCompany[] = [
+  {
+    id: "1",
+    pageMain: '1',
+    logo: 'logo.png',
+    favicon: 'favicon.png',
+    title: "Olenolin Web",
+    description: "example web description 1",
+    keywords: "health, medicina",
+    cssExtra: "",
+    jsExtra: "",
+    genericHeaderHTML: "",
+    genericFooterHTML: ""
+  },
+  {
+    id: "2",
+    pageMain: '1',
+    logo: 'logo.png',
+    favicon: 'favicon.png',
+    title: "Lily Web",
+    description: "example web description 1",
+    keywords: "Technology, gaming",
+    cssExtra: "",
+    jsExtra: "",
+    genericHeaderHTML: "",
+    genericFooterHTML: ""
+  },
+  {
+    id: "3",
+    pageMain: '1',
+    logo: 'logo.png',
+    favicon: 'favicon.png',
+    title: "Evey",
+    description: "example web description 1",
+    keywords: "Technology, Data Science",
+    cssExtra: "",
+    jsExtra: "",
+    genericHeaderHTML: "",
+    genericFooterHTML: ""
+  },
+
+]
 
 
 /////////////////////////////////////////
@@ -161,6 +245,36 @@ const filesData:fileCompany[] = [
     name: "05.docx",
     description: "documento 2",
     idCompany: "2"
+  },
+  {
+    id: "6",
+    name: "01.png",
+    description: "imagen 1",
+    idCompany: "1"
+  },
+  {
+    id: "7",
+    name: "02.jpg",
+    description: "imagen 2",
+    idCompany: "1"
+  },
+  {
+    id: "8",
+    name: "03.mp4",
+    description: "video 1",
+    idCompany: "1"
+  },
+  {
+    id: "9",
+    name: "04.pdf",
+    description: "documento 1",
+    idCompany: "1"
+  },
+  {
+    id: "10",
+    name: "05.docx",
+    description: "documento 2",
+    idCompany: "1"
   }
 ]
 
@@ -656,7 +770,8 @@ const productsData:Product[] = [{
   "image": "",
   "categories": "food",
   "idCompany": '3'
-}, {
+},
+ {
   "id": '50',
   "name": "Tray - Foam, Square 4 - S",
   "price": 73,
@@ -666,4 +781,6 @@ const productsData:Product[] = [{
   "image": "",
   "categories": "food",
   "idCompany": '1'
-}]
+},
+
+]

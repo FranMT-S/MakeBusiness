@@ -10,7 +10,8 @@ import { ListTemplatesComponent } from './pages/list-templates/list-templates.co
 import { EditCodeComponent } from './pages/edit-template/components/edit-code/edit-code.component';
 import { EditorWYSIWYGModule } from 'src/app/editor-wysiwyg/editor-wysiwyg.module';
 import { FormsModule } from '@angular/forms';
-import { HtmlDecoderPipe } from './pipes/html-decoder.pipe';
+import { SafeHtmlPipe } from './pipes/html-decoder.pipe';
+import { DialogComponent } from './pages/edit-template/components/dialog/dialog.component';
 
 
 
@@ -20,7 +21,9 @@ import { HtmlDecoderPipe } from './pipes/html-decoder.pipe';
     AddTemplateComponent, 
     EditTemplateComponent, 
     ListTemplatesComponent, 
-    EditCodeComponent, HtmlDecoderPipe],
+    EditCodeComponent, 
+    SafeHtmlPipe, DialogComponent
+    ],
   imports: [
     CommonModule,
     TemplatesRoutingModule,

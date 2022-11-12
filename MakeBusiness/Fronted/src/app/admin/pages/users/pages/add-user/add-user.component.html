@@ -3,30 +3,31 @@
 
     <i [routerLink]="['../']"  class="backPage fa fa-circle-arrow-left" aria-hidden="true"></i>
 
-    <form class="form mx-auto text-center py-5 bg-body rounder" action="">
+    <form class="form mx-auto text-center py-5 bg-body rounder" 
+    [formGroup]="myForm" autocomplete="off" (ngSubmit)="save()">
         <div class="row w-50 mx-auto mb-4">
             
             <div class="mb-3 col-md-12 ">
-              <span class="form-label">Name </span>
+              <span class="form-label">Nombre </span>
               <input type="text"
-                class="form-control" name="name" id="name" aria-describedby="helpId" placeholder="">
+                class="form-control" formControlName="name" id="name" aria-describedby="helpId" placeholder="">
             </div>
     
             <div class="mb-3 col-md-12">
               <span class="form-label">Contraseña </span>
-              <input type="password" class="form-control" name="password" id="password" placeholder="">
+              <input type="password" class="form-control" formControlName="password" id="password" placeholder="">
             </div>
 
             <div class="mb-3 col-12">
               <span class="form-label">Correo</span>
-              <input type="email" class="form-control" name="mail" id="mail" aria-describedby="emailHelpId" placeholder="correo@mail.com">
+              <input type="email" class="form-control" formControlName="mail" id="mail" aria-describedby="emailHelpId" placeholder="correo@mail.com">
             </div>
 
             <div class="mb-3 col-12">
                 <span class="form-label">Tipo: </span>
-                <select class="form-select form-select-lg" name="typeUser" id="typeUser">
-                    <option selected>Tipo Usuario</option>
-                    <option value="1">Cliente</option>
+                <select class="form-select form-select-lg"  formControlName="typeUser" id="typeUser" placeholder="test">
+                    <option  value="">Tipo Usuario</option>
+                    <option  value="1">Cliente</option>
                     <option value="2">Compañia</option>
                     <option value="3">Administrador</option>
                 </select>

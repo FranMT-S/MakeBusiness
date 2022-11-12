@@ -11,16 +11,17 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   hide = true;
-  constructor(private router:Router, private fb:FormBuilder) { }
   myForm:FormGroup = this.fb.group({
     email   : [,[],[]],
     password: [,[],[]]
   });
+
+  constructor(private router:Router, private fb:FormBuilder) { }
   ngOnInit(): void {
   }
 
   login(){
-      console.log("hola")
+     console.log("hola")
      this.router.navigateByUrl("/client");
   }
 

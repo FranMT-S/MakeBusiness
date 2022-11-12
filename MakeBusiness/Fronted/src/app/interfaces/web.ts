@@ -8,7 +8,7 @@ export interface webCompany {
     favicon?: string,
     title: String,
     description?: String,
-    keywords?: string[],
+    keywords?: string,
     cssExtra?: string,
     jsExtra?: string,
     genericHeaderHTML?: string,

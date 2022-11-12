@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { AddUserComponent } from './pages/add-user/add-user.component';
 import { ListUserComponent } from './pages/list-user/list-user.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ListUserComponent } from './pages/list-user/list-user.component';
   imports: [
     CommonModule,
     UsersRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class UsersModule { }

@@ -34,8 +34,8 @@ export class HomeComponent implements OnInit {
   constructor(private companyService: CompanyService, private activatedRoute:ActivatedRoute) { 
 
     this.activatedRoute.params.subscribe( (params:Params) => {
-      this.companyService.setCurrentCompany = this.companyService.getCompanyById(params['id']);
-      this.companyService.getCompanyFiles(params['id']);
+     
+      this.companyService.inicializatedCurrentData(params['id'])
     })
 
   }

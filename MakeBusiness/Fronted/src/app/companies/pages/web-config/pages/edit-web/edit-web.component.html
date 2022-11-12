@@ -8,17 +8,17 @@
             <div class="mb-3 col-md-12 ">
               <span class="form-label">Titulo </span>
               <input type="text"
-                class="form-control"   name="title" id="title" aria-describedby="helpId" placeholder="">
+                class="form-control"  name="title" id="title" aria-describedby="helpId" placeholder="" [value]="web.title">
             </div>
     
             <div class="mb-3 col-md-12">
-              <span class="form-label">Descripcion </span>
-              <textarea type="text" class="form-control" name="description" id="description" placeholder=""></textarea>
+              <span class="form-label">Descripción </span>
+              <textarea type="text" class="form-control text-center" name="description" id="description" placeholder="" [value]="web.description"></textarea>
             </div>
 
             <div class="mb-3 col-md-12">
                 <span class="form-label">Palabras Clave </span>
-                <input type="text"   class="form-control" name="keywords" id="price" placeholder=""/>        
+                <input type="text"   class="form-control" name="keywords" id="price" placeholder="" [value]="web.keywords"/>        
              </div>
 
             <div class="mb-3 col-md-12">

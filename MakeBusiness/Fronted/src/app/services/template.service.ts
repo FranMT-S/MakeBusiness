@@ -56,11 +56,27 @@ const DataRaw:TemplateRaw[] = [ {
     {
       "id":"1",
       "size":12,
-      "HTML":"<button class='bg bg-primary'>test</button>",
+      "HTML":"",
       "CSS":"background",
       "position":1,
-      "type":"1",
-    }
+      "type":"dynamic",
+    },
+    {
+      "id":"2",
+      "size":6,
+      "HTML":"",
+      "CSS":"background",
+      "position":1,
+      "type":"pure",
+    },
+    {
+      "id":"3",
+      "size":6,
+      "HTML":"",
+      "CSS":"background",
+      "position":1,
+      "type":"pure",
+    },
 ],
   "images": [],
 }];

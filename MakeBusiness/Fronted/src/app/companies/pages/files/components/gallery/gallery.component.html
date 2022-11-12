@@ -1,1 +1,54 @@
-<p>gallery works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <ng-container [ngSwitch]="type">
+            <ng-container *ngSwitchCase="'images'" [ngTemplateOutlet]="images"></ng-container>
+            <ng-container *ngSwitchCase="'videos'" [ngTemplateOutlet]="videos"></ng-container>
+            <ng-container *ngSwitchDefault [ngTemplateOutlet]="generic"></ng-container>
+          
+        </ng-container>
+       
+        <ng-template #images>
+            <div  *ngFor="let file of files" class="col-2 p-2">
+                <div>
+                    <img src="../../../../../../assets/Companies/Files/{{file.name}}" [alt]="file.name" 
+                        style="width: 100%; height: 100%;"
+                    > 
+                 </div>
+                <ng-container  [ngTemplateOutlet]="buttons" [ngTemplateOutletContext]="{file:file}"></ng-container>     
+            </div>
+        </ng-template>
+
+        <ng-template #videos>
+            <div  *ngFor="let file of files" class="col-2 p-2">
+                <div>
+
+                    <video height="100%" width="100%" controls>
+                        <source src="../../../../../../assets/Companies/Files/{{file.name}}" type="video/mp4">
+                    
+                      Your browser does not support the video tag.
+                    </video>   
+                </div>
+                <ng-container  [ngTemplateOutlet]="buttons" [ngTemplateOutletContext]="{file:file}"></ng-container>     
+
+            </div>
+        </ng-template>
+
+        <ng-template #generic>
+           <div *ngFor="let file of files" class="col-2 p-2 text-center">
+                <div>
+                    <i class="fa fa-solid fa-5x {{iconGeneric(file.name)}}" aria-hidden="true"></i>
+
+                </div>
+                <ng-container  [ngTemplateOutlet]="buttons" [ngTemplateOutletContext]="{file:file}"></ng-container>     
+                
+           </div>
+        </ng-template>
+
+        <ng-template #buttons let-file='file'>
+            <div class="my-2">
+                <button (click)="editFile(file)" class="btn btn-primary me-3">Editar</button>
+                <button class="btn btn-danger">Eliminar</button>
+            </div>
+         </ng-template>
+    </div>
+</div>

@@ -3,41 +3,43 @@
 
     <i [routerLink]="['../../']"  class="backPage fa fa-circle-arrow-left" aria-hidden="true"></i>
 
-    <form class="form mx-auto text-center py-5 bg-body rounder" action="">
-        <div class="row w-50 mx-auto mb-4">
-            
-            <div class="mb-3 col-md-12 ">
-              <span class="form-label">Nombre </span>
-              <input type="text"
-                class="form-control"  [value]="plain.name" name="name" id="name" aria-describedby="helpId" placeholder="">
-            </div>
-    
-            <div class="mb-3 col-md-12">
-              <span class="form-label">Descripcion </span>
-              <textarea type="text" [value]="plain.description" class="form-control" name="description" id="description" placeholder=""></textarea>
-            </div>
-
-            <div class="mb-3 col-md-12">
-                <span class="form-label">Precio </span>
-                <input type="text"  [value]="plain.price" class="form-control" name="price" id="price" placeholder=""/>        
-             </div>
-            <div class="mb-3 col-md-12">
-                <span class="form-label">Limite Paginas </span>
-                <input type="text"  [value]="plain.limitPage" class="form-control" name="limitPrice" id="limitPrice" placeholder=""/>        
-             </div>
-            <div class="mb-3 col-md-12">
-                <span class="form-label">Limite Productos </span>
-                <input type="text" [value]="plain.limitProducts" class="form-control" name="limitProducts" id="limitProducts" placeholder=""/>        
-             </div>
-            <div class="mb-3 col-md-12">
-                <span class="form-label">Limite Archivos </span>
-                <input type="text" [value]="plain.limitFiles" class="form-control" name="limitFiles" id="limitFiles" placeholder=""/>        
-             </div>
-           
+    <form class="form mx-auto text-center py-5 bg-body rounder" 
+    [formGroup]="myForm" autocomplete="off" (ngSubmit)="save()"
+    >
+    <div class="row w-50 mx-auto mb-4">
+        
+        <div class="mb-3 col-md-12 ">
+          <span class="form-label">Nombre </span>
+          <input type="text"
+            class="form-control" formControlName="name" id="name" aria-describedby="helpId" placeholder="">
         </div>
-        <button type="submit" class="btn btn-purple">Guardar Cambios</button>
 
-    </form>
+        <div class="mb-3 col-md-12">
+          <span class="form-label">Descripción </span>
+          <textarea type="text" class="form-control" formControlName="description" id="description" placeholder=""></textarea>
+        </div>
+
+        <div class="mb-3 col-md-12">
+            <span class="form-label">Precio </span>
+            <input type="text"  class="form-control" formControlName="price" id="price" placeholder=""/>        
+         </div>
+        <div class="mb-3 col-md-12">
+            <span class="form-label">Límite Página  </span>
+            <input type="text"  class="form-control" formControlName="limitPage" id="limitPage" placeholder=""/>        
+         </div>
+        <div class="mb-3 col-md-12">
+            <span class="form-label">Límite Productos </span>
+            <input type="text"  class="form-control" formControlName="limitProducts" id="limitProducts" placeholder=""/>        
+         </div>
+        <div class="mb-3 col-md-12">
+            <span class="form-label">Límite Archivos </span>
+            <input type="text"  class="form-control" formControlName="limitFiles" id="limitFiles" placeholder=""/>        
+         </div>
+       
+    </div>
+    <button type="submit" class="btn btn-purple">Guardar Plan</button>
+
+</form>
     
 </div>
 

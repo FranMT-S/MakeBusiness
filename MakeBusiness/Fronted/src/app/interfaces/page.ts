@@ -33,6 +33,6 @@ export interface Block{
     HTML: string,
     CSS:string,
     position:number,
-    type:string,
+    type:'dynamic' | 'pure',
 }
 
