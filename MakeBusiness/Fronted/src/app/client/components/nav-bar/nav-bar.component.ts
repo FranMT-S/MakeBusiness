@@ -12,7 +12,6 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.navigateByUrl(`clients/companies`)
-
   }
 
   navegate(url:string){
