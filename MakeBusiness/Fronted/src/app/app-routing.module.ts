@@ -17,7 +17,7 @@ const routes: Routes = [
     loadChildren: () => import("./registry/registry.module").then(module => module.RegistryModule)
   },
   {
-    path:"client",
+    path:"clients",
     loadChildren: () => import("./client/client.module").then(module => module.ClientModule)
   },
   {
