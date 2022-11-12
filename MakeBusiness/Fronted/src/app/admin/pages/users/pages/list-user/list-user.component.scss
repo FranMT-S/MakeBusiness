@@ -1,0 +1,50 @@
+.avatar-card {
+    max-width: 400px;
+
+    &-information{
+        margin-top: 20px;
+        margin-bottom: 30px;
+        span{
+            font: {
+                
+                weight: 500;
+                size: 1.2em;
+            }
+            margin-right: 3px;
+            color: rgb(50, 139, 222) ;
+
+        }
+        
+        p{
+            font: {
+                size: 1.2em
+            }
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}
+  
+.avatar-header-image {
+    background-image: url('../../../../../../assets/Users/01.jpg');
+    background-size: cover;
+}
+
+
+
+.MathbuttonsContainer{
+    width: 100%;
+    height: 60px;
+    text-align: center;
+
+    button{
+        display: contents;
+        .fa{
+            padding: 10px 0px 0px 0px;
+            font-size: 35px;
+            margin: 0 10px 0 10px;
+        }
+    }
+
+
+}

@@ -1,0 +1,40 @@
+
+<div class="m-5" >  
+    <h1 class="text-center"> Empresas</h1>
+    <div class="bg-light rounded">
+        <mat-divider class="mb-5"> </mat-divider>
+        <div class="d-flex justify-content-center mb-3">
+          <span class=" buttonsContainer text-deg-purple-1">
+              <button [routerLink]="['../add-product']"><i class="fa fa-light fa-circle-plus"></i></button>
+              <button [disabled]="selectedRowIndex == ''" (click)="editProduct()"><i class="fa fa-solid fa-pen-to-square" aria-hidden="true"></i></button>
+              <button [disabled]="selectedRowIndex == ''"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          </span>
+      </div>
+    </div>
+ 
+    <div class="table-container">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+
+            <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+              <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+              <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+            </ng-container>
+
+
+      
+
+            <!-- <mat-slide-toggle [(ngModel)]="isChecked">Slide Toggle Checked: {{isChecked}}</mat-slide-toggle> -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row   *matRowDef="let row; columns: displayedColumns;"
+            (click)="selectRow(row)"
+            [class.highlight]="selectedRowIndex == row.id"          
+            ></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                    
+                    showFirstLastButtons 
+                    aria-label="Select page of company elements">
+          </mat-paginator>
+    </div>
+</div>

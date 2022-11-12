@@ -1,0 +1,42 @@
+<div class="m-5" >  
+    <h1 class="text-center"> Editar Usuario</h1>
+
+    <i [routerLink]="['../../']"  class="backPage fa fa-circle-arrow-left" aria-hidden="true"></i>
+
+    <form class="form mx-auto text-center py-5 bg-body rounder" 
+    [formGroup]="myForm" autocomplete="off" (ngSubmit)="save()">
+        <div class="row w-50 mx-auto mb-4">
+            
+            <div class="mb-3 col-md-12 ">
+              <span class="form-label">Nombre </span>
+              <input type="text"
+                class="form-control" formControlName="name" id="name" aria-describedby="helpId" placeholder="">
+            </div>
+    
+            <div class="mb-3 col-md-12">
+              <span class="form-label">Contraseña </span>
+              <input type="password" class="form-control" formControlName="password" id="password" placeholder="">
+            </div>
+
+            <div class="mb-3 col-12">
+              <span class="form-label">Correo</span>
+              <input type="email" class="form-control" formControlName="mail" id="mail" aria-describedby="emailHelpId" placeholder="correo@mail.com">
+            </div>
+
+            <div class="mb-3 col-12">
+                <span class="form-label">Tipo: </span>
+                <select class="form-select form-select-lg"  formControlName="typeUser" id="typeUser" placeholder="test">
+                    <option  value="">Tipo Usuario</option>
+                    <option  value="1">Cliente</option>
+                    <option value="2">Compañia</option>
+                    <option value="3">Administrador</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-purple">Guardar Usuario</button>
+
+    </form>
+    
+</div>
+
+
