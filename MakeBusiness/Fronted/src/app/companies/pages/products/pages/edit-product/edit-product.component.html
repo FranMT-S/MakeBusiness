@@ -3,28 +3,36 @@
 
     <i [routerLink]="['../../']"  class="backPage fa fa-circle-arrow-left" aria-hidden="true"></i>
 
-    <form class="form mx-auto text-center py-5 bg-body rounder" action="">
+    <form class="form mx-auto text-center py-5 bg-body rounder" 
+        [formGroup]="myForm" autocomplete="off" (ngSubmit)="save()"
+    >
         <div class="row w-50 mx-auto mb-4">
             
             <div class="mb-3 col-md-12 ">
               <span class="form-label">Nombre </span>
               <input type="text"
-                class="form-control"  [value]="product.name" name="name" id="name" aria-describedby="helpId" placeholder="">
+                class="form-control"  [value]="product.name" formControlName="name" id="name" aria-describedby="helpId" placeholder="">
+                <span *ngIf="fieldNotValid('name')" class="form-label form-text text-danger">El campo no es valido </span>
+           
             </div>
     
             <div class="mb-3 col-md-12">
               <span class="form-label">Descripcion </span>
-              <textarea type="text" [value]="product.description" class="form-control" name="description" id="description" placeholder=""></textarea>
+              <textarea type="text" [value]="product.description" class="form-control text-center" formControlName="description" id="description" placeholder=""></textarea>
+              <span *ngIf="fieldNotValid('description')" class="form-label form-text text-danger">El campo no es valido </span>
             </div>
 
             <div class="mb-3 col-md-12">
                 <span class="form-label">Precio </span>
-                <input type="text"  [value]="product.price" class="form-control" name="price" id="price" placeholder=""/>        
-             </div>
+                <input type="text"  [value]="product.price" class="form-control" formControlName="price" id="price" placeholder=""/>        
+                <span *ngIf="fieldNotValid('price')" class="form-label form-text text-danger">El campo no es valido </span>
+            </div>
+
              <div class="mb-3 col-md-12">
                  <span class="form-label">Categoria </span>
-                 <input type="text" [value]="product.categories" class="form-control" name="limitProducts" id="limitProducts" placeholder=""/>               
-             </div>
+                 <input type="text" [value]="product.categories" class="form-control" formControlName="limitProducts" id="limitProducts" placeholder=""/>               
+                 <span *ngIf="fieldNotValid('limitProducts')" class="form-label form-text text-danger">El campo no es valido </span>
+            </div>
 
 
              <div class="mb-3 col-md-12">

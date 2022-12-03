@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { WebConfigRoutingModule } from './web-config-routing.module';
 import { WebConfigComponent } from './web-config/web-config.component';
 import { EditWebComponent } from './pages/edit-web/edit-web.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { EditWebComponent } from './pages/edit-web/edit-web.component';
   ],
   imports: [
     CommonModule,
-    WebConfigRoutingModule
+    WebConfigRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class WebConfigModule { }

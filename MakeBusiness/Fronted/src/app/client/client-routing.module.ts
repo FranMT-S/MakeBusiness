@@ -12,8 +12,8 @@ const routes: Routes = [
     children : [
       {path:"companies",component:CompaniesComponent},
       {path:"car_shopping",component:ShoppingCartComponent},
-      {path:"historical",component:HistoryPurchasesComponent
-}
+      {path:"historical",component:HistoryPurchasesComponent},
+      {path:"",redirectTo:"companies"}
     ]
   }
 ];

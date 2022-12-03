@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Plain } from 'src/app/interfaces/plains';
-import { PlainService } from 'src/app/services/plain.service';
+import { Plan } from 'src/app/interfaces/plains';
+import { PlanService } from 'src/app/services/plain.service';
 
 
 @Component({
@@ -13,33 +13,59 @@ import { PlainService } from 'src/app/services/plain.service';
 })
 export class ListPlainsComponent implements OnInit {
   selectedRowIndex = "";
-  selectedPlain:Plain = {} as Plain;
+  selectedPlain:Plan = {} as Plan;
 
-  displayedColumns: string[] = ['id', 'name', 'description', 'price'];
+  displayedColumns: string[] = ['_id', 'name', 'description','limitPages','limitProducts','limitFiles','annuity','price'];
  
-  plains:Plain[] = [];
-  dataSource = new MatTableDataSource<Plain>();
+  plans:Plan[] = [];
+  dataSource = new MatTableDataSource<Plan>();
  
 
-  constructor(private router:Router,private plainService:PlainService) { }
+  constructor(private router:Router,private planService:PlanService) { }
 
   ngOnInit(): void {
-    this.plains = this.plainService.getAllPlains;
-    this.dataSource.data = this.plains;
+    this.getPlans();
   }
 
-  addPlain(){
-    this.router.navigate([`admin/plains/add-plain`])
+  getPlans(){
+    this.planService.getAllPlans.subscribe( res =>{
+      if(res.ok){
+        this.plans = res.plans;
+        this.dataSource.data = this.plans;
+
+      }
+    });
   }
 
-  editPlain(){
+  addPlan(){
+    this.router.navigate([`admin/plans/add-plan`])
+  }
+
+  editPlan(){
     let id = this.selectedRowIndex;
-    this.router.navigate([`admin/plains/${id}/edit-plain`])
+    this.router.navigate([`admin/plans/${id}/edit-plan`])
   }
 
-  selectRow(row:Plain){
+
+
+  deletePlan(){
+      
+    if (confirm("Desea eliminar el plan " + this.selectedPlain.name)) {
+     
+      this.planService.deletePlan(this.selectedPlain._id).subscribe( res =>{
+        if(res.ok){
+          this.getPlans();
+        }else{
+          alert("no se pudo eliminar el plan")
+          console.log(res.error)
+        }
+      });
+    } 
+  }
+
+  selectRow(row:Plan){
     this.selectedPlain = row;
-    this.selectedRowIndex = row.id;
+    this.selectedRowIndex = row._id;
   }
 
 }

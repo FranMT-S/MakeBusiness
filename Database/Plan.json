@@ -1,0 +1,34 @@
+[{
+  "_id": {
+    "$oid": "637d32a1f542e68362260f77"
+  },
+  "name": "Free",
+  "description": "Licencia de prueba de productos por 1 semana",
+  "price": 0,
+  "annuity": "free",
+  "limitPages": 5,
+  "limitProducts": 10,
+  "limitFiles": 10
+},{
+  "_id": {
+    "$oid": "637d32a1f542e68362260f78"
+  },
+  "name": "Basico",
+  "description": "Licencia  con basica con lo que podras tener los recursos basicos para crear una pagina web",
+  "price": 30,
+  "annuity": "mensual",
+  "limitPages": 15,
+  "limitProducts": 20,
+  "limitFiles": 20
+},{
+  "_id": {
+    "$oid": "637d32a1f542e68362260f79"
+  },
+  "name": "Premium",
+  "description": "Licencia de sin limites, aprovecha nuestro servicio sin restricciones",
+  "price": 330,
+  "annuity": "anual",
+  "limitPages": 0,
+  "limitProducts": 0,
+  "limitFiles": 0
+}]

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ValidatorService } from 'src/app/services/validator.service';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +13,25 @@ export class LoginComponent implements OnInit {
 
   hide = true;
   myForm:FormGroup = this.fb.group({
-    email   : [,[],[]],
-    password: [,[],[]]
+    email   : [,[Validators.required,Validators.pattern(this.validatorService.emailPattern)]],
+    password: [,[Validators.required]]
   });
 
-  constructor(private router:Router, private fb:FormBuilder) { }
+  constructor(private router:Router, private fb:FormBuilder,private validatorService:ValidatorService) { }
   ngOnInit(): void {
   }
 
+
+  fieldNotValid(field:string){
+    return this.myForm.get(field)?.invalid && this.myForm.get(field)?.touched;
+  }
+
+
+
   login(){
-     console.log("hola")
-     this.router.navigateByUrl("/client");
+
+    if(!this.myForm.invalid)
+      this.router.navigateByUrl("/clients");
   }
 
 }

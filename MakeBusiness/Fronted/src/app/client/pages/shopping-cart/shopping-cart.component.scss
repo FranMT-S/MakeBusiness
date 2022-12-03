@@ -12,7 +12,10 @@
     margin-right: auto;
     border-radius: 1rem;
     padding-top: 1rem;
-    height:80vh;
+  
+    .col{
+        text-align: center;
+    }
 }
 
 .title{
@@ -27,7 +30,10 @@
 }
 
 .product-image{
-    width: 5rem;
+    width: 6rem;
+    height: 5rem;
+    max-width: 6rem;
+    max-height: 5rem;
 }
 
 .pagination{

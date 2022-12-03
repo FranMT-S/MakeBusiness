@@ -12,7 +12,7 @@ const routes: Routes = [
     component:PlainsComponent,
     children: [
       {
-        path:"add-plain",
+        path:"add-plan",
         component:AddPlainComponent
       },
       {
@@ -20,7 +20,7 @@ const routes: Routes = [
         component:ListPlainsComponent
       },
       {
-        path:":id/edit-plain",
+        path:":id/edit-plan",
         component:EditPlainComponent
       },
       {

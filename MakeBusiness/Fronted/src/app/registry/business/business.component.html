@@ -1,26 +1,31 @@
 <div class="background background-back ">
     <div class="background background-transparent-black d-flex justify-content-center align-items-center">  
-        <form autocomplete="off">
+        <form [formGroup]="myForm" autocomplete="off" (ngSubmit)="register()">
           <div class="form mx-auto  p-3 rounded text-center text-white">
             <div class="col-12">
                 <h1 class="fs-2 mb-4">Registro</h1>
                 <mat-form-field appearance="legacy" color="accent">
                   <mat-label >Nombre</mat-label>
-                  <input matInput placeholder="">
+                  <input matInput placeholder="" formControlName="name">
                   <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
                   <!-- <mat-hint>Hint</mat-hint> -->
+                  <mat-hint *ngIf="fieldNotValid('name')" class="form-label form-text text-danger">El campo no es valido </mat-hint>                   
+                
                 </mat-form-field>
                 <mat-form-field appearance="legacy" color="accent">
-                  <mat-label >Correo</mat-label>
-                  <input matInput placeholder="">
+                  <mat-label>Correo</mat-label>
+                  <input matInput placeholder=""  formControlName="email">
                   <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-                  <!-- <mat-hint>Hint</mat-hint> -->
+                  
+                  <mat-hint *ngIf="fieldNotValid('email')" class="form-label form-text text-danger">El campo no es valido </mat-hint>                   
+                
                 </mat-form-field>
                 <mat-form-field appearance="legacy" color="accent">
                   <mat-label >Nombre Empresa</mat-label>
-                  <input matInput placeholder="">
+                  <input matInput placeholder=""  formControlName="nameCompany">
                   <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-                  <!-- <mat-hint>Hint</mat-hint> -->
+                  <mat-hint *ngIf="fieldNotValid('nameCompany')" class="form-label form-text text-danger">El campo no es valido </mat-hint>                   
+
                 </mat-form-field>
                 
                 <mat-form-field appearance="legacy" color="accent">
@@ -34,22 +39,30 @@
                 
                 <mat-form-field appearance="legacy" color="accent" class="lastInput">
                   <mat-label>Contraseña</mat-label>
-                  <input  [type]="hide ? 'password' : 'text'" type="password" matInput formControlName="password2">
+                  <input  [type]="hide ? 'password' : 'text'" type="password" matInput formControlName="password">
                   <mat-icon class="me-2" matPrefix>lock</mat-icon>
                   <button mat-icon-button matSuffix (click)="hide = !hide" type="button" >
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                   </button>
+                  <mat-hint *ngIf="fieldNotValid('password')" class="form-label form-text text-danger">El campo no es valido </mat-hint>                   
+
                 </mat-form-field>
+                
                 <p>
-                  <button type="submit" class="btn btn-purple text-white mt-4">Submit</button>
+                  <button type="submit" class="btn btn-purple text-white mt-4">Registrarse</button>
                 </p>
+
+                
                 
                 <p class="mt-4">
-                  ¿Ya tienes un cuenta? <a style="color:#4F72CD">Inicia Sesion</a>
+                  ¿Ya tienes un cuenta? <a [routerLink]="['/auth/login']" style="color:#4F72CD">Inicia Sesion</a>
                 </p>
               </div>
           </div>  
-      </form>  
+      </form> 
+       
      </div>
+     
 </div>
+
 

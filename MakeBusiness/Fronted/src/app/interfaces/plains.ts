@@ -1,10 +1,10 @@
-export interface Plain {
-    id: string,
+export interface Plan {
+    _id: string,
     name: string;
     description: string;
     price: number;
     annuity: string;
-    limitPage: number;
+    limitPages: number;
     limitProducts: number;
     limitFiles: number;
 }

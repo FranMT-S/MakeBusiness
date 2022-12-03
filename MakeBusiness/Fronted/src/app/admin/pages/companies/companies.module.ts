@@ -8,6 +8,8 @@ import { CompaniesComponent } from './companies/companies.component';
 import { AddCompanyComponent } from './pages/add-company/add-company.component';
 import { EditCompanyComponent } from './pages/edit-company/edit-company.component';
 import { ListCompaniesComponent } from './pages/list-companies/list-companies.component';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
+
 
 
 @NgModule({
@@ -15,13 +17,16 @@ import { ListCompaniesComponent } from './pages/list-companies/list-companies.co
     CompaniesComponent,
     AddCompanyComponent,
     EditCompanyComponent,
-    ListCompaniesComponent
+    ListCompaniesComponent,
+    
 
   ],
   imports: [
     CommonModule,
     CompaniesRoutingModule,
-    MaterialModule
+    MaterialModule,
+    PipesModule
+
   ],
   exports: [MatSidenavModule],
 })

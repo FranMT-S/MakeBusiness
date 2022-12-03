@@ -2,7 +2,7 @@ import * as internal from "stream"
 
 
 export interface Company {
-    id: string,
+    _id: string,
     nameCompany: string,
     description: string,
     phone?: string,
@@ -10,6 +10,5 @@ export interface Company {
     location?: string,
     state: Boolean,
     idPlan: string,
-    idWeb: string,
     idUser: string
 }

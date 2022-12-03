@@ -8,7 +8,12 @@ import { Page404Component } from './shared/page404/page404.component';
 import { LandingPageModule } from './landing-page/landing-page.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NavbarComponent } from './shared/navbar/navbar.component';
+
+import { HtmlEditorComponent } from './components/html-editor/html-editor.component';
+import { JsEditorComponent } from './components/js-editor/js-editor.component';
+import { CssEditorComponent } from './components/css-editor/css-editor.component';
+import { MultiEditorComponent } from './components/multi-editor/multi-editor.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -18,6 +23,11 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     AppComponent,
     Page404Component,
 
+    HtmlEditorComponent,
+    JsEditorComponent,
+    CssEditorComponent,
+    MultiEditorComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -26,7 +36,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     LandingPageModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-
+    HttpClientModule
 
   ],
  

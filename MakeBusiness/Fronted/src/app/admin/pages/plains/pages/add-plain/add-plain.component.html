@@ -12,32 +12,58 @@
               <span class="form-label">Nombre </span>
               <input type="text"
                 class="form-control" formControlName="name" id="name" aria-describedby="helpId" placeholder="">
+                <span *ngIf="fieldNotValid('name')" class="form-label form-text text-danger">El campo no es valido </span>
+            
             </div>
     
             <div class="mb-3 col-md-12">
               <span class="form-label">Descripción </span>
-              <textarea type="text" class="form-control" formControlName="description" id="description" placeholder=""></textarea>
+              <textarea type="text" class="form-control text-center" formControlName="description" id="description" placeholder=""></textarea>
+              <span *ngIf="fieldNotValid('description')" class="form-label form-text text-danger">El campo no es valido </span>
+            
             </div>
 
             <div class="mb-3 col-md-12">
                 <span class="form-label">Precio </span>
                 <input type="text"  class="form-control" formControlName="price" id="price" placeholder=""/>        
-             </div>
+                <span *ngIf="fieldNotValid('price')" class="form-label form-text text-danger">El campo no es valido </span>
+            
+            </div>
+
+
+            <div class="mb-3 col-md-12">
+                <span class="form-label">Anualidad  </span>
+                <select formControlName='annuity'  id="annuity" class='form-control'>
+                    <option  value="">Anualidad</option>
+                    <option value='free'>Free</option>
+                    <option value='semanal'>Semanal</option>
+                    <option value='mensual'>Mensual</option>
+                    <option value='anual' selected="selected">Anual</option>
+                  </select>
+            
+            </div>
+   
+            
             <div class="mb-3 col-md-12">
                 <span class="form-label">Límite Página  </span>
-                <input type="text"  class="form-control" formControlName="limitPage" id="limitPage" placeholder=""/>        
-             </div>
+                <input type="text"  class="form-control" formControlName="limitPages" id="limitPages" placeholder=""/>        
+                <span *ngIf="fieldNotValid('limitPages')" class="form-label form-text text-danger">El campo no es valido </span>
+            
+            </div>
+            
             <div class="mb-3 col-md-12">
                 <span class="form-label">Límite Productos </span>
                 <input type="text"  class="form-control" formControlName="limitProducts" id="limitProducts" placeholder=""/>        
-             </div>
+                <span *ngIf="fieldNotValid('limitProducts')" class="form-label form-text text-danger">El campo no es valido </span>
+            
+            </div>
             <div class="mb-3 col-md-12">
                 <span class="form-label">Límite Archivos </span>
                 <input type="text"  class="form-control" formControlName="limitFiles" id="limitFiles" placeholder=""/>        
-             </div>
-           
+                <span *ngIf="fieldNotValid('limitFiles')" class="form-label form-text text-danger">El campo no es valido </span>
+            </div>
         </div>
-        <button type="submit" class="btn btn-purple">Guardar Plan</button>
+        <button type="submit"  class="btn btn-purple" (click)="save()">Guardar Plan</button>
 
     </form>
     

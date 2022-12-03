@@ -1,0 +1,57 @@
+[{
+  "_id": {
+    "$oid": "637344b5f542e68362260e66"
+  },
+  "userName": "company2",
+  "email": "company2@gmail.com",
+  "password": "1234",
+  "type": "company"
+},{
+  "_id": {
+    "$oid": "637344b5f542e68362260e65"
+  },
+  "userName": "company1",
+  "email": "company1@gmail.com",
+  "password": "1234",
+  "type": "company"
+},{
+  "_id": {
+    "$oid": "637344b5f542e68362260e63"
+  },
+  "userName": "admin1",
+  "email": "admin1@gmail.com",
+  "password": "1234",
+  "type": "admin"
+},{
+  "_id": {
+    "$oid": "637344b5f542e68362260e64"
+  },
+  "userName": "admin2",
+  "email": "admin2@gmail.com",
+  "password": "1234",
+  "type": "admin"
+},{
+  "_id": {
+    "$oid": "637344b5f542e68362260e67"
+  },
+  "userName": "client1",
+  "email": "client1@gmail.com",
+  "password": "1234",
+  "type": "client"
+},{
+  "_id": {
+    "$oid": "637344b5f542e68362260e68"
+  },
+  "userName": "client2",
+  "email": "client2@gmail.com",
+  "password": "1234",
+  "type": "client"
+},{
+  "_id": {
+    "$oid": "637344b5f542e68362260e69"
+  },
+  "userName": "client3",
+  "email": "client3@gmail.com",
+  "password": "1234",
+  "type": "client"
+}]

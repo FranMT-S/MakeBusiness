@@ -11,5 +11,8 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  scrollingSmooth(seccionId:string){
+    const coordenadaTopSeccion = document.getElementById(seccionId)?.getBoundingClientRect().top
+    scrollTo(0, coordenadaTopSeccion!-10);
+  }
 }

@@ -30,16 +30,16 @@ $deg-purple-1:280deg, rgba(253,9,68,1) 0%, rgba(170,49,128,1) 48%, rgba(204,16,1
     }
     
     &-purple{
-        color: #942C70;
+        color: #942C70!important;
     }
 
     &-pink{
-        color:#F0A6E0
+        color:#F0A6E0!important
     }
 
     &-deg-purple{
         &-1 {
-            color: #aa3180;
+            color: #aa3180 !important;
             background: -webkit-linear-gradient($deg-purple-1);
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -72,21 +72,40 @@ $deg-purple-1:280deg, rgba(253,9,68,1) 0%, rgba(170,49,128,1) 48%, rgba(204,16,1
 
 // Botones
 .btn{
-
+    
+   
     &-outline{
         &-purple{
             border-color: #aa3180 !important;
             color:#aa3180 !important;
+            
+            &:hover{
+                background-color: #aa3180;
+                color:#fff !important;
+            }   
         }
     }
 
     &-purple{
-        background-color: #AA3180 !important;
         color:white !important;
+        background-color: #AA3180 !important;
         &:hover{
-            background-color: #a1317a !important;       
+            background-color: #a1317a !important;  
+            color:#fff !important;     
         }
     }
+
+    &-yellow{
+        color:white !important;
+        background-color: #e5aa14 !important;
+   
+        border-width: 0;
+        &:hover{
+            background-color: #d09a0f !important;
+        }
+    }
+    
+    
 }
 
 
@@ -148,12 +167,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .backPage{
     position:absolute;
-    top: 120px;
+    top: 13vh;
     left: 150px;
     font-size: 50px;
     color: rgb(149, 37, 126);
     cursor: pointer;
     
+}
+
+.break-word{
+    overflow-wrap: break-word;
 }
 
 // Cursor

@@ -20,9 +20,9 @@ export class ListCompaniesComponent implements OnInit {
   
   
   displayedColumns: string[] = [
-                                'id', 'nameCompany', 'description', 
+                                '_id', 'nameCompany', 'description', 
                                 'phone','category','location',
-                                'idPlan','idWeb','idUser','state'
+                                'state'
                               ];
 
   companies:Company[] = [];
@@ -37,21 +37,47 @@ export class ListCompaniesComponent implements OnInit {
 
   
   ngOnInit(): void {
-    this.companies = this.companyService.getAllCompany;
+ 
+   this.companyService.getAllCompany.subscribe( res => {
+      if(res.ok){
+  
+        this.companies = res.companies;
+        this.dataSource.data = this.companies ;
+        this.dataSource.paginator = this.paginator;
+      }
+   });
    
-    this.dataSource.data = this.companies ;
-    this.dataSource.paginator = this.paginator;
+   
   }
 
   selectRow(row:Company){
     this.selectedCompany = row;
-    this.selectedRowIndex = row.id;
-    // console.log(row)
+    this.selectedRowIndex = row._id;
+
   }
   
-  changeStateCompany(){
+  changeStateCompany(company:Company){
       
-      this.companyService.changeStateCompany(this.selectedCompany.id);
+      this.companyService.changeStateCompany(company).subscribe( res =>{
+        if(!res.ok){
+          alert("No cambiar el estado")
+        }      
+      });
+  }
+
+  deleteCompany(){
+      
+    if (confirm("Desea eliminar la empresa " + this.selectedCompany.nameCompany)) {
+     
+      this.companyService.deleteCompany(this.selectedCompany).subscribe( res =>{
+        if(res.ok){
+          this.dataSource.data = this.dataSource.data.filter( company => company._id != this.selectedCompany._id)
+        }else{
+          alert("no se pudo eliminar la empresa")
+          console.log(res.error)
+        }
+      });
+    } 
   }
 
 }

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute,Params } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute,Params, Router } from '@angular/router';
+
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
+import { ValidatorService } from 'src/app/services/validator.service';
 // import { switchMap, tap } from 'rxjs/operators';
 
 @Component({
@@ -16,37 +18,68 @@ export class EditUserComponent implements OnInit {
   user:User = {} as User;
 
   myForm:FormGroup = this.fb.group({
-    name   : ["",[],[]],
-    password: ["",[],[]],
-    mail: ["",[],[]],
-    typeUser: ["",[],[]],
+    userName   : ["",[Validators.required]],
+    password: ["",[Validators.required]],
+    email: ["",[Validators.required,Validators.pattern(this.validatorService.emailPattern)]],
+    type: ["",[Validators.required,this.validatorService.notBlank]],
   });
 
   constructor(private activatedRoute:ActivatedRoute,private userService:UserService,
-              private fb:FormBuilder) { 
+              private fb:FormBuilder, private validatorService:ValidatorService, private router:Router) { 
+
+                this.activatedRoute.params.subscribe( (params:Params) => {
+                  this.getUser(params['id'])
+              }) 
   }
 
   ngOnInit(): void {
     
-    this.activatedRoute.params.subscribe( (params:Params) => {
-        let data = this.userService.getUser(params['id']);
-        if(data != undefined){
-            this.user = data; 
-            let index = this.user.type == "client" ? 1 : this.user.type == "company" ? 2 : this.user.type == "admin" ? 3 : 0;
-            
-            this.myForm.setValue({
-              name: this.user.name,
-              password: this.user.password,
-              mail: this.user.email,
-              typeUser: index,
-            })
-          
+ 
+  }
+
+  getUser(id:string){
+    this.userService.getUser(id).subscribe( res =>{
+      if(res.ok){
+         
+          this.user = res.user; 
+      
+          this.myForm.setValue({
+            userName: this.user.userName,
+            password: this.user.password,
+            email: this.user.email,
+            type: this.user.type,
+          })
         
-        }
-      }) 
+      
+      }
+    });
+
+
+  }
+
+  fieldNotValid(field:string){
+    return this.myForm.get(field)?.invalid && this.myForm.get(field)?.touched;
   }
 
   save(){
-    console.log(this.myForm.value)
+   
+    if(this.myForm.valid){
+
+      this.userService.updateUser(this.user._id,this.myForm.value).subscribe(res =>{
+        
+        if(res.ok){
+          alert("Modificado con exito")
+          this.router.navigateByUrl("admin/users")
+        }else{
+          alert(res.msg)
+          console.log(res.error)
+        }
+      })
+    }else{
+      alert("Ingrese los datos correctos")
+      console.log(this.myForm.valid)
+      console.log(this.myForm.value)
+    }
+
   }
 }

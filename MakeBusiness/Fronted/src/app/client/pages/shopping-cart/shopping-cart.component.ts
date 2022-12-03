@@ -52,9 +52,13 @@ export class ShoppingCartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.getPrice();
   }
 
 
-  
+  getPrice(){
+    this.total = 0;
+    this.products.forEach( e => this.total += e.price * e.quantity)
+  }
 
 }

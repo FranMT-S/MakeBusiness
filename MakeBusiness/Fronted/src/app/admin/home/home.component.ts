@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
                   },
                   {
                     text:"Planes",
-                    path:"plains",
+                    path:"plans",
                     icon:"fa fa-solid fa-money-bill-transfer"
                   },
                   {

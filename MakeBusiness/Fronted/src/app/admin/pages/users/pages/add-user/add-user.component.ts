@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import { ValidatorService } from 'src/app/services/validator.service';
 
 @Component({
   selector: 'app-add-user',
@@ -9,20 +11,44 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class AddUserComponent implements OnInit {
 
   myForm:FormGroup = this.fb.group({
-    name   : ["",[],[]],
-    password: ["",[],[]],
-    mail: ["",[],[]],
-    typeUser: ["",[],[]],
+    userName   : ["",[Validators.required]],
+    password: ["",[Validators.required]],
+    email: ["",[Validators.required,Validators.pattern(this.validatorService.emailPattern)]],
+    type: ["",[Validators.required,this.validatorService.notBlank]],
   });
 
 
-  constructor(private fb:FormBuilder  ) { }
+  constructor(private fb:FormBuilder,private validatorService:ValidatorService,
+              private userService:UserService
+            ) { }
 
   ngOnInit(): void {
   }
 
+  fieldNotValid(field:string){
+      return this.myForm.get(field)?.invalid && this.myForm.get(field)?.touched;
+  }
+
   save(){
-    console.log(this.myForm.value)
+
+
+    if(this.myForm.valid){
+      console.log(this.myForm.value)
+      this.userService.newUser(this.myForm.value).subscribe(res =>{
+        if(res.ok){
+          alert("Agregado con exito")
+          this.myForm.reset()
+       
+        }else{
+          alert("no se pudo ingresar el usuario")
+          console.log(res.error)
+        }
+      })
+    }else{
+      alert("Ingrese los datos correctos")
+      console.log(this.myForm.valid)
+      console.log(this.myForm.value)
+    }
   }
 
 }

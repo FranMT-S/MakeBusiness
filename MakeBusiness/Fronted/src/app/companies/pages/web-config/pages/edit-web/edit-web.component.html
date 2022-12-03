@@ -2,24 +2,28 @@
     <h1 class="text-center"> Editar Web</h1>
 
 
-    <form class="form mx-auto text-center py-5 bg-body rounder" action="">
+    <form class="form mx-auto text-center py-5 bg-body rounder"
+            [formGroup]="myForm" autocomplete="off" (ngSubmit)="save()">
+        
         <div class="row w-50 mx-auto mb-4">
             
             <div class="mb-3 col-md-12 ">
               <span class="form-label">Titulo </span>
               <input type="text"
-                class="form-control"  name="title" id="title" aria-describedby="helpId" placeholder="" [value]="web.title">
+                class="form-control"  formControlName="title" id="title" aria-describedby="helpId" placeholder="" [value]="web.title">
+                <span *ngIf="fieldNotValid('title')" class="form-label form-text text-danger">El campo no es valido </span>
             </div>
     
             <div class="mb-3 col-md-12">
               <span class="form-label">Descripción </span>
-              <textarea type="text" class="form-control text-center" name="description" id="description" placeholder="" [value]="web.description"></textarea>
+              <textarea type="text" class="form-control text-center" formControlName="description" id="description" placeholder="" [value]="web.description"></textarea>
+              <span *ngIf="fieldNotValid('description')" class="form-label form-text text-danger">El campo no es valido </span>
             </div>
 
             <div class="mb-3 col-md-12">
                 <span class="form-label">Palabras Clave </span>
-                <input type="text"   class="form-control" name="keywords" id="price" placeholder="" [value]="web.keywords"/>        
-             </div>
+                <input type="text"   class="form-control" formControlName="keywords" id="price" placeholder="" [value]="web.keywords"/>        
+            </div>
 
             <div class="mb-3 col-md-12">
                 <span class="form-label">Favicon </span>

@@ -1,0 +1,52 @@
+[{
+  "_id": {
+    "$oid": "637d407ff542e68362260f8d"
+  },
+  "pageMain": null,
+  "idCompany": {
+    "$oid": "637d3586f542e68362260f85"
+  },
+  "logo": "logo.png",
+  "favicon": "favicon.png",
+  "title": "Olenolin Web",
+  "description": "example web description 1",
+  "keywords": "health, medicina",
+  "cssExtra": "",
+  "jsExtra": "",
+  "genericHeaderHTML": "",
+  "genericFooterHTML": ""
+},{
+  "_id": {
+    "$oid": "637d407ff542e68362260f8e"
+  },
+  "pageMain": null,
+  "idCompany": {
+    "$oid": "637d3586f542e68362260f84"
+  },
+  "logo": "logo.png",
+  "favicon": "favicon.png",
+  "title": "Lily Web",
+  "description": "example web description 1",
+  "keywords": "Technology, gaming",
+  "cssExtra": "",
+  "jsExtra": "",
+  "genericHeaderHTML": "",
+  "genericFooterHTML": ""
+},{
+  "_id": {
+    "$oid": "637d407ff542e68362260f8f"
+  },
+  "pageMain": null,
+  "idCompany": {
+    "$oid": "637d3586f542e68362260f83"
+  },
+  "logo": "logo.png",
+  "favicon": "favicon.png",
+  "title": "Evey",
+  "description": "example web description 1",
+  "keywords": "Technology, Data Science",
+  "cssExtra": "",
+  "jsExtra": "",
+  "genericHeaderHTML": "",
+  "genericFooterHTML": ""
+}]

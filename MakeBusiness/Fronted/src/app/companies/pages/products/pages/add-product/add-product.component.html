@@ -3,34 +3,42 @@
 
     <i [routerLink]="['../']"  class="backPage fa fa-circle-arrow-left" aria-hidden="true"></i>
 
-    <form class="form mx-auto text-center py-5 bg-body rounder" action="">
+    <form class="form mx-auto text-center py-5 bg-body rounder" 
+    
+    [formGroup]="myForm" autocomplete="off" (ngSubmit)="save()">
         <div class="row w-50 mx-auto mb-4">
             
             <div class="mb-3 col-md-12 ">
               <span class="form-label">Nombre </span>
               <input type="text"
-                class="form-control"   name="name" id="name" aria-describedby="helpId" placeholder="">
+              
+                class="form-control"   formControlName="name" id="name" aria-describedby="helpId" placeholder="">
+              <span *ngIf="fieldNotValid('name')" class="form-label form-text text-danger">El campo no es valido </span>
             </div>
     
             <div class="mb-3 col-md-12">
               <span class="form-label">Descripcion </span>
-              <textarea type="text" class="form-control" name="description" id="description" placeholder=""></textarea>
+              <textarea type="text" class="form-control text-center" formControlName="description" id="description" placeholder=""></textarea>
+              <span *ngIf="fieldNotValid('description')" class="form-label form-text text-danger">El campo no es valido </span>
             </div>
 
             <div class="mb-3 col-md-12">
                 <span class="form-label">Precio </span>
-                <input type="text"   class="form-control" name="price" id="price" placeholder=""/>        
-             </div>
+                <input type="text"   class="form-control" formControlName="price" id="price" placeholder=""/>        
+                <span *ngIf="fieldNotValid('price')" class="form-label form-text text-danger">El campo no es valido </span>
+            </div>
              <div class="mb-3 col-md-12">
                  <span class="form-label">Categoria </span>
-                 <input type="text"  class="form-control" name="category" id="category" placeholder=""/>               
-             </div>
+                 <input type="text"  class="form-control" formControlName="category" id="category" placeholder=""/>               
+                 <span *ngIf="fieldNotValid('category')" class="form-label form-text text-danger">El campo no es valido </span>
+                </div>
 
             <div class="mb-3 col-md-12">
                 <span class="form-label">Imagen </span>
                <div class="row pt-3 justify-content-center mx-auto">
                     <div class="col-3">
                         <img src="../../../../../../assets/img-default.png" style="height: 80px;" name="image" id="image">
+                        <input type="file" name="" id="">
                     </div>
                     <div class="col-3 pt-2">
                         <i class="fa fa-solid fa-upload fa-4x text-deg-purple-1 cursor-pointer" aria-hidden="true"></i>

@@ -10,6 +10,8 @@ import { ClientComponent } from './client/client.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 import { MaterialModule } from '../material/material.module';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { PipesModule } from '../shared/pipes/pipes.module';
+import { HistoryPurchasesComponent } from './pages/history-purchases/history-purchases.component';
 
 
 @NgModule({
@@ -17,14 +19,16 @@ import {NgxPaginationModule} from 'ngx-pagination';
     CompaniesComponent,
     NavBarComponent,
     ClientComponent,
-    ShoppingCartComponent    
+    ShoppingCartComponent,
+    HistoryPurchasesComponent    
   ],
   imports: [
     CommonModule,
     ClientRoutingModule,
     SharedModule,
     MaterialModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    PipesModule
   ]
 })
 export class ClientModule { }

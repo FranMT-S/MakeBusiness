@@ -1,0 +1,33 @@
+[{
+  "_id": {
+    "$oid": "637d3586f542e68362260f83"
+  },
+  "nameCompany": "Olenolin",
+  "description": "Empresa de sombreros",
+  "phone": "161-430-5930",
+  "category": "Health Care",
+  "location": "2 Crownhardt Plaza",
+  "state": true,
+  "idPlan": {
+    "$oid": "637d32a1f542e68362260f79"
+  },
+  "idUser": {
+    "$oid": "637344b5f542e68362260e66"
+  }
+},{
+  "_id": {
+    "$oid": "637d3586f542e68362260f84"
+  },
+  "nameCompany": "Lily",
+  "phone": "997-109-8572",
+  "description": "Empresa de tecnologia",
+  "category": "Tecnology",
+  "location": "53 Sutherland Trail",
+  "state": true,
+  "idPlan": {
+    "$oid": "637d32a1f542e68362260f78"
+  },
+  "idUser": {
+    "$oid": "637344b5f542e68362260e65"
+  }
+}]

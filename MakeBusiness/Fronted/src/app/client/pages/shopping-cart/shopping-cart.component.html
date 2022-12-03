@@ -2,9 +2,86 @@
     <div class="container shop-container">
         <h2 class="title">Carrito de compra</h2>
 
-        <table class="table">
+        <div class="row mt-5">
+            <div class="col">
+               
+            </div>
+            <div class="col">
+                <p class="fw-bold fs-5">Producto</p>
+            </div>
+            <div class="col">
+              <p class="fw-bold fs-5">Precio</p>
+            </div>
+            <div class="col">
+              <p class="fw-bold fs-5"> Cantidad</p>
+            </div>
+            <div class="col">
+              <p class="fw-bold fs-5">Subtotal</p>
+            </div>
+            <div class="col">
+              <p class="fw-bold fs-5"></p>
+            </div>
+        </div>
+
+        <div class="row my-3" *ngFor="let product of products | paginate: { itemsPerPage: 3, currentPage: page }">
+          <hr>
+          <div class="col">
+            <img [src]="product.image" class="product-image mx-2">
+          </div>
+          <div class="col">
+              <p>{{product.name}} </p>
+          </div>
+          <div class="col">
+            <p>{{product.price}}</p>
+          </div>
+          <div class="col">
+            <p><input  class="form-control text-center" type="number" [value]="product.quantity"></p>
+          </div>
+          <div class="col">
+            <p>{{product.quantity * product.price}}</p>
+          </div>
+          <div class="col">
+            <button mat-icon-button color="warn">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </div> 
+      </div>
+
+      <div class="row mt-5">
+        <div class="col">
+           
+        </div>
+        <div class="col">
+            <p class="fw-bold fs-5"></p>
+        </div>
+        <div class="col">
+          <p class="fw-bold fs-5"></p>
+        </div>
+        <div class="col">
+          <p class="fw-bold fs-5"> </p>
+        </div>
+        <div class="col">
+          <p class="fw-bold fs-5">Total: {{total}}</p>
+        </div>
+        <div class="col">
+          <p class="fw-bold fs-5"></p>
+        </div>
+    </div>
+
+      <hr>
+
+      <pagination-controls 
+      (pageChange)="page = $event" 
+      previousLabel="Anterior" 
+      nextLabel="Siguiente"
+      class="pagination"
+      >
+</pagination-controls>
+
+        <!-- <table class="table">
             <thead>
               <tr>
+                <th scope="col"></th>
                 <th scope="col">Producto</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Cantidad</th>
@@ -14,14 +91,13 @@
             </thead>
             <tbody>
               <tr  *ngFor="let product of products | paginate: { itemsPerPage: 3, currentPage: page }">
-                <td>{{product.name}} <img [src]="product.image" class="product-image mx-2" alt=""></td>
+                <td> <img [src]="product.image" class="product-image mx-2"></td>
+                <td>{{product.name}} </td>
                 <td>{{product.price}}</td>
-                <td><input  class="form-control" type="number" [value]="product.quantity"></td>
-                <td>{{product.quantity * product.price}}</td>
+                <td></td>
+                <td></td>
                 <td>
-                  <button mat-icon-button color="warn">
-                    <mat-icon>delete_outline</mat-icon>
-                  </button>
+    
                 </td>
               </tr>
             </tbody>
@@ -31,15 +107,17 @@
               <td></td>
               <td>Total: {{total}}</td>
             </tfoot>
-        </table>
+            
+            <pagination-controls 
+            (pageChange)="page = $event" 
+            previousLabel="Anterior" 
+            nextLabel="Siguiente"
+            class="pagination"
+            >
+      </pagination-controls>
+      </table> -->
 
-        <pagination-controls 
-              (pageChange)="page = $event" 
-              previousLabel="Anterior" 
-              nextLabel="Siguiente"
-              class="pagination"
-              >
-        </pagination-controls>
+     
 
     </div>
 

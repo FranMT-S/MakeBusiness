@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { webCompany } from 'src/app/interfaces/web';
 import { CompanyService } from 'src/app/services/company.service';
 
@@ -20,11 +20,10 @@ export class EditWebComponent implements OnInit {
               {"text":'Editar JS', "name":"js"},
       ]
 
-  myForm:FormGroup = this.fb.group({
-    title   : [,[],[]],
-    description: [,[],[]],
-    keywords: [,[],[]],
-    
+    myForm:FormGroup = this.fb.group({
+    title   : [,[Validators.required]],
+    description: [,[Validators.required]],
+    keywords: [,[Validators.required]],
   });
    
 
@@ -32,8 +31,23 @@ export class EditWebComponent implements OnInit {
   constructor(private companyService:CompanyService,private fb:FormBuilder) { }
 
   ngOnInit(): void {
-
+   
     this.web = this.companyService.getCurrentWeb;
+    this.myForm.setValue({
+      title   :  this.web.title,
+      description: this.web.description,
+      keywords: this.web.keywords
+    })
   }
 
+
+  fieldNotValid(field:string){
+    return this.myForm.get(field)?.invalid && this.myForm.get(field)?.touched;
+  }
+
+  save(){
+
+    console.log(this.myForm.valid)
+    console.log(this.myForm.value)
+  }
 }

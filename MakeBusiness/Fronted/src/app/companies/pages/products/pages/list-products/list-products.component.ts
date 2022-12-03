@@ -2,9 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+
 import { Company } from 'src/app/interfaces/company';
 import { Product } from 'src/app/interfaces/product';
 import { CompanyService } from 'src/app/services/company.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-list-products',
@@ -16,10 +18,11 @@ export class ListProductsComponent implements OnInit {
   selectedRowIndex = "";
   selectedProduct:Product = {} as Product;
   
+  productURLBase = `${environment.baseUrl}/uploads/products/` 
   displayedColumns: string[] = [
                                 'id', 'name', 'price', 
-                                'description','score','counterVotes',
-                                'categories',
+                                'description',
+                                'categories', "image"
                               ];
 
 
@@ -31,20 +34,31 @@ export class ListProductsComponent implements OnInit {
   constructor(private router:Router,private companyService:CompanyService,private activatedRoute:ActivatedRoute) {
    }
 
+
+
    ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    
+    this.companyService.getCompanyProducts(this.companyService.getCurrentIDCompany).subscribe( res =>{
+      if(res.ok){
+       
+          this.products = res.products;
+          this.dataSource.data = this.products;
+          this.dataSource.paginator = this.paginator;
+      }
+    })
+   
   }
   
   ngOnInit(): void {
-    
-    this.products = this.companyService.getCompanyProducts(this.companyService.getCompany.id);
-    this.dataSource.data = this.products;
-  
-  }
+ 
+      
+  };
+
+
 
   selectRow(row:Product){
     this.selectedProduct = row;
-    this.selectedRowIndex = row.id;
+    this.selectedRowIndex = row._id;
 
 
    
@@ -54,7 +68,7 @@ export class ListProductsComponent implements OnInit {
   editProduct(){
     let id = this.selectedRowIndex;
     console.log(this.companyService.getCurrentProducts)
-    this.router.navigateByUrl(`/companies/${this.companyService.getCompany.id}/products/${this.selectedProduct.id}/edit-product`)
+    this.router.navigateByUrl(`/companies/${this.companyService.getCompany._id}/products/${this.selectedProduct._id}/edit-product`)
  
 
 

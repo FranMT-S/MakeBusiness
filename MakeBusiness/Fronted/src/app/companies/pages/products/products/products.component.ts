@@ -11,13 +11,11 @@ export class ProductsComponent implements OnInit {
 
   constructor(private companyService: CompanyService, private activatedRoute:ActivatedRoute) { 
 
-
   }
 
   ngAfterContentInit(): void {
-    this.activatedRoute.params.subscribe( (params:Params) => {
-      this.companyService.getCompanyProducts(this.companyService.getCompany.id);
-    })
+  
+   
   
   }
 

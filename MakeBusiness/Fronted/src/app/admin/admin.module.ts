@@ -8,6 +8,7 @@ import { TemplatesModule } from './pages/templates/templates.module';
 import { UsersModule } from './pages/users/users.module';
 import { HomeComponent } from './home/home.component';
 import { MaterialModule } from '../material/material.module';
+import { PipesModule } from '../shared/pipes/pipes.module';
 
 
 
@@ -15,7 +16,7 @@ import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     CommonModule,
@@ -25,6 +26,7 @@ import { MaterialModule } from '../material/material.module';
     TemplatesModule,
     UsersModule,
     MaterialModule,  
+    PipesModule
   ],
 
 })

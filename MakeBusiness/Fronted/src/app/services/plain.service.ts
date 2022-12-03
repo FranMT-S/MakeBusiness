@@ -1,51 +1,48 @@
 import { Injectable } from '@angular/core';
-import { Plain } from '../interfaces/plains';
+import { Plan } from '../interfaces/plains';
 
-const Data:Plain[] =[
-  {
-    id:"1",
-    name: "Free",
-    description: "Licencia de prueba de productos por 1 semana",
-    price: 0,
-    annuity:"Free",
-    limitPage: 5,
-    limitProducts: 10,
-    limitFiles: 10,
-  },
-  {
-    id:"2",
-    name: "Basico",
-    description: "Licencia  con basica con lo que podras tener los recursos basicos para crear una pagina web",
-    price: 30,
-    annuity:"Mensual",
-    limitPage: 15,
-    limitProducts: 20,
-    limitFiles: 20,
-  },
-  {
-    id:"3",
-    name: "Premium",
-    description: "Licencia de sin limites, aprovecha nuestro servicio sin restricciones",
-    price: 330,
-    annuity:"anual",
-    limitPage: 0,
-    limitProducts: 0,
-    limitFiles: 0,
-  }
-];
+import {environment} from '../../environments/environment'
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+
+
+
+
+interface PlanResponse {
+  ok:       boolean;
+  plans: Plan[];
+  plan:  Plan;
+  error: any;
+  msg: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class PlainService {
+export class PlanService {
 
-  constructor() { }
+  private url = `${environment.baseUrl}/plans`
 
-  get getAllPlains():Plain[]{
-    return [...Data]
+  constructor(private http:HttpClient) { }
+
+  get getAllPlans():Observable<PlanResponse>{
+    return this.http.get<PlanResponse>(this.url)
   }
 
-  getPlain(id:string):Plain | undefined{
-    return Data.find( e => e.id == id );
+  getPlan(id:string):Observable<PlanResponse>{
+    return this.http.get<PlanResponse>(`${this.url}/${id}`)
+  }
+
+  deletePlan(id:string):Observable<PlanResponse>{
+    return this.http.delete<PlanResponse>(`${this.url}/${id}`)
+  }
+
+  addPlan(plan:Plan):Observable<PlanResponse>{
+    return this.http.post<PlanResponse>(`${this.url}`,plan)
+  }
+
+  updatePlan(id:string,plan:Plan):Observable<PlanResponse>{
+    return this.http.put<PlanResponse>(`${this.url}/${id}`,plan)
   }
 }

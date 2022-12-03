@@ -8,6 +8,7 @@ import { AddPlainComponent } from './pages/add-plain/add-plain.component';
 import { EditPlainComponent } from './pages/edit-plain/edit-plain.component';
 import { ListPlainsComponent } from './pages/list-plains/list-plains.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     PlainsRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule
   ]
 })
 export class PlainsModule { }

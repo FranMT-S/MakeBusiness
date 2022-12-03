@@ -1,6 +1,8 @@
 export interface fileCompany {
-    id: string,
+    _id: string,
+    baseName:string,
     name: string;
+    filename:string
     description: string;
     idCompany: string;
 }

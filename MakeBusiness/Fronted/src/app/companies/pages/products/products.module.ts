@@ -7,6 +7,9 @@ import { AddProductComponent } from './pages/add-product/add-product.component';
 import { EditProductComponent } from './pages/edit-product/edit-product.component';
 import { ListProductsComponent } from './pages/list-products/list-products.component';
 import { MaterialModule } from 'src/app/material/material.module';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -14,12 +17,15 @@ import { MaterialModule } from 'src/app/material/material.module';
     ProductsComponent,
     AddProductComponent,
     EditProductComponent,
-    ListProductsComponent
+    ListProductsComponent,
+    
   ],
   imports: [
     CommonModule,
     ProductsRoutingModule,
-    MaterialModule
+    MaterialModule,
+    PipesModule,
+    ReactiveFormsModule
   ]
 })
 export class ProductsModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { param } from 'lightgallery/plugins/video/lg-video-utils';
 import { CompanyService } from 'src/app/services/company.service';
 
 @Component({
@@ -33,15 +34,21 @@ export class HomeComponent implements OnInit {
     ]
   constructor(private companyService: CompanyService, private activatedRoute:ActivatedRoute) { 
 
-    this.activatedRoute.params.subscribe( (params:Params) => {
-     
+
+     this.activatedRoute.params.subscribe( (params:Params) => {
+   
+      this.companyService.setCurrentIDCompany =   params['id'];
       this.companyService.inicializatedCurrentData(params['id'])
     })
 
   }
 
   ngOnInit(): void {
+   
 
+  }
+
+  ngAfterContentInit(): void {
 
   }
 
