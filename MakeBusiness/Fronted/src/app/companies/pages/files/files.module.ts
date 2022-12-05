@@ -6,6 +6,7 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 
 // Terceros
 import { LightgalleryModule } from 'lightgallery/angular/13';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { LightgalleryModule } from 'lightgallery/angular/13';
   imports: [
     CommonModule,
     FilesRoutingModule,
-    LightgalleryModule
+    LightgalleryModule,
+    FormsModule
   ]
 })
 export class FilesModule { }

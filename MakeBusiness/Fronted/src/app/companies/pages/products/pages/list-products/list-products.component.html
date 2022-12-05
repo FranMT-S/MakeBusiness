@@ -7,7 +7,7 @@
           <span class=" buttonsContainer text-deg-purple-1">
               <button [routerLink]="['../add-product']"><i class="fa fa-light fa-circle-plus"></i></button>
               <button [disabled]="selectedRowIndex == ''" (click)="editProduct()"><i class="fa fa-solid fa-pen-to-square" aria-hidden="true"></i></button>
-              <button [disabled]="selectedRowIndex == ''"><i class="fa fa-trash" aria-hidden="true"></i></button>
+              <button [disabled]="selectedRowIndex == ''"><i (click)="deleteProduct()" class="fa fa-trash" aria-hidden="true"></i></button>
           </span>
       </div>
     </div>

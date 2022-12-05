@@ -17,11 +17,11 @@ export class ListTemplatesComponent implements OnInit {
   constructor(private router:Router,private templateService:TemplateService) { }
 
   ngOnInit(): void {
-    this.templates = this.templateService.getAllTemplatesDescription;
+    this.templates = [];
   }
 
   editTemplate(template:TemplateDescription){
-    this.router.navigate([`admin/templates/${template.id}/edit-template`])
+    this.router.navigate([`admin/templates/${template._id}/edit-template`])
   }
 
 }

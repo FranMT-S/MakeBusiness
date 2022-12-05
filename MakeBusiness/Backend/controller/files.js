@@ -13,17 +13,26 @@ const File = require('../models/file');
 
 const fileUpload = async(req = request, res = response) => {
 
-    const {idCompany} = req.params
-    const {description} = req.body
-
+    const {idCompany} = req.params;
+    let {description,baseName} = req.body;
+   
+    
     //procesar el archivo
     const file = req.files.file; // ! files.imagen contiene el archivo enviado
     const partsName = file.name.split('.')
     const fileEXtension = partsName[partsName.length - 1];
+ 
+    let name = '';
     
-    const name = file.name;
-    const fileName = partsName[partsName.length - 1];
-    const baseName = partsName.slice(0,-1).join()
+    if(!baseName){
+   
+        name = file.name;
+    
+        baseName = partsName.slice(0,-1).join()
+    }else{
+        name = `${baseName}.${fileEXtension}`
+    }
+   
     // const id = uuidv4() ;
    
     // Generar la instancia del archivo para la base de datos
@@ -70,19 +79,7 @@ const fileUpload = async(req = request, res = response) => {
    
 }
 
-// const returnFile = (req = request, res = response) => {
-//     const {fileName} = req.params;
-//     let pathFile = path.join(__dirname, `../upload/files/${ fileName }`);
 
-//     if (fs.existsSync(pathFile)) {
-//         res.sendFile(pathFile);
-//     } else {
-//         return res.status(504).json({
-//             ok: false,
-//             msg: "El archivo no existe."
-//         });
-//     }
-// }
 
 const returnFile = async (req = request, res = response) => {
     try{
@@ -132,7 +129,7 @@ const returnFiles = async (req = request, res = response) => {
 const updateFile = async (req = request, res = response) =>{
 
     try{
-        const {newName, description} = req.body;
+        const {baseName, description} = req.body;
 
 
         const file = await File.findById(req.params.id);
@@ -144,10 +141,11 @@ const updateFile = async (req = request, res = response) =>{
             })
         }
 
-
-        file.name = file.name.replace(file.baseName,newName);
-        file.baseName = newName;
-        file.description = description
+        if(baseName){
+            file.name = file.name.replace(file.baseName,baseName);
+            file.baseName = baseName;
+        }
+        if(description) file.description = description
 
         await file.save();
         return res.status(200).json({

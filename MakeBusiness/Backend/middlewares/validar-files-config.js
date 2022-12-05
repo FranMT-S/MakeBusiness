@@ -27,6 +27,7 @@ const fileValidate = (req=request, res=response, next)=>{
 }
 
 const imageValidate = (req=request, res=response, next)=>{
+
     const {image} = req.files;
     
 

@@ -38,14 +38,7 @@ export class ListProductsComponent implements OnInit {
 
    ngAfterViewInit() {
     
-    this.companyService.getCompanyProducts(this.companyService.getCurrentIDCompany).subscribe( res =>{
-      if(res.ok){
-       
-          this.products = res.products;
-          this.dataSource.data = this.products;
-          this.dataSource.paginator = this.paginator;
-      }
-    })
+    this.getProducts();
    
   }
   
@@ -54,7 +47,16 @@ export class ListProductsComponent implements OnInit {
       
   };
 
-
+  getProducts(){
+    this.companyService.getCompanyProducts(this.companyService.getCurrentIDCompany).subscribe( res =>{
+      if(res.ok){
+       
+          this.products = res.products;
+          this.dataSource.data = this.products;
+          this.dataSource.paginator = this.paginator;
+      }
+    })
+  }
 
   selectRow(row:Product){
     this.selectedProduct = row;
@@ -67,11 +69,20 @@ export class ListProductsComponent implements OnInit {
 
   editProduct(){
     let id = this.selectedRowIndex;
-    console.log(this.companyService.getCurrentProducts)
-    this.router.navigateByUrl(`/companies/${this.companyService.getCompany._id}/products/${this.selectedProduct._id}/edit-product`)
- 
+    this.router.navigateByUrl(`/admin-companies/${this.companyService.getCurrentIDCompany}/products/${id}/edit-product`)
+  }
 
-
+  deleteProduct(){
+    let id = this.selectedRowIndex;
+   
+    this.companyService.deleteProduct(id).subscribe(res =>{
+      if(res.ok){
+        this.getProducts();
+      }else{
+        alert("no se pudo eliminar el plan")
+        console.log(res.error)
+      }
+    })
   }
   
 

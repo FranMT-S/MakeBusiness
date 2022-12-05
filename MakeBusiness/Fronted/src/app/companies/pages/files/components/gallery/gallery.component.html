@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row list-container rounded">
         <ng-container [ngSwitch]="type">
             <ng-container *ngSwitchCase="'images'" [ngTemplateOutlet]="images"></ng-container>
             <ng-container *ngSwitchCase="'videos'" [ngTemplateOutlet]="videos"></ng-container>
@@ -8,10 +8,11 @@
         </ng-container>
        
         <ng-template #images>
-            <div  *ngFor="let file of files" class="col-2 p-2">
-                <div>
-                    <img src="../../../../../../assets/Companies/Files/{{file.name}}" [alt]="file.name" 
-                        style="width: 100%; height: 100%;"
+            <div  *ngFor="let file of files"
+             class="border border-dark border-opacity-10 col-2 file-container m-3 ng-star-inserted p-2 rounded text-center ">
+                <div class="text-center d-flex justify-content-center text-center">
+                    <img [src]="url + file.fileName" [alt]="file.name" 
+                        style="max-height: 200px; max-width: 200px; min-height: 80px; min-width: 80px;"
                     > 
                  </div>
                 <ng-container  [ngTemplateOutlet]="buttons" [ngTemplateOutletContext]="{file:file}"></ng-container>     
@@ -19,11 +20,12 @@
         </ng-template>
 
         <ng-template #videos>
-            <div  *ngFor="let file of files" class="col-2 p-2">
+            <div  *ngFor="let file of files" 
+            class="border border-dark border-opacity-10 col-2 file-container m-3 ng-star-inserted p-2 rounded text-center ">
                 <div>
 
                     <video height="100%" width="100%" controls>
-                        <source src="../../../../../../assets/Companies/Files/{{file.name}}" type="video/mp4">
+                        <source [src]="url + file.fileName" type="video/mp4">
                     
                       Your browser does not support the video tag.
                     </video>   
@@ -34,7 +36,9 @@
         </ng-template>
 
         <ng-template #generic>
-           <div *ngFor="let file of files" class="col-2 p-2 text-center">
+           <div *ngFor="let file of files" 
+           class="border border-dark border-opacity-10 col-2
+            file-container m-3 ng-star-inserted p-2 rounded text-center">
                 <div>
                     <i class="fa fa-solid fa-5x {{iconGeneric(file.name)}}" aria-hidden="true"></i>
 
@@ -45,10 +49,22 @@
         </ng-template>
 
         <ng-template #buttons let-file='file'>
+            <div class=" border border-end col-12 mx-auto my-2 ng-star-inserted p-3 rounded text-break">
+                <label >
+                    <span class="fs-5 fw-semibold text-deg-purple-1">Nombre:</span>
+                     <span class="fs-6 fw-semibold file-description"> {{file.name}}</span>
+                </label>
+                <label >
+                    <span class="fs-5 fw-semibold text-deg-purple-1">description:</span> 
+                    <span class="fs-6 fw-semibold file-description">{{file.description}}</span>
+                </label>
+            </div>
             <div class="my-2">
                 <button (click)="editFile(file)" class="btn btn-primary me-3">Editar</button>
-                <button class="btn btn-danger">Eliminar</button>
+                <button (click)="deleteFile(file)" class="btn btn-danger">Eliminar</button>
             </div>
          </ng-template>
+
+         
     </div>
 </div>

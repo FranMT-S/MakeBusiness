@@ -81,7 +81,14 @@ const sendFile = async (req = request, res = response) => {
         else{
             if(type=="users")      
                 return res.sendFile(path.join(__dirname, `../upload/users/no-user-02.png`))
-        
+            if(type=="products" || type=="web")      
+                return res.sendFile(path.join(__dirname, `../upload/other/img-default.png`))
+            if(type=="files")
+                if(name.match(".jpg|.png|.jpeg|.gif|.tiff|.tif|.RAW|.bmp|.pic"))      
+                    return res.sendFile(path.join(__dirname, `../upload/other/img-default.png`))
+
+
+
             return res.status(504).json({
                 ok: false,
                 msg: "El archivo no existe."

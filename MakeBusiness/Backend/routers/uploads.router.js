@@ -18,7 +18,7 @@ router.use(expressFileUpload({
 //router.post('/:type/:id', uploadFile);
 
 // //Obtener archivo
-
+router.get('/:type/', sendFile);
 router.get('/:type/:id', sendFile);
 
 

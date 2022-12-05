@@ -13,21 +13,12 @@ router.use(expressFileUpload({
     createParentPath:true
 }));
 
-// actualizar campos de archivo
-router.put('/:idCompany/:id',updateFile)
-
-// //Obtener archivos
+// Archivos
+router.post('/:idCompany',fileValidate,  fileUpload);
 router.get('/:idCompany', returnFiles);
-
-// //Obtener archivo
-// router.get('/:fileName', returnFile);
 router.get('/:idCompany/:id', returnFile);
-
-//Crear archivos
-router.post('/:idCompany/files',fileValidate,  fileUpload);
-
-// Eliminar archivos
-router.delete("/:id",deleteFile)
+router.put('/:idCompany/:id',updateFile)
+router.delete("/:idCompany/:id",deleteFile)
 
 
 

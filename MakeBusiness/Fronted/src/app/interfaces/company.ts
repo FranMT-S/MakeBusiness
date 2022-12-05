@@ -1,5 +1,3 @@
-import * as internal from "stream"
-
 
 export interface Company {
     _id: string,

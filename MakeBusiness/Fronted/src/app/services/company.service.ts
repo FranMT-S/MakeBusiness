@@ -4,34 +4,11 @@ import { lastValueFrom, Observable, pipe, tap } from 'rxjs';
 
 import {environment} from '../../environments/environment'
 import { Company } from '../interfaces/company';
-import { fileCompany } from '../interfaces/fileCompany';
+import { fileCompany, fileSend } from '../interfaces/fileCompany';
 import { Product } from '../interfaces/product';
+import { CompanyResponse, FileResponse, ProductResponse, WebResponse } from '../interfaces/response';
 import { webCompany } from '../interfaces/web';
 
-
-interface CompanyResponse {
-  ok:       boolean;
-  companies: Company[];
-  company:  Company;
-  error: any;
-  msg:string
-}
-
-interface ProductResponse {
-  ok:       boolean;
-  products: Product[];
-  product:  Product;
-  error: any;
-  msg: string;
-}
-
-interface FileResponse {
-  ok:       boolean;
-  files: fileCompany[];
-  file:  fileCompany;
-  error: any;
-  msg: string;
-}
 
 
 
@@ -58,14 +35,6 @@ export class CompanyService {
  
   }
 
-  get getCompany():Company{
-    return this.currentCompany;
-  }
-
-  set setCurrentCompany(company:Company){
-    this.currentCompany = company;
-  }
-
   get getCurrentIDCompany(){
     return this.currentIDCompany
   }
@@ -74,29 +43,16 @@ export class CompanyService {
     this.currentIDCompany = id;
   }
 
-  get getCurrentProducts():Product[]{
-    return [...this.currentProducts];
+  get getCompany():Company{
+    return this.currentCompany;
   }
 
-  set setCurrentProducts(products:Product[]){
-    this.currentProducts = products;
+  set setCurrentCompany(company:Company){
+    this.currentCompany = company;
   }
 
-  get getCurrentFiles():fileCompany[]{
-    return [...this.currentFiles];
-  }
 
-  set setCurrentFiles(filesCompany:fileCompany[]){
-    this.currentFiles = filesCompany;
-  }
 
-  get getCurrentWeb():webCompany{
-    return this.currentWeb;
-  }
-
-  set setCurrentWeb(webCompany:webCompany){
-    this.currentWeb = webCompany;
-  }
 
 
   getCompanyById(id:string):Observable<CompanyResponse>{
@@ -131,20 +87,95 @@ export class CompanyService {
 
   }
 
-  getCompanyFiles(idCompany:string){
-   
- }
+  
+  /* ========
+     Star Files
+     ========*/ 
+  newFile(idCompany:string,file:fileSend):Observable<FileResponse>{ 
+    const data:FormData = new FormData();
+    
+    data.append('baseName',String(file.baseName));
+    data.append('file',file.file);
+    data.append('description',file.description);
+    
+    return this.http.post<FileResponse>(`${this.urlFile}/${idCompany}`,data)
+  }
 
-  getProductById(idProduct:string){
+  getFiles(idCompany:string):Observable<FileResponse>{ 
+    return this.http.get<FileResponse>(`${this.urlFile}/${idCompany}`)
+  }
 
-   
- }
 
-  getWebById(idWeb:string):any{
+  getFile(idCompany:string,idProduct:string):Observable<FileResponse>{ 
+    return this.http.get<FileResponse>(`${this.urlFile}/${idCompany}/${idProduct}`)
+  }
 
-    let web = "";
+  updateFile(idCompany:string,idProduct:string, File:fileCompany):Observable<FileResponse>{ 
+    return this.http.put<FileResponse>(`${this.urlFile}/${idCompany}/${idProduct}`,File)
+  }
 
-    return web;
+  deleteFile(idCompany:string,idProduct:string):Observable<FileResponse>{ 
+    return this.http.delete<FileResponse>(`${this.urlFile}/${idCompany}/${idProduct}`)
+  }
+
+  // End Files ///
+
+  addProduct(product:Product | any):Observable<ProductResponse>{
+    const data:FormData = new FormData();
+    
+    data.append('name',product.name);
+    data.append('price',product.price);
+    data.append('description',product.description);
+    data.append('categories',product.categories);
+    data.append('image',product.image);
+
+    return this.http.post<ProductResponse>(`${this.urlProducts}/${this.currentIDCompany}`,data)
+  }
+
+
+  deleteProduct(id:string):Observable<ProductResponse>{
+
+    return this.http.delete<ProductResponse>(`${this.urlProducts}/${id}`)
+  }
+
+  updateProduct(idProduct:string,product:Product | any):Observable<ProductResponse>{
+    const data:FormData = new FormData();
+    
+    if(product.name) data.append('name',product.name);
+    if(product.price) data.append('price',product.price);
+    if(product.description) data.append('description',product.description);
+    if(product.categories) data.append('categories',product.categories);
+    if(product.image) data.append('image',product.image);
+    console.log("product:",product)
+    console.log(data)
+    console.log(`${this.urlProducts}/${this.getCurrentIDCompany}/${idProduct}`)
+    return this.http.put<ProductResponse>(`${this.urlProducts}/${this.getCurrentIDCompany}/${idProduct}`,data)
+
+  }
+
+  getProductById(idProduct:string):Observable<ProductResponse>{
+  
+    return this.http.get<ProductResponse>(`${this.urlProducts}/${this.getCurrentIDCompany}/${idProduct}`)
+  }
+
+  getWeb(idCompany:string):Observable<WebResponse>{
+    return this.http.get<WebResponse>(`${this.url}/${idCompany}/web`)
+  }
+
+  updateWeb(idCompany:string,web:webCompany | any):Observable<WebResponse>{
+
+    const data:FormData = new FormData();
+    
+    if(web.title) data.append('title',web.title);
+    if(web.keywords) data.append('keywords',web.keywords);
+    if(web.cssExtra) data.append('cssExtra',web.cssExtra);
+    if(web.jsExtra) data.append('jsExtra',web.jsExtra);
+    if(web.genericHeaderHTML) data.append('genericHeaderHTML',web.genericHeaderHTML);
+    if(web.genericFooterHTML) data.append('genericFooterHTML',web.genericFooterHTML);
+    if(web.logo) data.append('logo',web.logo);
+    if(web.favicon) data.append('favicon',web.favicon);
+
+    return this.http.put<WebResponse>(`${this.url}/${idCompany}/web`,data)
   }
 
 }

@@ -12,7 +12,7 @@
 
         <mat-selection-list #shoes [multiple]="false">
         <mat-list-option *ngFor="let block of template.blocks" [value]="block" (click)="edit(block)">
-            {{block.id}}
+            {{block._id}}
         </mat-list-option>
         </mat-selection-list>
  
@@ -57,13 +57,13 @@
                 
                     <div *ngFor="let block of template.blocks" 
                          [class]="'block position-relative ' + 'col-' + block.size"
-                         [id]="'block-' + block.id"  
+                         [id]="'block-' + block._id"  
                          [ngClass]="{'border': border}"
                     >
                         <p class="position-absolute start-0 mt-3 ms-3 text-secondary "
                            [ngClass]="{'editor': editing}"
                             >
-                            {{block.id}}
+                            {{block._id}}
                         </p>
                         <div [innerHTML]="block.HTML | safeHtml">
                             
@@ -92,7 +92,7 @@
     </div>
     <div class="row block-container">
         
-        <div *ngFor="let block of template.blocks" class="block position-relative" [id]="'block-' + block.id" [class]="'col-' + block.size" 
+        <div *ngFor="let block of template.blocks" class="block position-relative" [id]="'block-' + block._id" [class]="'col-' + block.size" 
         >
             <p class="position-absolute start-0 mt-3 ms-3 text-secondary ">"texto</p>
             <div class="d-flex position-absolute end-0 me-3 block__detail">               

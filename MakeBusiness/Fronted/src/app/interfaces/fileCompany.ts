@@ -2,7 +2,14 @@ export interface fileCompany {
     _id: string,
     baseName:string,
     name: string;
-    filename:string
+    fileName:string
     description: string;
     idCompany: string;
+}
+
+
+export interface fileSend {
+    file:File;
+    baseName?:String;
+    description: string;
 }

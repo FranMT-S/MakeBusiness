@@ -6,7 +6,7 @@ export interface Product {
     price: number;
     description?: string;
     votes?: { "idUser":string,"point":number}[];
-    image?: string;
+    image?: string | File;
     categories?: string;
     idCompany: string;
 }

@@ -1,6 +1,6 @@
 
 export interface page{
-    id: string,
+    _id: string,
     title: string,
     description: string,
     js?:string,
@@ -21,14 +21,14 @@ export interface TemplateRaw extends page{
 
 // Template solo para mostrar la informacion mas basica
 export interface TemplateDescription {
-    id: string,
+    _id: string,
     title: string,
     description: string,
 }
 
 
 export interface Block{
-    id: string,
+    _id: string,
     size: number,
     HTML: string,
     CSS:string,

@@ -217,19 +217,15 @@ const updateWeb = async (req = request, res = response) =>{
         const web = await Web.findOne({idCompany:req.params.id});      
         const newData = req.body;
 
-  
-
         if(!web){
-            return res.status(400).json({
-                ok:false,
-                msg:"No se pudo encontrar la web buscado"
-            })
+           web = new Web(req.param.id);
         }
-
-        // favicon y logo
-        if (req.files && Object.keys(req.files).length === 0) {
+       
+  
+        if (req.files && Object.keys(req.files).length != 0) {
             const {logo, favicon} = req.files;
-
+           
+     
             if(logo?.truncated || favicon?.truncated){
                 return res.status(400).json({
                     ok: false,
@@ -247,8 +243,7 @@ const updateWeb = async (req = request, res = response) =>{
                 
                 //Generar el nombre del archivo usando el Id de la nueva instancia
                 const pathLogo = `./upload/web/${ nameLogo }`;
-                console.log("paso aqui")
-                console.log(nameLogo);
+
     
                 if (web.logo != "" && fs.existsSync(`./upload/web/${ web.logo }`)) {
                     fs.unlinkSync(`./upload/web/${ web.logo }`)
@@ -262,7 +257,7 @@ const updateWeb = async (req = request, res = response) =>{
                         });
                     }
                 });
-    
+                
                 newData.logo = nameLogo;
             }
     

@@ -2,7 +2,7 @@ import * as internal from "stream"
 
 
 export interface webCompany {
-    id: string,
+    _id: string,
     pageMain: String,
     logo?: String,
     favicon?: string,

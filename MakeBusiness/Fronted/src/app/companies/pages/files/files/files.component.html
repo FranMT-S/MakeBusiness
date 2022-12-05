@@ -1,12 +1,66 @@
 <div class="my-3 ms-3">
-    <button class="btn btn-outline-purple">Nuevo Archivo</button>
+    <button class="btn btn-outline-purple" (click)="open(fileForm)">Nuevo Archivo</button>
     <div class="mt-3">
         <h1 class="ms-2 mt-4">Imagenes</h1>    
-        <app-gallery [files]="images" [type]="'images'"></app-gallery>
+        <app-gallery [files]="images" [type]="'images'" (onEditFile)="formUpdate($event,fileFormUpdate)"></app-gallery>
         <h1 class="ms-2 mt-4">Videos</h1>  
-        <app-gallery [files]="videos" [type]="'videos'"></app-gallery>
+        <app-gallery [files]="videos" [type]="'videos'" (onEditFile)="formUpdate($event,fileFormUpdate)" ></app-gallery>
         <h1 class="ms-2 mt-4">Archivos Genericos</h1> 
-        <app-gallery [files]="filesGenerics"></app-gallery>
+        <app-gallery [files]="filesGenerics" (onEditFile)="formUpdate($event,fileFormUpdate)"></app-gallery>
     </div>
     
+    <ng-template #fileForm let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title">Formulario</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <form (ngSubmit)="save(formSave)" #formSave="ngForm">
+                <div class="mb-3">
+                  <label for="" class="form-label">Nombre</label>
+                  <input type="text" ngModel name="baseName" id="" class="form-control" placeholder="Nombre del archivo" aria-describedby="helpId">
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">Descripción</label>
+                  <input type="text" ngModel name="description" id="" class="form-control" placeholder="Nombre del archivo" aria-describedby="helpId">
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Archivo</label>
+                    <input type="file" ngModel required class="form-control" name="file" id="" (change)="selectFile($event)"  placeholder="" aria-describedby="fileHelpId">
+                  </div> 
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="close()">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" >Guardar</button>
+                </div>
+            </form>   
+        </div>
+  
+    </ng-template>
+    
+
+    <ng-template #fileFormUpdate let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title">Formulario</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <form (ngSubmit)="update(myFormUpdate)" #myFormUpdate="ngForm">
+                <div class="mb-3">
+                  <label for="" class="form-label">Nombre</label>
+                  <input type="text"  name="baseName" id="" [ngModel]="fileUpdate.baseName" class="form-control" placeholder="Nombre del archivo" aria-describedby="helpId">
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">Descripción</label>
+                  <input type="text"  name="description" id="" [ngModel]="fileUpdate.description" class="form-control" placeholder="Nombre del archivo" aria-describedby="helpId">
+                </div>
+          
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="modal.close('Cerrar')">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" >Guardar</button>
+                </div>
+            </form>   
+        </div>
+  
+    </ng-template>
+ 
 </div>

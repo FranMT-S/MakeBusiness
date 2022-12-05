@@ -15,6 +15,8 @@ const newProduct = async(req = request, res = response) => {
 
     const {idCompany} = req.params
 
+
+
     //procesar el archivo
     const {image} = req.files;
     const partsName = image.name.split('.')
@@ -114,8 +116,8 @@ const getProducts = async (req = request, res = response) => {
 const updateProduct = async (req = request, res = response) =>{
 
     try{
-        const {name,price, description,categories} = req.body;
-
+     
+        const data = req.body
 
         const product = await Product.findById(req.params.id);
 
@@ -126,43 +128,45 @@ const updateProduct = async (req = request, res = response) =>{
             })
         }
 
-
+        console.log(req.files)
+        if(req.files && req.files.image){
             //procesar el archivo
-        const {image} = req.files;
-        const partsName = image.name.split('.')
-        const fileEXtension = partsName[partsName.length - 1];
-        
-        // Nombre archivo
-        const nameImage = `${ uuidv4() }.${ fileEXtension }`;
-        
-        //Generar el nombre del archivo usando el Id de la nueva instancia
-        const path = `./upload/products/${ nameImage }`;
+            const {image} = req.files;
+            const partsName = image.name.split('.')
+            const fileEXtension = partsName[partsName.length - 1];
+            
+            // Nombre archivo
+            const nameImage = `${ uuidv4() }.${ fileEXtension }`;
+            
+            //Generar el nombre del archivo usando el Id de la nueva instancia
+            const path = `./upload/products/${ nameImage }`;
 
-        if (product.image != "" && fs.existsSync(`./upload/products/${ product.image }`)) {
-            fs.unlinkSync(`./upload/products/${ product.image }`)
-        }
-
-        image.mv(path, (err) => {
-            if (err) {
-                return res.status(500).json({
-                    ok: false,
-                    msg: 'Error al actualizar la imagen en la ruta destino "products"'
-                });
+            if (product.image != "" && fs.existsSync(`./upload/products/${ product.image }`)) {
+                fs.unlinkSync(`./upload/products/${ product.image }`)
             }
-        });
 
-        // Actualizar datos
-        product.name = name;
-        product.price = price;
-        product.description = description;
-        product.categories = categories;
-        product.image = nameImage;
+            image.mv(path, (err) => {
+                if (err) {
+                    return res.status(500).json({
+                        ok: false,
+                        msg: 'Error al actualizar la imagen en la ruta destino "products"'
+                    });
+                }
+            });
+             
+             data.image = nameImage;
+             console.log("///")
+             console.log(nameImage)
+             console.log(data)
+        }
+        
 
-        await product.save();
+        const productUpdate = await Product.findByIdAndUpdate(req.params.id,data,{new:true});
+
         return res.status(200).json({
             ok: true,
             msg: "archivo actualizado con exito.",
-            product: product,
+            product: productUpdate,
 
         })
     }catch (error){
