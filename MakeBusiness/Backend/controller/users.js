@@ -1,5 +1,8 @@
 const {request, response} = require("express")
 const User = require("../models/user")
+const Company = require("../models/company")
+const Web = require("../models/web")
+const { v4: uuidv4 } = require('uuid');
 
 const getUsers = async (req = request, res = response) =>{
     try{
@@ -68,6 +71,16 @@ const newUser = async (req = request, res = response) =>{
 
         const user = new User(req.body)
         await user.save();
+        if(user.type == "company"){
+            console.log("entro")
+            const company = new Company({nameCompany:uuidv4(),idUser:user._id})
+            console.log(company)
+            await company.save();
+            const web = new Web({idCompany:company._id});
+            console.log(web)
+            await web.save();
+        }
+
         return res.status(200).json({
             ok: true,
             msg: "usuario creado con exito.",

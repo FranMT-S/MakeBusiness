@@ -1,0 +1,7 @@
+
+Preguntas al lic: 
+las plantillas tendrán su propio encabezado y pie de página o el genérico?
+en administrar pagina: el menu al que se refiere es el sidebar?
+en configuraciones de sitio, ¿para qué sirven las palabras clave?
+Los bloques de contenido son módulos?, estarán en blanco al ingresarlos o tendran contenido agregado para modificar luego
+El cliente se registra a nosotros o a las empresas, su carrito es por cada empresa o una en general

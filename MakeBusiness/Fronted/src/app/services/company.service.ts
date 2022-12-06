@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom, Observable, pipe, tap } from 'rxjs';
 
@@ -90,12 +90,14 @@ export class CompanyService {
      ========*/ 
   newFile(idCompany:string,file:fileSend):Observable<FileResponse>{ 
     const data:FormData = new FormData();
+
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
     
     data.append('baseName',String(file.baseName));
     data.append('file',file.file);
     data.append('description',file.description);
     
-    return this.http.post<FileResponse>(`${this.urlFile}/${idCompany}`,data)
+    return this.http.post<FileResponse>(`${this.urlFile}/${idCompany}`,data,{headers})
   }
 
   getFiles(idCompany:string):Observable<FileResponse>{ 
@@ -108,45 +110,47 @@ export class CompanyService {
   }
 
   updateFile(idCompany:string,idProduct:string, File:fileCompany):Observable<FileResponse>{ 
-    return this.http.put<FileResponse>(`${this.urlFile}/${idCompany}/${idProduct}`,File)
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+    return this.http.put<FileResponse>(`${this.urlFile}/${idCompany}/${idProduct}`,File,{headers})
   }
 
   deleteFile(idCompany:string,idProduct:string):Observable<FileResponse>{ 
-    return this.http.delete<FileResponse>(`${this.urlFile}/${idCompany}/${idProduct}`)
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+    return this.http.delete<FileResponse>(`${this.urlFile}/${idCompany}/${idProduct}`,{headers})
   }
 
   // End Files ///
 
   addProduct(product:Product | any):Observable<ProductResponse>{
     const data:FormData = new FormData();
-    
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+
     data.append('name',product.name);
     data.append('price',product.price);
     data.append('description',product.description);
     data.append('categories',product.categories);
     data.append('image',product.image);
 
-    return this.http.post<ProductResponse>(`${this.urlProducts}/${this.currentIDCompany}`,data)
+    return this.http.post<ProductResponse>(`${this.urlProducts}/${this.currentIDCompany}`,data,{headers})
   }
 
 
   deleteProduct(id:string):Observable<ProductResponse>{
-
-    return this.http.delete<ProductResponse>(`${this.urlProducts}/${id}`)
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+    return this.http.delete<ProductResponse>(`${this.urlProducts}/${id}`,{headers})
   }
 
   updateProduct(idProduct:string,product:Product | any):Observable<ProductResponse>{
     const data:FormData = new FormData();
-    
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+
     if(product.name) data.append('name',product.name);
     if(product.price) data.append('price',product.price);
     if(product.description) data.append('description',product.description);
     if(product.categories) data.append('categories',product.categories);
     if(product.image) data.append('image',product.image);
-    console.log("product:",product)
-    console.log(data)
-    console.log(`${this.urlProducts}/${this.getCurrentIDCompany}/${idProduct}`)
-    return this.http.put<ProductResponse>(`${this.urlProducts}/${this.getCurrentIDCompany}/${idProduct}`,data)
+
+    return this.http.put<ProductResponse>(`${this.urlProducts}/${this.getCurrentIDCompany}/${idProduct}`,data,{headers})
 
   }
 
@@ -162,7 +166,8 @@ export class CompanyService {
   updateWeb(idCompany:string,web:webCompany | any):Observable<WebResponse>{
 
     const data:FormData = new FormData();
-    
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+
     if(web.title) data.append('title',web.title);
     if(web.keywords) data.append('keywords',web.keywords);
     if(web.cssExtra) data.append('cssExtra',web.cssExtra);
@@ -172,7 +177,7 @@ export class CompanyService {
     if(web.logo) data.append('logo',web.logo);
     if(web.favicon) data.append('favicon',web.favicon);
 
-    return this.http.put<WebResponse>(`${this.url}/${idCompany}/web`,data)
+    return this.http.put<WebResponse>(`${this.url}/${idCompany}/web`,data,{headers})
   }
 
 }
