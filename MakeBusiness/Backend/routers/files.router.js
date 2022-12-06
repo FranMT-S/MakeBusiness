@@ -3,6 +3,7 @@ const expressFileUpload = require('express-fileupload');
 
 const { fileValidate } = require("../middlewares/validar-files-config");
 const { fileUpload,returnFile,returnFiles,deleteFile ,updateFile} = require("../controller/files");
+const { validarJWT } = require("../middlewares/validar-jwt");
 
 
 const router = Router();
@@ -14,11 +15,11 @@ router.use(expressFileUpload({
 }));
 
 // Archivos
-router.post('/:idCompany',fileValidate,  fileUpload);
+router.post('/:idCompany',validarJWT,fileValidate,  fileUpload);
 router.get('/:idCompany', returnFiles);
 router.get('/:idCompany/:id', returnFile);
-router.put('/:idCompany/:id',updateFile)
-router.delete("/:idCompany/:id",deleteFile)
+router.put('/:idCompany/:id',validarJWT,updateFile)
+router.delete("/:idCompany/:id",validarJWT,deleteFile)
 
 
 

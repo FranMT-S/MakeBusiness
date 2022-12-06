@@ -1,94 +1,100 @@
 import { Injectable } from '@angular/core';
-import { User } from '../interfaces/user';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, tap } from "rxjs/operators";
+import { of, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
-const Data:User[] = [
-  {
-    "id": "1",
-    "name": "Miran",
-    "email": "mtarge0@goo.gl",
-    "phone": "813-194-2869",
-    "password": "jVEw6xXJn",
-    "type": "admin",
-    "state": 1
-  }, {
-    "id": "2",
-    "name": "Merle",
-    "email": "mpalfrey1@nsw.gov.au",
-    "phone": "150-173-3068",
-    "password": "2zHEGC",
-    "type": "admin",
-    "state": 1
-  }, {
-    "id": "3",
-    "name": "Merla",
-    "email": "mbingall2@bloglines.com",
-    "phone": "724-965-1401",
-    "password": "8Baqsn7",
-    "type": "admin",
-    "state": 1
-  }, {
-    "id": "4",
-    "name": "Belvia",
-    "email": "bprosser3@theguardian.com",
-    "phone": "480-588-0910",
-    "password": "jOYf6Mr",
-    "type": "client",
-    "state": 1
-  }, {
-    "id": "5",
-    "name": "Mufi",
-    "email": "mgerty4@nationalgeographic.com",
-    "phone": "749-743-0849",
-    "password": "wk8TXbSCt",
-    "type": "client",
-    "state": 1
-  }, {
-    "id": "6",
-    "name": "Rodolphe",
-    "email": "rheighway5@wikimedia.org",
-    "phone": "156-709-6763",
-    "password": "01AeXJp4FT",
-    "type": "client",
-    "state": 1
-  }, {
-    "id": "7",
-    "name": "Jonathan",
-    "email": "jmcpartlin6@eepurl.com",
-    "phone": "333-917-2837",
-    "password": "2iblXwxb0",
-    "type": "client",
-    "state": 1
-  }, {
-    "id": "8",
-    "name": "Grove",
-    "email": "ggruszecki7@canalblog.com",
-    "phone": "250-425-7091",
-    "password": "UipWRaX7F7di",
-    "type": "company",
-    "state": 1
-  }, {
-    "id": "9",
-    "name": "Pall",
-    "email": "polney8@hao123.com",
-    "phone": "867-943-9036",
-    "password": "GKN3rqgGaju",
-    "type": "company",
-    "state": 1
-  }, {
-    "id": "10",
-    "name": "Adora",
-    "email": "ametheringham9@about.com",
-    "phone": "448-971-5368",
-    "password": "MJKpog",
-    "type": "company",
-    "state": 10
-  }
-]
+
+import { FormGroup, FormControl, ValidationErrors } from '@angular/forms';
+
+import { User } from '../interfaces/user';
+import { AuthResponse, LoginResponse } from '../interfaces/response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  private _baseUrl:string = environment.baseUrl;
+  private _user!:User;
+
+
+  /* Mínimo ocho caracteres, al menos una letra mayúscula, una minúscula y un número. */
+  public passwordRegex: RegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+
+  get user(){
+    return {...this._user}
+  }
+
+  constructor(private http: HttpClient,
+    private router: Router ) { }
+
+  login( email:string, password:string ):Observable<boolean | string>{
+    const url  = `${this._baseUrl}/login`
+    const body = {email,password}
+    return this.http.post<LoginResponse>( url, body)
+      .pipe(
+        tap(resp => {
+          if(resp.ok === true){
+            localStorage.setItem("token",resp.token!)
+            const { ...data} = resp.data;
+            this._user = data;
+           
+          }
+        }),
+        map( resp => {
+          return resp.ok
+        }),
+        catchError( (err) =>{
+          // console.log("CATCH",err.error)
+          return of(err.error?.msg||"Error en la peticion")
+        })
+      )
+  }
+
+  logOut() {
+    localStorage.removeItem('token');
+    this.router.navigateByUrl("/auth/login")
+  }
+
+  register( form:FormGroup ){
+    const url = `${this._baseUrl}/usuarios`
+    const headers = new HttpHeaders()
+      .append('x-token', localStorage.getItem('token') || '');
+    return this.http.post<AuthResponse>(url, form.value, { headers })
+      .pipe(
+        map(resp => resp.ok),
+        catchError( err => of(err.error.msg))
+      ); 
+  }
+
+  validarToken():Observable<boolean> {
+
+    const url = `${ this._baseUrl }/login/renew`;
+    const headers = new HttpHeaders()
+      .set('x-token', localStorage.getItem('token') || '');
+
+    return this.http.get<AuthResponse>( url, { headers } )
+      .pipe(
+        map( resp => {
+          if (localStorage.getItem('token') === null) {
+            return false;
+          }
+          localStorage.setItem("token", resp.token!)
+          const {...data} = resp.data;
+          this._user = data;
+          return resp.ok;
+        }),
+        catchError (err => of(false))
+      );
+  }
+
+  getImageUrl() {
+    return `${this._baseUrl}/uploads/users/${this.user.image}`;
+  }
+
+
+  
+
 }

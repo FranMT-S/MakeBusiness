@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { ValidarTokenGuard } from './guards/validar-token.guard';
 import { LandingComponent } from './landing-page/landing/landing.component';
 import { Page404Component } from './shared/page404/page404.component';
 
@@ -22,11 +24,17 @@ const routes: Routes = [
   },
   {
     path:"admin-companies/:id",
-    loadChildren: () => import("./companies/companies.module").then(module => module.CompaniesModule)
+    loadChildren: () => import("./companies/companies.module").then(module => module.CompaniesModule),
+    canActivate: [ValidarTokenGuard ],
+    canLoad: [ValidarTokenGuard ],
+    canActivateChild: [ValidarTokenGuard]
   },
   {
     path:"admin",
-    loadChildren: () => import("./admin/admin.module").then(module => module.AdminModule)
+    loadChildren: () => import("./admin/admin.module").then(module => module.AdminModule),
+    canActivate: [ ValidarTokenGuard],     
+    canLoad: [ ValidarTokenGuard],
+    canActivateChild: [ValidarTokenGuard]
   },
  
   { path: "", redirectTo: "landing-page", pathMatch: "full"},

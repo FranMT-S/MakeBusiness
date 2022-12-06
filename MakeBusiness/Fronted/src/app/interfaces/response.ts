@@ -1,6 +1,7 @@
 import { Company } from "./company";
 import { fileCompany } from "./fileCompany";
 import { Product } from "./product";
+import { User } from "./user";
 import { webCompany } from "./web";
 
 export interface CompanyResponse {
@@ -42,3 +43,25 @@ export interface CompanyResponse {
     error: any;
     msg: string;
   }
+
+  export interface WebResponse {
+    ok:       boolean;
+    file: fileCompany;
+    files: fileCompany[];
+    error: any;
+    msg: string;
+  }
+
+  export interface LoginResponse {
+    ok    : boolean;
+    msg?  : string;
+    data? : User;
+    token?: string;
+}
+
+export interface AuthResponse {
+    ok: boolean;
+    msg?: string;
+    data?: User;
+    token?: string;
+}

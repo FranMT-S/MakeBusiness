@@ -4,9 +4,9 @@ import { url } from 'inspector';
 import { Block, TemplateRaw } from 'src/app/interfaces/page';
 import { TemplateService } from 'src/app/services/template.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { DialogComponent } from '../dialog/dialog.component';
+
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Overlay } from '@angular/cdk/overlay';
+
 
 @Component({
   selector: 'app-edit-code',
@@ -15,6 +15,7 @@ import { Overlay } from '@angular/cdk/overlay';
 })
 
 export class EditCodeComponent implements OnInit {
+  
   //  cambiar favicon
   // favIcon: HTMLLinkElement | null  = document.querySelector('#favIcon');
 
@@ -79,7 +80,7 @@ export class EditCodeComponent implements OnInit {
   template:TemplateRaw = {} as TemplateRaw;
 
   constructor(private activatedRoute:ActivatedRoute,private templateService:TemplateService,
-              public dialog: MatDialog,private _overlay: Overlay, private _viewContainerRef: ViewContainerRef) {
+              public dialog: MatDialog) {
 
    }
 

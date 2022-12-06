@@ -3,6 +3,7 @@ const { check } = require("express-validator");
 
 const {getPlans,getPlan,newPlan,deletePlan,updatePlan} = require("../controller/plan")
 const { validarCampos } = require("../middlewares/validar-campos");
+const { validarJWT } = require("../middlewares/validar-jwt");
 
 const router = Router();
 
@@ -10,7 +11,7 @@ router.get("/",getPlans)
 router.get("/:id",getPlan)
 
 router.post("/", 
-                [
+                [validarJWT,
                 check("name", "Nombre es un campo obligatorio").notEmpty(),
                 check("price", "Precio son campos obligatorios").notEmpty(),
                 check("annuity", "Anualidad son campos obligatorios").notEmpty(),
@@ -21,9 +22,9 @@ router.post("/",
                 validarCampos,
                 newPlan,)
 
-router.put("/:id",updatePlan)
+router.put("/:id",validarJWT,updatePlan)
                 
-router.delete("/:id",deletePlan)
+router.delete("/:id",validarJWT,deletePlan)
 
 
 module.exports = router;

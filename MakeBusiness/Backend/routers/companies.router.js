@@ -9,6 +9,7 @@ const {
     newBlock,getBlock,getBlocks,deleteBlock,updateBlock
     } = require("../controller/companies")
 const { validarCampos } = require("../middlewares/validar-campos");
+const { validarJWT } = require("../middlewares/validar-jwt");
 
 const router = Router();
 
@@ -19,7 +20,7 @@ router.use(expressFileUpload({
 }));
 
 router.post("/", 
-                [
+                [validarJWT,
                 check("nameCompany", "Nombre es un campo obligatorio").notEmpty(),
                 check("idUser", "el id del usuario es obligatorio obligatorios").notEmpty()
                 ],
@@ -29,16 +30,16 @@ router.post("/",
 router.get("/",getCompanies)
 router.get("/:id",getCompany)
 router.get("/user/:id",getCompanyByUser)
-router.put("/:id",updateCompany)
-router.delete("/:id",deleteCompany)
+router.put("/:id",validarJWT,updateCompany)
+router.delete("/:id",validarJWT,deleteCompany)
 
 //////////////
 // Rutas Web
 /////////////
 
 // Id de la compania
-router.put("/:id/web",updateWeb)
-router.delete("/:id/web",deleteWeb)
+router.put("/:id/web",validarJWT,updateWeb)
+router.delete("/:id/web",validarJWT,deleteWeb)
 router.get("/:id/web",getWeb)
 // router.post("/:id/web", 
 //                 [
@@ -60,6 +61,7 @@ router.get("/:id/web",getWeb)
 // // Id de la compania
 router.post("/:id/web/pages", 
                 [
+                    validarJWT,
                 check("title", "el titulo es un campo obligatorio").notEmpty(),
                 ],
                 validarCampos,
@@ -68,15 +70,15 @@ router.post("/:id/web/pages",
 // 
 router.get("/:id/web/pages",getPages)
 router.get("/:id/web/pages/:idPage",getPage)
-router.put("/:id/web/pages/:idPage",updatePage)
-router.delete("/:id/web/pages/:idPage",deletePage)
+router.put("/:id/web/pages/:idPage",validarJWT,updatePage)
+router.delete("/:id/web/pages/:idPage",validarJWT,deletePage)
 
 //////////////
 // Rutas Block
 /////////////
 
 router.post("/:id/web/pages/:idPage/blocks", 
-                [
+                [validarJWT,
                 check("size", "el tamaño debe ser entre 1 a 12").notEmpty().isInt({ min: 1, max: 12 }),
                 ],
                 validarCampos,
@@ -86,7 +88,7 @@ router.post("/:id/web/pages/:idPage/blocks",
 //
 router.get("/:id/web/pages/:idPage/blocks",getBlocks)
 router.get("/:id/web/pages/:idPage/blocks/:idBlock",getBlock)
-router.put("/:id/web/pages/:idPage/blocks/:idBlock",updateBlock)
-router.delete("/:id/web/pages/:idPage/blocks/:idBlock",deleteBlock)
+router.put("/:id/web/pages/:idPage/blocks/:idBlock",validarJWT,updateBlock)
+router.delete("/:id/web/pages/:idPage/blocks/:idBlock",validarJWT,deleteBlock)
 
 module.exports = router;

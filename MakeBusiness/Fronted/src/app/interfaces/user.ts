@@ -7,7 +7,8 @@ export interface User {
     phone?: string,
     password: string,
     type: string,
-    state: number
+    state: number,
+    image?:string,
 }
 
 export interface Client  extends User{

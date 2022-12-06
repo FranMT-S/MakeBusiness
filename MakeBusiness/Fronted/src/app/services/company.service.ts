@@ -21,9 +21,6 @@ export class CompanyService {
 
   private currentIDCompany:string = "";
   private currentCompany:Company = {} as Company;
-  private currentWeb:webCompany = {} as webCompany;
-  private currentProducts:Product[] = [];
-  private currentFiles:fileCompany[] = [];
   private url = `${environment.baseUrl}/companies`
   private urlFile = `${environment.baseUrl}/files`
   private urlProducts = `${environment.baseUrl}/products`
@@ -59,8 +56,8 @@ export class CompanyService {
     return this.http.get<CompanyResponse>(`${this.url}/${id}`);
   }
 
-    inicializatedCurrentData(idCompany:string){
-    // Convertir a promsesa
+  inicializatedCurrentData(idCompany:string){
+    
     this.getCompanyById(idCompany).pipe(tap( res =>{
       this.currentCompany = res.company
     }))

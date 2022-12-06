@@ -12,7 +12,7 @@
     "$oid": "637d32a1f542e68362260f79"
   },
   "idUser": {
-    "$oid": "637344b5f542e68362260e66"
+    "$oid": "637344b5f542e68362260e65"
   }
 },{
   "_id": {
@@ -28,6 +28,22 @@
     "$oid": "637d32a1f542e68362260f78"
   },
   "idUser": {
-    "$oid": "637344b5f542e68362260e65"
+    "$oid": "637344b5f542e68362260e66"
+  }
+},{
+  "_id": {
+    "$oid": "637d3586f542e68362260f85"
+  },
+  "nameCompany": "Evey",
+  "phone": "968-276-4037",
+  "description": "Empresa de tecnologia",
+  "category": "Technology",
+  "location": "27 Portage Street",
+  "state": true,
+  "idPlan": {
+    "$oid": "637d32a1f542e68362260f78"
+  },
+  "idUser": {
+    "$oid": "6381a2664f12dfa4c47f9c0a"
   }
 }]

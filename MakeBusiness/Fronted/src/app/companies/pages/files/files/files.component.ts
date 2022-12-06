@@ -34,6 +34,7 @@ export class FilesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFiles();
+
   }
 
   getFiles(){

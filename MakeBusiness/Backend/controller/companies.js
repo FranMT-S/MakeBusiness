@@ -291,9 +291,6 @@ const updateWeb = async (req = request, res = response) =>{
         }
        
 
-
-
-
         const update = await Web.findOneAndUpdate({idCompany:req.params.id},newData, {returnDocument:'after'});
         return res.status(200).json({
             ok: true,

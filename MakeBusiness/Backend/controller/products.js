@@ -14,7 +14,7 @@ const Product = require('../models/product');
 const newProduct = async(req = request, res = response) => {
 
     const {idCompany} = req.params
-
+    
 
 
     //procesar el archivo

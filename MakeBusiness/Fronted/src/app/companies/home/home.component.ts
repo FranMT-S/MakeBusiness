@@ -36,9 +36,19 @@ export class HomeComponent implements OnInit {
 
 
      this.activatedRoute.params.subscribe( (params:Params) => {
-   
-      this.companyService.setCurrentIDCompany =   params['id'];
-      this.companyService.inicializatedCurrentData(params['id'])
+      let id = params['id']
+     
+      this.companyService.setCurrentIDCompany =  id ;
+
+      this.companyService.inicializatedCurrentData(id)
+      this.companyService.getWeb(this.companyService.getCurrentIDCompany).subscribe(res =>{
+          if(!res.ok){
+            this.companyService.updateWeb(id,{title:this.companyService.getCompany.nameCompany}).subscribe(
+              r =>{
+              if(!r.ok) console.log("no existe la web")
+            })
+          }
+      })
     })
 
   }

@@ -1,7 +1,7 @@
 <div class="background background-back ">
     <div class="background background-transparent-black d-flex justify-content-center align-items-center">       
         <form  [formGroup]="myForm" autocomplete="off" (ngSubmit)="login()">
-            <div class="form  mx-auto  p-3 rounded text-center text-white">              
+            <div class="form-auth  mx-auto  p-3 rounded text-center text-white">              
                 <div class="col-12">
                     <img src="../../../assets/Logo V3.png" alt="" width="150" >
                     
@@ -10,7 +10,7 @@
                         <mat-label >Correo</mat-label>
                         <input matInput formControlName="email" placeholder="">
                         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-                        <mat-hint *ngIf="fieldNotValid('email')" class="form-label form-text text-danger">El campo no es valido </mat-hint>                   
+                        <mat-hint *ngIf="fieldNotValid('email')" class="form-label form-text text-danger">El correo no es valido </mat-hint>                   
                     </mat-form-field>
                     
                     
