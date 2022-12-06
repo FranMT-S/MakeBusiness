@@ -6,10 +6,10 @@ const { v4: uuidv4 } = require('uuid');
 const {request, response} = require("express")
 
 const Company = require("../models/company")
-const User = require("../models/user")
 const Web = require("../models/web")
+const User = require("../models/user")
 const Page = require("../models/page");
-const { default: mongoose, mongo } = require('mongoose');
+const { default: mongoose } = require('mongoose');
 const { Block } = require('../models/block');
 
 
