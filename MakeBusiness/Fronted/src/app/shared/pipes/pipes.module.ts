@@ -8,9 +8,11 @@ import { SafeHtmlPipe } from './html-decoder.pipe';
 @NgModule({
   declarations: [
     TranslatePipe,  
-    SafeHtmlPipe],
+    SafeHtmlPipe
+  ],
   exports:[
     TranslatePipe,
+    SafeHtmlPipe
   ]
 })
 export class PipesModule { }

@@ -4,7 +4,8 @@ export interface page{
     title: string,
     description: string,
     js?:string,
-    blocks: Block[]
+    blocks: Block[],
+
 }
 
 export interface pageCompany extends page{
@@ -31,8 +32,8 @@ export interface Block{
     _id: string,
     size: number,
     HTML: string,
-    CSS:string,
     position:number,
     type:'dynamic' | 'pure',
+    editing?: boolean
 }
 

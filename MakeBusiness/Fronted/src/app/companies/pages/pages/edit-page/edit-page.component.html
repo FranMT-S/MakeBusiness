@@ -1,7 +1,199 @@
 
-<mat-sidenav-container [hasBackdrop]="false">
-    
- 
+<mat-sidenav-container [hasBackdrop]="false" class="h-100">
     
 
+    <mat-sidenav #sidenav opened mode="side" style="width: 30vh;" class="d-flex flex-column pt-4 px-2">     
+        
+        <p class="ms-2 fw-semibold"> Opciones</p>
+        <button class="btn btn-outline-primary " (click)="open(addPageForm)"> Agregar Pagina</button>
+        <button class="btn btn-outline-danger  mt-1 " (click)="deletePage()"> Borrar pagina</button>
+
+        <hr>
+        <p class="ms-2  mt-4 fw-semibold"> Paginas</p>
+        <mat-select class=" p-2" placeholder="Paginas" (ngModelChange)="onChange($event)" [(ngModel)]="pageSelected" name="page">
+            <mat-option *ngFor="let page of pages" [value]="page">
+                {{page.title | titlecase}}         
+            </mat-option>
+        </mat-select>
+
+        <hr>
+        <div class="mt-4" *ngIf="pageSelected">
+            <p class="ms-2 fw-semibold"> Bloques</p>
+            <button class="btn btn-outline-success" (click)="open(addBlockForm)"         
+                > Agregar Bloque
+             </button>
+        </div>
+
+        
+        <section class="sidenav-options ps-3">
+            <label><input type="checkbox" name="border" [(ngModel)]="border" > Mostrar Bordes</label><br>
+        </section>
+
+ 
+    </mat-sidenav>
+
+    <mat-sidenav-content style="height:91vh">
+        <div>
+            <div class="container-fluid">
+                <!-- <div class="row  position-fixed editor-container bg-light" style="width: 82%;"  
+                    [ngClass]="{'visible': pureActive == 0}"
+                    #editor
+                >
+                    <angular-editor 
+                    #editor [placeholder]="'Ingrese su texto'" 
+                    [config]="editorConfig" 
+                    [(ngModel)]="blockSelected.HTML"              
+                    >
+                    </angular-editor>
+                </div> -->
+
+                <!-- <div class="row  position-fixed editor-container bg-light ps-2 pt-2" style="width: 82%;"  
+                    [ngClass]="{'visible': pureActive == 1}"
+                    #editor>
+                
+                    <textarea 
+                    #editorPure [placeholder]="'Ingrese su texto'" 
+                    style="height: 300px;" tabindex="-1" resize="none"
+                    [(ngModel)]="blockSelected.HTML" 
+                    class="editor-textarea "             
+                    >
+                    </textarea>
+                </div> -->
+                <div class="row" [ngClass]="{'block-container-active': editing}">           
+                    <div 
+                        #editable
+                        *ngFor="let block of blocks" 
+                         [id]="'block-' + block._id"  
+                         [class]="'block position-relative ' + 'col-' + block.size"
+                         [ngClass]="{'border': border}" (mouseenter)="caja.classList.remove('not-editing')"
+                         (mouseleave)="caja.classList.add('not-editing')"
+                         >
+                        <div #caja class="edit-options end-0 me-4 opacity-75 position-absolute edit-options not-editing">
+                            <i class="fa fa-solid fa-pen-to-square cursor-pointer" (mouseenter)="onMouseEnterEditing(block)" (click)="openFullScreen(editBlockForm)"></i>
+                            <i class="fa fa-solid fa-trash cursor-pointer" (click)="deleteBlock(block)"></i>
+                        </div>
+                        <div [innerHTML]="block.HTML | safeHtml" >
+                            
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </mat-sidenav-content>
+
 </mat-sidenav-container>
+
+<ng-template #addPageForm let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Pagina Nueva</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form (ngSubmit)="newPage(formNewPage)" #formNewPage="ngForm">
+            <div class="mb-3">
+              <label for="" class="form-label">Titulo</label>
+              <input type="text" ngModel required name="title" id="" class="form-control" placeholder="Nombre de la pagina" aria-describedby="helpId">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="modal.close('Cerrar')">Cerrar</button>
+                <button type="submit" class="btn btn-primary" [ngClass]="{'disabled': formNewPage.invalid}" >Guardar</button>
+            </div>
+        </form>   
+    </div>
+</ng-template>
+
+<ng-template #addBlockForm let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Agregar Bloque</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form (ngSubmit)="newBlock(formNewBlock)" #formNewBlock="ngForm">
+            <div class="mb-3">
+              <label for="" class="form-label">Tamaño</label>
+          
+                <input type="number" min="1" max="12"   class="form-control"
+                required  placeholder="Tamaño" ngModel=1 name="size" >
+
+                <label class="form-check-label text-danger" 
+               [class.visually-hidden]="validateSize(formNewBlock)"
+                for="size">
+                    Seleccione un numero entre 1 a 12
+                </label>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Tipo</label>
+                <!-- <input type="text" ngModel required name="type" id="" class="form-control" placeholder="Nombre de la pagina" aria-describedby="helpId"> -->
+                <select class="form-select form-select-lg" required  ngModel name="type" id="type" placeholder="Tipo">
+                    <option  value="">Tipo</option>
+                    <option  value="dynamic">Dinamico</option>
+                    <option value="pure">HTML Puro</option>
+                </select>  
+      
+  
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger"  (click)="modal.close('Cerrar')">Cerrar</button>
+                <button type="submit" class="btn btn-primary" [ngClass]="{'disabled': formNewBlock.invalid}" >Guardar</button>
+            </div>
+        </form>   
+    </div>
+</ng-template>
+
+
+
+<ng-template #editBlockForm let-modal>
+    <form (ngSubmit)="editBlock(formEditBlock!)" #formEditBlock="ngForm">
+    
+        <div class="modal-header">
+            <div class="d-flex flex-column">
+                <h4 class="modal-title text-success fw-semibold fs-5">Editar Bloque</h4>
+                <button type="submit" class="btn btn-primary" [ngClass]="{'disabled': formEditBlock.invalid}" >Guardar</button>
+            </div>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+              <label for="" class="form-label text-success fw-semibold ">Tamaño</label>
+          
+                <input type="number" min="1" max="12"   class="form-control"
+                required  placeholder="Tamaño" [(ngModel)]="blockSelected!.size" name="size" >
+
+                <label class="form-check-label text-danger" 
+               [class.visually-hidden]=" validateSize(formEditBlock)"
+                for="size">
+                    Seleccione un numero entre 1 a 12
+                </label>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label me-3 text-success fw-semibold">HTML</label>
+                <div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label" for="visualizar">Visualizar:</label>
+                        <input class="ms-2 form-check-input" [(ngModel)]="HtmlVisual" name="HtmlVisual" type="checkbox" id="visualizar"> 
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label" for="visualizar">Ver Bordes:</label>
+                        <input class="ms-2 form-check-input" [(ngModel)]="borderEditing" name="borderEditing" type="checkbox" id="visualizar"> 
+                    </div>
+                </div>
+
+                
+                <div class="mb-3">
+                  <label for="" class="form-label"></label>
+                  <textarea class="form-control" [(ngModel)]="htmlContent" name="HTML" id="HTML" rows="3"></textarea>
+                </div>
+            </div>
+            <hr *ngIf="HtmlVisual">
+            <div *ngIf="HtmlVisual" 
+            class="mx-auto block position-relative"
+            [class]="'col-' + blockSelected!.size"
+            [ngClass]="{'border': borderEditing}"
+            [innerHTML]="htmlContent | safeHtml" >
+                            
+            </div>
+         
+        </div>
+    </form> 
+</ng-template>

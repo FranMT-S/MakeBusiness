@@ -1,0 +1,42 @@
+/* Add application styles & imports to this file! */
+.editor-textarea{
+    max-height: 300px;
+    
+}
+
+.editor-container{
+    visibility: collapse;
+    z-index: 1000;
+}
+
+
+.block-container-active{
+    position: relative;
+    top:350px
+}
+
+.redText{
+    color:red;
+}
+
+.example-h2 {
+    margin: 10px;
+  }
+  
+  .sidenav-options {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+.not-editing{
+    display: none;
+}
+
+.edit-options{
+    .fa{
+        margin-left: 5px;
+    }
+
+}

@@ -3,7 +3,7 @@ import { ProductHistory } from '../interfaces/product';
 import { Client, User } from '../interfaces/user';
 
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 interface UserResponse {
@@ -34,16 +34,18 @@ export class UserService {
   }
   
   deleteUser(id:string):Observable<UserResponse>{
-     return this.http.delete<UserResponse>(`${this.url}/${id}`)
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+     return this.http.delete<UserResponse>(`${this.url}/${id}`,{headers})
   }
 
   newUser(user:User):Observable<UserResponse>{
-
-    return this.http.post<UserResponse>(this.url,user)
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+    return this.http.post<UserResponse>(this.url,user,{headers})
  }
 
   updateUser(id:string,user:User):Observable<UserResponse>{
-    return this.http.put<UserResponse>(`${this.url}/${id}`,user)
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+    return this.http.put<UserResponse>(`${this.url}/${id}`,user,{headers})
   }
 
 

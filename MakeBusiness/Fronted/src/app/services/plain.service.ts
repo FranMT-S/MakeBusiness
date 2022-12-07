@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Plan } from '../interfaces/plains';
 
 import {environment} from '../../environments/environment'
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -35,14 +35,17 @@ export class PlanService {
   }
 
   deletePlan(id:string):Observable<PlanResponse>{
-    return this.http.delete<PlanResponse>(`${this.url}/${id}`)
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+    return this.http.delete<PlanResponse>(`${this.url}/${id}`,{headers})
   }
 
   addPlan(plan:Plan):Observable<PlanResponse>{
-    return this.http.post<PlanResponse>(`${this.url}`,plan)
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+    return this.http.post<PlanResponse>(`${this.url}`,plan,{headers})
   }
 
   updatePlan(id:string,plan:Plan):Observable<PlanResponse>{
-    return this.http.put<PlanResponse>(`${this.url}/${id}`,plan)
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+    return this.http.put<PlanResponse>(`${this.url}/${id}`,plan,{headers})
   }
 }
