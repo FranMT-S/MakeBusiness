@@ -166,6 +166,7 @@ const deleteCompany = async (req = request, res = response) =>{
             })
         }
         
+        
         return res.status(200).json({
             ok: true,
             msg: "compania removido  con exito.",

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Product } from 'src/app/interfaces/product';
 import { CompanyService } from 'src/app/services/company.service';
 import { ValidatorService } from 'src/app/services/validator.service';
@@ -28,7 +28,7 @@ export class EditProductComponent implements OnInit {
  
   });
 
-   constructor(private activatedRoute:ActivatedRoute,private companyService:CompanyService,
+   constructor(private activatedRoute:ActivatedRoute,private companyService:CompanyService,private router:Router,
               private fb:FormBuilder,private validatorService:ValidatorService) { 
 
 
@@ -37,7 +37,7 @@ export class EditProductComponent implements OnInit {
       this.idProduct = params['id'];
       this.companyService.getProductById(this.idProduct).subscribe(res => {
         if(res.ok){
-          console.log("test")
+
           this.product = res.product
           this.imageUrl = `${environment.baseUrl}/uploads/products/${res.product.image}`
       
@@ -47,10 +47,7 @@ export class EditProductComponent implements OnInit {
             name: this.product.name,
             description: this.product.description,
             price: this.product.price,
-            categories: this.product.categories,
-            
-
-            
+            categories: this.product.categories,          
           })
 
 
@@ -110,7 +107,8 @@ export class EditProductComponent implements OnInit {
       this.companyService.updateProduct(this.idProduct,product).subscribe(res =>{
         console.log(res)
         if(res.ok){
-          alert("Modificado con exito con exito")
+          alert("Modificado con exito ")
+          this.router.navigateByUrl(`admin-companies/${localStorage.getItem("_web")}/products/list`)
          
        
         }else{

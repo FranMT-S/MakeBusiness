@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { angularEditorConfig } from '@kolkov/angular-editor/lib/config';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -62,7 +62,7 @@ export class EditPageComponent implements OnInit {
 
   // currentTheme: string = themeGithub;
 
-  constructor(private activatedRoute:ActivatedRoute,
+  constructor(private activatedRoute:ActivatedRoute, private router:Router,
               private companyService:CompanyService, private modalService: NgbModal) { 
     
     this.activatedRoute.params.subscribe((params:Params) => {
@@ -218,6 +218,10 @@ export class EditPageComponent implements OnInit {
           }
       })
     }  
+  }
+
+  back(){
+    this.router.navigateByUrl(`admin-companies/${localStorage.getItem("_web")}`)
   }
 
   // // Highlight

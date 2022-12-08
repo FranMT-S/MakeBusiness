@@ -11,8 +11,9 @@ export interface User {
     image?:string,
 }
 
-export interface Client  extends User{
-    history?: ProductHistory[];
+
+export interface Client {
+    _id: string,
+    idUser: string,
+    historical?: ProductHistory[];
 }
-
-

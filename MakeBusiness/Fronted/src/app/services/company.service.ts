@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { lastValueFrom, Observable, pipe, tap } from 'rxjs';
 
 import {environment} from '../../environments/environment'
-import { Company } from '../interfaces/company';
-import { fileCompany, fileSend } from '../interfaces/fileCompany';
 import { Block, pageCompany } from '../interfaces/page';
 import { Product } from '../interfaces/product';
-import { BlockResponse, CompanyResponse, FileResponse, PageResponse, ProductResponse, WebResponse } from '../interfaces/response';
-import { webCompany } from '../interfaces/web';
 
+import { Company } from '../interfaces/company';
+import { fileCompany, fileSend } from '../interfaces/fileCompany';
+import { webCompany } from '../interfaces/web';
+import { BlockResponse, CompanyResponse, FileResponse, PageResponse, ProductResponse, WebResponse } from '../interfaces/response';
 
 
 
@@ -176,6 +176,7 @@ export class CompanyService {
     
     if(web.title) data.append('title',web.title);
     if(web.keywords) data.append('keywords',web.keywords);
+    if(web.description) data.append('description',web.description);
     if(web.cssExtra) data.append('cssExtra',web.cssExtra);
     if(web.jsExtra) data.append('jsExtra',web.jsExtra);
     if(web.genericHeaderHTML) data.append('genericHeaderHTML',web.genericHeaderHTML);

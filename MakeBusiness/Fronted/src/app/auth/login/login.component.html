@@ -3,7 +3,7 @@
         <form  [formGroup]="myForm" autocomplete="off" (ngSubmit)="login()">
             <div class="form-auth  mx-auto  p-3 rounded text-center text-white">              
                 <div class="col-12">
-                    <img src="../../../assets/Logo V3.png" alt="" width="150" >
+                    <img src="../../../assets/Logo V3.png" [routerLink]="['/']" class="cursor-pointer" routerLinkActive="router-link-active"  alt="" width="150" >
                     
                     <h1 class="mt-5 text-pink2 mb-4">Bienvenido</h1>
                     <mat-form-field appearance="legacy" color="accent">

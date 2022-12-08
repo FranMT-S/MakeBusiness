@@ -1,8 +1,13 @@
 <div class="background background-back ">
     <div class="background background-transparent-black d-flex justify-content-center align-items-center">  
         <form [formGroup]="myForm" autocomplete="off" (ngSubmit)="register()">
-            <div class="form mx-auto  p-3 rounded text-center text-white">
-                <h1 class="mt-5">Registro</h1>
+            <div class="form-login mx-auto  p-3 rounded text-center text-white">
+                <div class="d-flex mt-4">
+                    <div class="mb-3 pb-3">
+                      <img src="../../../assets/Logo V3.png" [routerLink]="['/']" class="cursor-pointer" routerLinkActive="router-link-active"  alt="" width="100px" >
+                    </div>
+                    <h1 class="fs-2 mb-4 ms-5">Registro</h1>
+                  </div>
                 <mat-form-field appearance="legacy" color="accent">
                     <mat-label >Nombre</mat-label>
                     <input matInput placeholder="" formControlName="name">

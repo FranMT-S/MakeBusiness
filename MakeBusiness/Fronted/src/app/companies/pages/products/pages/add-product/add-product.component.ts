@@ -76,7 +76,7 @@ export class AddProductComponent implements OnInit {
         if(res.ok){
           alert("Agregado con exito")
           this.myForm.reset()
-       
+          this.imageUrl = `${environment.baseUrl}/uploads/other/img-default.png`;
         }else{
           alert(res.msg)
           console.log(res.error)

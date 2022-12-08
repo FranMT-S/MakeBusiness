@@ -30,6 +30,10 @@ export class PlanService {
     return this.http.get<PlanResponse>(this.url)
   }
 
+  getPlans(id:string):Observable<PlanResponse>{
+    return this.http.get<PlanResponse>(`${this.url}`)
+  }
+
   getPlan(id:string):Observable<PlanResponse>{
     return this.http.get<PlanResponse>(`${this.url}/${id}`)
   }

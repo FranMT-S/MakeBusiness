@@ -1,9 +1,16 @@
+import { Interface } from "readline";
 import { Company } from "./company";
 import { fileCompany } from "./fileCompany";
 import { Block, pageCompany } from "./page";
 import { Product } from "./product";
-import { User } from "./user";
+import { Client, User } from "./user";
 import { webCompany } from "./web";
+
+export interface basicResponse{
+  ok:       boolean;
+  error: any;
+  msg:string
+}
 
 export interface CompanyResponse {
     ok:       boolean;
@@ -37,22 +44,6 @@ export interface CompanyResponse {
   }
 
    
-  export interface WebResponse {
-    ok:       boolean;
-    file: fileCompany;
-    files: fileCompany[];
-    error: any;
-    msg: string;
-  }
-
-  export interface WebResponse {
-    ok:       boolean;
-    file: fileCompany;
-    files: fileCompany[];
-    error: any;
-    msg: string;
-  }
-
 
   
 export interface PageResponse {
@@ -70,7 +61,16 @@ export interface BlockResponse {
   error: any;
   msg: string;
 }
-  export interface LoginResponse {
+
+export interface ClientResponse {
+  ok:       boolean;
+  Client: Client;
+  Clients: Client[];
+  error: any;
+  msg: string;
+}
+
+export interface LoginResponse {
     ok    : boolean;
     msg?  : string;
     data? : User;
@@ -82,4 +82,13 @@ export interface AuthResponse {
     msg?: string;
     data?: User;
     token?: string;
+}
+
+
+export interface registerCompanySend {
+  userName:String,
+  email:String,
+  nameCompany: string,
+  password:string,
+  idPlan: string
 }

@@ -31,6 +31,7 @@ app.use("/api/files", require('./routers/files.router'));
 app.use("/api/products", require('./routers/products.router'));
 app.use("/api/uploads", require('./routers/uploads.router'));
 app.use("/api/login", require('./routers/login.router'));
+app.use("/api/clients", require('./routers/clients.router'));
 
 
 app.listen(process.env.PORT, () => {
