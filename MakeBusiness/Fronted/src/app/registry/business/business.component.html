@@ -1,15 +1,21 @@
 <div class="background background-back ">
     <div class="background background-transparent-black d-flex justify-content-center align-items-center">  
-        <form [formGroup]="myForm" autocomplete="off" (ngSubmit)="register()">
-          <div class="form mx-auto  p-3 rounded text-center text-white">
+      <form [formGroup]="myForm" autocomplete="off" (ngSubmit)="register()">
+        <div class="form-login mx-auto  p-3 rounded text-center text-white">
             <div class="col-12">
-                <h1 class="fs-2 mb-4">Registro</h1>
+           
+                <div class="d-flex">
+                  <div >
+                    <img src="../../../assets/Logo V3.png" [routerLink]="['/']" class="cursor-pointer" routerLinkActive="router-link-active"  alt="" width="100px" >
+                  </div>
+                  <h1 class="fs-2 mb-4 ms-5">Registro</h1>
+                </div>
                 <mat-form-field appearance="legacy" color="accent">
                   <mat-label >Nombre</mat-label>
-                  <input matInput placeholder="" formControlName="name">
+                  <input matInput placeholder="" formControlName="userName">
                   <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
                   <!-- <mat-hint>Hint</mat-hint> -->
-                  <mat-hint *ngIf="fieldNotValid('name')" class="form-label form-text text-danger">El campo no es valido </mat-hint>                   
+                  <mat-hint *ngIf="fieldNotValid('userName')" class="form-label form-text text-danger">El campo no es valido </mat-hint>                   
                 
                 </mat-form-field>
                 <mat-form-field appearance="legacy" color="accent">
@@ -28,11 +34,11 @@
 
                 </mat-form-field>
                 
-                <mat-form-field appearance="legacy" color="accent">
+                <mat-form-field appearance="legacy" color="accent" >
                   <mat-label>Plan</mat-label>
-                  <mat-select>
+                  <mat-select formControlName="idPlan" >
                     <mat-option>None</mat-option>
-                    <mat-option *ngFor="let plain of plains" [value]="plain.id">{{plain.name}}</mat-option>
+                    <mat-option *ngFor="let plan of plans" [value]="plan._id">{{plan.name | titlecase}}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 

@@ -35,20 +35,17 @@ export class UserService {
   
   deleteUser(id:string):Observable<UserResponse>{
     const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
-
      return this.http.delete<UserResponse>(`${this.url}/${id}`,{headers})
   }
 
   newUser(user:User):Observable<UserResponse>{
     const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
-
     return this.http.post<UserResponse>(this.url,user,{headers})
  }
 
   updateUser(id:string,user:User):Observable<UserResponse>{
     const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
-
-    return this.http.put<UserResponse>(`${this.url}/${id}`,user, {headers})
+    return this.http.put<UserResponse>(`${this.url}/${id}`,user,{headers})
   }
 
 

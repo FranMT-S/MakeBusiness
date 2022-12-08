@@ -36,8 +36,7 @@ export class HomeComponent implements OnInit {
 
 
      this.activatedRoute.params.subscribe( (params:Params) => {
-      let id = params['id']
-     
+      let id = params['id']   
       this.companyService.setCurrentIDCompany =  id ;
 
       this.companyService.inicializatedCurrentData(id)

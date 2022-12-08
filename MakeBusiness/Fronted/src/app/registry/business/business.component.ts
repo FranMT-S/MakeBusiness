@@ -1,11 +1,15 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Plan } from 'src/app/interfaces/plains';
+import { registerCompanySend } from 'src/app/interfaces/response';
+import { AuthService } from 'src/app/services/auth.service';
+import { PlanService } from 'src/app/services/plain.service';
 import { ValidatorService } from 'src/app/services/validator.service';
+import Swal from 'sweetalert2'
 
-interface plain {
-  id: number;
-  name: string;
-}
+
+
 
 @Component({
   selector: 'app-business',
@@ -16,29 +20,26 @@ interface plain {
 export class BusinessComponent implements OnInit {
   hide = true;
   /// Recordar hacer la validacion del input plan
-  plains:plain[]=
-              [
-                {
-                  id:1,
-                  name:"free"
-                },
-                {
-                  id:2,
-                  name:"basic"
-                },
-                {
-                  id:3,
-                  name:"premium"
-                },
-              ]
+ 
+  plans:Plan[] = [];
   myForm:FormGroup = this.fb.group({
-    name   : [,[Validators.required]],
-    nameCompany   : [,[Validators.required]],  
+    userName   : [,[Validators.required]],
     email   : [,[Validators.required,Validators.pattern(this.validatorService.emailPattern)]],
-    password: [,[Validators.required]]
+    nameCompany   : [,[Validators.required]],  
+    password: [,[Validators.required]],
+    idPlan: [,[Validators.required]]
   });
 
-  constructor(private fb:FormBuilder,private validatorService:ValidatorService) { }
+  constructor(private fb:FormBuilder,private validatorService:ValidatorService,
+              private planService:PlanService,private authService:AuthService,
+              private router: Router) { 
+
+    this.planService.getAllPlans.subscribe(res =>{
+      if(res.ok) 
+        this.plans = res.plans;
+        
+    })  
+  }
 
   ngOnInit(): void {
  
@@ -56,7 +57,37 @@ export class BusinessComponent implements OnInit {
   }
 
   register(){
-
+              
+         
+    
+    if(this.myForm.valid){
+        const company:registerCompanySend = this.myForm.value;
+        this.authService.registerCompany(company).subscribe(res =>{
+          if(res.ok){
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              text: `${res.msg}`,
+              title: 'Correcto',
+            })
+            this.router.navigateByUrl('/auth/login');
+          }else{
+            Swal.fire({ background:'rgba(250,250,250,0.96)',
+            title: 'Oops!!',
+            text: `${res.msg}`,                  
+            icon: 'error',
+            confirmButtonColor: '#3085d6'
+            });
+          }
+        })
+    }else{
+      Swal.fire({ background:'rgba(250,250,250,0.96)',
+      title: 'Oops!!',
+      text: `Llene todos los campos`,                  
+      icon: 'error',
+      confirmButtonColor: '#3085d6'
+      });
+    }
   }
-
+        
 }

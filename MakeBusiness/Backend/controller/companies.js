@@ -166,6 +166,7 @@ const deleteCompany = async (req = request, res = response) =>{
             })
         }
         
+        
         return res.status(200).json({
             ok: true,
             msg: "compania removido  con exito.",
@@ -356,7 +357,7 @@ const newPage = async (req = request, res = response) =>{
         await page.save();
 
         return res.status(200).json({
-            ok:false,
+            ok:true,
             page
        
         })
@@ -547,12 +548,13 @@ const newBlock = async (req = request, res = response) =>{
         }
 
         block.position = page.blocks.length + 1;
+        block.HTML = ""
         page.blocks.push(block);
 
         page.save();
    
         return res.status(200).json({
-            ok:false,
+            ok:true,
             page
         })
   
@@ -583,6 +585,7 @@ const getBlock = async (req = request, res = response) =>{
         }
 
   
+       
         
         return res.status(200).json({
             ok: true,

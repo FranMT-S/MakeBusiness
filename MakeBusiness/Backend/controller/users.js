@@ -2,6 +2,8 @@ const {request, response} = require("express")
 const User = require("../models/user")
 const Company = require("../models/company")
 const Web = require("../models/web")
+const Client = require("../models/client")
+ 
 const { v4: uuidv4 } = require('uuid');
 
 const getUsers = async (req = request, res = response) =>{
@@ -71,14 +73,18 @@ const newUser = async (req = request, res = response) =>{
 
         const user = new User(req.body)
         await user.save();
+
         if(user.type == "company"){
-            console.log("entro")
             const company = new Company({nameCompany:uuidv4(),idUser:user._id})
-            console.log(company)
+            const web = new Web({title:company.nameCompany, idCompany:company._id});         
+            // Guardar Compania y web
             await company.save();
-            const web = new Web({idCompany:company._id});
-            console.log(web)
             await web.save();
+        }
+
+        if(user.type == "client"){
+            const client = new Client({idUser:user._id})
+            await client.save();
         }
 
         return res.status(200).json({
@@ -150,6 +156,15 @@ const deleteUser = async (req = request, res = response) =>{
                 msg: "El usuario ya fue eliminado o no esta registrado."
             })
         }
+
+        if(user.type == "company"){
+            const company = await Company.findByIdAndRemove({idUser: user._id})
+            const web = await Web.findByIdAndRemove({title:company.nameCompany, idCompany:company._id});         
+            // Guardar Compania y web
+            await company.save();
+            await web.save();
+        }
+        
         
         return res.status(200).json({
             ok: true,

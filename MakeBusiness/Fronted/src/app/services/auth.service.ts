@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, ValidationErrors } from '@angular/forms';
 
 import { User } from '../interfaces/user';
-import { AuthResponse, LoginResponse } from '../interfaces/response';
+import { AuthResponse, basicResponse, LoginResponse, registerCompanySend } from '../interfaces/response';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +67,12 @@ export class AuthService {
         map(resp => resp.ok),
         catchError( err => of(err.error.msg))
       ); 
+  }
+
+  registerCompany( companySend:registerCompanySend ){
+    const url = `${this._baseUrl}/login/register/company`
+
+    return this.http.post<basicResponse>(url,companySend)
   }
 
   validarToken():Observable<boolean> {

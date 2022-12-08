@@ -1,4 +1,6 @@
-const { Schema, model} = require("mongoose");
+const { Schema, model, default: mongoose} = require("mongoose");
+
+
 
 const UserSchema = Schema({
                     userName: {
@@ -25,6 +27,9 @@ const UserSchema = Schema({
                         enum : ['client','admin','company'], 
                         required: true,
                     }             
-            },{ collection: 'User',versionKey: false })
+            },{ collection: 'User',versionKey: false }
+)
+  
+
 
 module.exports = model("User",UserSchema)

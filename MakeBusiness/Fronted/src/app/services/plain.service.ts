@@ -30,25 +30,26 @@ export class PlanService {
     return this.http.get<PlanResponse>(this.url)
   }
 
+  getPlans(id:string):Observable<PlanResponse>{
+    return this.http.get<PlanResponse>(`${this.url}`)
+  }
+
   getPlan(id:string):Observable<PlanResponse>{
     return this.http.get<PlanResponse>(`${this.url}/${id}`)
   }
 
   deletePlan(id:string):Observable<PlanResponse>{
     const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
-
     return this.http.delete<PlanResponse>(`${this.url}/${id}`,{headers})
   }
 
   addPlan(plan:Plan):Observable<PlanResponse>{
     const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
-
     return this.http.post<PlanResponse>(`${this.url}`,plan,{headers})
   }
 
   updatePlan(id:string,plan:Plan):Observable<PlanResponse>{
     const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
-
     return this.http.put<PlanResponse>(`${this.url}/${id}`,plan,{headers})
   }
 }
