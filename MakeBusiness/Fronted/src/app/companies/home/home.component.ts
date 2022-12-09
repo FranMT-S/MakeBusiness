@@ -32,8 +32,12 @@ export class HomeComponent implements OnInit {
     },
 
     ]
+  favIcon: HTMLLinkElement | null = document.querySelector('#favIcon'); 
+
+
   constructor(private companyService: CompanyService, private activatedRoute:ActivatedRoute) { 
 
+    this.favIcon!.href = `favicon.ico` 
 
      this.activatedRoute.params.subscribe( (params:Params) => {
       let id = params['id']   

@@ -14,8 +14,8 @@
  
     <div class="container w-100">
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-4 col-xl-4 mb-3 pe-sm-3" *ngFor="let user of users">
-                <mat-card  class="avatar-card">
+            <div class="col-12 col-md-4 col-sm-6 col-xl-4 mb-3 pe-sm-3 text-break" *ngFor="let user of users">
+                <mat-card  class="avatar-card h-100 break-word">
                     <mat-card-header class="justify-content-center wrap" >
                       <div mat-card-avatar class="avatar-header-image" [ngStyle]="{
                         'background-image': 'url(' + noImage + ')', 

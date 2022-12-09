@@ -1,7 +1,6 @@
 /* Add application styles & imports to this file! */
 .editor-textarea{
     max-height: 300px;
-    
 }
 
 .editor-container{
@@ -39,4 +38,16 @@
         margin-left: 5px;
     }
 
+}
+
+.block{
+    min-height: 10px;
+    
+    &:hover &__detail{
+        visibility: visible !important;      
+    }
+}
+
+.block__detail{      
+    visibility: hidden !important;
 }

@@ -96,6 +96,30 @@ export class AuthService {
       );
   }
 
+  validarNoToken():Observable<boolean> {
+
+    const url = `${ this._baseUrl }/login/renew`;
+    const headers = new HttpHeaders()
+      .set('x-token', localStorage.getItem('token') || '');
+
+    return this.http.get<AuthResponse>( url, { headers } )
+      .pipe(
+        map( resp => {
+          if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+            return true;
+          }else{
+            localStorage.setItem("token", resp.token!)
+            const {...data} = resp.data;
+            this._user = data;
+            return false;
+          }
+     
+        }),
+        catchError (err => of(true))
+      );
+  }
+
+
   getImageUrl() {
     return `${this._baseUrl}/uploads/users/${this.user.image}`;
   }

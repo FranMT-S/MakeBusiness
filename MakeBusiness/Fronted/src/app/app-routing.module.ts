@@ -36,6 +36,11 @@ const routes: Routes = [
     canLoad: [ ValidarTokenGuard],
     canActivateChild: [ValidarTokenGuard]
   },
+
+  {
+    path:"companies",
+    loadChildren: () => import("./company-view/company-view.module").then(module => module.CompanyViewModule),
+  },
  
   { path: "", redirectTo: "landing-page", pathMatch: "full"},
   { path: "**", component: Page404Component}];

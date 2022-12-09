@@ -1,10 +1,10 @@
 import { Interface } from "readline";
-import { Company } from "./company";
+import { Company, CompanyWithWeb } from "./company";
 import { fileCompany } from "./fileCompany";
 import { Block, pageCompany } from "./page";
-import { Product } from "./product";
+import { Product, ProductHistory } from "./product";
 import { Client, User } from "./user";
-import { webCompany } from "./web";
+import { webCompany, WebWithPage } from "./web";
 
 export interface basicResponse{
   ok:       boolean;
@@ -19,6 +19,7 @@ export interface CompanyResponse {
     error: any;
     msg:string
   }
+
   
   export  interface ProductResponse {
     ok:       boolean;
@@ -64,10 +65,11 @@ export interface BlockResponse {
 
 export interface ClientResponse {
   ok:       boolean;
-  Client: Client;
-  Clients: Client[];
-  error: any;
-  msg: string;
+  client: Client;
+  clients: Client[];
+  product: ProductHistory;
+  error?: any;
+  msg?: string;
 }
 
 export interface LoginResponse {
@@ -85,10 +87,30 @@ export interface AuthResponse {
 }
 
 
+
+
+
 export interface registerCompanySend {
-  userName:String,
-  email:String,
+  userName:string,
+  email:string,
   nameCompany: string,
   password:string,
   idPlan: string
+}
+
+
+
+
+export interface CompanyWithWebResponse {
+  ok:       boolean;
+  msg: string;
+  error: any;
+  companies: CompanyWithWeb[]
+}
+
+export interface WebWithPagesResponse {
+  ok:       boolean;
+  msg: string;
+  error: any;
+  web: WebWithPage
 }

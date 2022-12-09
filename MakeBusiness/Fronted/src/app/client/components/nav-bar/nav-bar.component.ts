@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/interfaces/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,9 +10,23 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  user!:User;
+  type = ""
+  constructor(private router:Router,private authService:AuthService) { 
+
+  }
 
   ngOnInit(): void {
+
+    this.authService.validarToken().subscribe(valid =>{
+      if(valid){
+        this.user = this.authService.user;
+        this.type = this.user.type;
+      }else{
+        localStorage.removeItem("products")
+      }
+    });
+
   }
 
   navegate(url:string){

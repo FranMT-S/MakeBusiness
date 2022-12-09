@@ -4,8 +4,8 @@ const expressFileUpload = require('express-fileupload');
 
 const {
     getCompanies,getCompany,getCompanyByUser,newCompany,deleteCompany,updateCompany,
-    getWeb,updateWeb,deleteWeb,
-    newPage,getPage,getPages,deletePage,updatePage,
+    getWeb,updateWeb,deleteWeb,getCompaniesAndWeb,
+    newPage,getPage,getPages,deletePage,updatePage,getWebWithPages,
     newBlock,getBlock,getBlocks,deleteBlock,updateBlock
     } = require("../controller/companies")
 const { validarCampos } = require("../middlewares/validar-campos");
@@ -28,26 +28,25 @@ router.post("/",
                 newCompany,)
 
 router.get("/",getCompanies)
+router.get("/with-webs",getCompaniesAndWeb)
 router.get("/:id",getCompany)
 router.get("/user/:id",getCompanyByUser)
 router.put("/:id",validarJWT,updateCompany)
 router.delete("/:id",validarJWT,deleteCompany)
 
+
+
+
+
 //////////////
 // Rutas Web
 /////////////
-
 // Id de la compania
 router.put("/:id/web",validarJWT,updateWeb)
 router.delete("/:id/web",validarJWT,deleteWeb)
 router.get("/:id/web",getWeb)
-// router.post("/:id/web", 
-//                 [
-//                 check("nameCompany", "Nombre es un campo obligatorio").notEmpty(),
-//                 check("idUser", "el id del usuario es obligatorio obligatorios").notEmpty()
-//                 ],
-//                 validarCampos,
-//                 newWeb,)
+router.get("/:id/web-pages",getWebWithPages)
+
 
 
 

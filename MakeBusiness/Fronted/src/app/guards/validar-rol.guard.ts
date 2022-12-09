@@ -61,6 +61,44 @@ export class AdmingGuard  implements CanActivate,CanLoad,CanActivateChild{
 @Injectable({
   providedIn: 'root'
 })
+export class ClientGuard  implements CanActivate,CanLoad,CanActivateChild{
+  private usuario!:User;
+  private company!:Company;
+
+  constructor( private authService: AuthService,private companyService:CompanyService,
+                 private router: Router ){
+                this.usuario = this.authService.user;
+    };
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
+   
+    if(this.usuario && this.usuario.type != "client"){
+        this.router.navigateByUrl('/clients/companies');
+    }
+      
+    return true
+  }
+
+  canLoad(): boolean{
+    if(this.usuario && this.usuario.type != "client"){
+      this.router.navigateByUrl('/clients/companies');
+    }
+    
+    return true
+ 
+  }
+
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
+    if(this.usuario && this.usuario.type != "client"){
+      this.router.navigateByUrl('/clients/companies');
+    }
+    
+    return true
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
 export class CompanyGuard  implements CanActivate,CanLoad,CanActivateChild{
   private usuario!:User;
   private company!:Company;

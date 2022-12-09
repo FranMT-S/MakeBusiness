@@ -4,6 +4,7 @@ export interface page{
     title: string,
     description: string,
     js?:string,
+    css?:string,
     blocks: Block[],
 
 }

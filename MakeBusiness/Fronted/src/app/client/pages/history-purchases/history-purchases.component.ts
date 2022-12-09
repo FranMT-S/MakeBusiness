@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProductHistory } from 'src/app/interfaces/product';
+import { AuthService } from 'src/app/services/auth.service';
+import { ClientService } from 'src/app/services/client.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,12 +11,21 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./history-purchases.component.scss']
 })
 export class HistoryPurchasesComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'price', 'quantity','total','date'];
+  displayedColumns: string[] = ['idProduct', 'name', 'price', 'quantity','total','date'];
   selectedRowIndex = "";
   productHistory:ProductHistory[] = [];
   dataSource = new MatTableDataSource<ProductHistory>();
  
-  constructor(private userService:UserService) { }
+  constructor(private clientService:ClientService,private authService:AuthService) {
+     this.clientService.getClient(this.authService.user._id).subscribe(res =>{
+        if(res.ok){
+
+          this.productHistory = res.client.historical!;
+          this.dataSource.data = this.productHistory
+        }
+     })
+
+   }
 
   ngOnInit(): void {
     // let client = this.userService.getClient('1');

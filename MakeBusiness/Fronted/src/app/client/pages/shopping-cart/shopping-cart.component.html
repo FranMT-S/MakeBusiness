@@ -22,11 +22,11 @@
               <p class="fw-bold fs-5"></p>
             </div>
         </div>
-
-        <div class="row my-3" *ngFor="let product of products | paginate: { itemsPerPage: 3, currentPage: page }">
+        
+        <div class="row my-3" *ngFor="let product of productCart | paginate: { itemsPerPage: 3, currentPage: page };let i = index">
           <hr>
           <div class="col">
-            <img [src]="product.image" class="product-image mx-2">
+            <img [src]="url + product.image" class="product-image mx-2">
           </div>
           <div class="col">
               <p>{{product.name}} </p>
@@ -35,14 +35,28 @@
             <p>{{product.price}}</p>
           </div>
           <div class="col">
-            <p><input  class="form-control text-center" type="number" [value]="product.quantity"></p>
+            <div class="mb-3">
+              
+              <div class="d-flex justify-content-center">
+                <input type="button" class="border-dark btn rounded-0 rounded-start" min="0"  (click)="decrease(product)" value="-" id="moins"  >
+						    <input #quantityInput type="text" class="text-center w-25" size="25" min="0" (change)="change(quantityInput,product)" [(ngModel)]="product.quantity" id="quantity">					
+						    <input type="button" class="border-dark btn rounded-0 rounded-end" min="0" (click)="increment(product)" value="+" id="plus" >
+              </div>
+  	    			
+                <label class="form-check-label text-danger" 
+               [class.visually-hidden]="validateQuantity(quantityInput)"
+                for="quantity">
+                    Seleccione un numero mayor a 1
+                </label>
+            </div>
+          
           </div>
-          <div class="col">
+          <div class="col mt-3">
             <p>{{product.quantity * product.price}}</p>
           </div>
           <div class="col">
             <button mat-icon-button color="warn">
-              <mat-icon>delete_outline</mat-icon>
+              <mat-icon (click)="deleteProduct(i)">delete_outline</mat-icon>
             </button>
           </div> 
       </div>
@@ -64,7 +78,9 @@
           <p class="fw-bold fs-5">Total: {{total}}</p>
         </div>
         <div class="col">
-          <p class="fw-bold fs-5"></p>
+          <button class="btn btn-outline-primary" 
+            [ngClass]="{'disabled': incorrect || productCart.length < 1}"
+            (click)="buy()">Comprar</button>
         </div>
     </div>
 
