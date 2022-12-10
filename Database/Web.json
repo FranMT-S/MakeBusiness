@@ -2,51 +2,19 @@
   "_id": {
     "$oid": "637d407ff542e68362260f8d"
   },
-  "pageMain": null,
   "idCompany": {
     "$oid": "637d3586f542e68362260f85"
   },
-  "logo": "logo.png",
-  "favicon": "favicon.png",
+  "logo": "1450b65e-ee13-4386-a2f7-4fe18db8dfcc.png",
+  "favicon": "77ce3dc3-5c4c-4e1d-b037-b12fac70c4a6.png",
   "title": "Olenolin Web",
-  "description": "example web description 1",
+  "description": "example web",
   "keywords": "health, medicina",
   "cssExtra": "",
   "jsExtra": "",
   "genericHeaderHTML": "",
-  "genericFooterHTML": ""
-},{
-  "_id": {
-    "$oid": "637d407ff542e68362260f8e"
-  },
-  "pageMain": null,
-  "idCompany": {
-    "$oid": "637d3586f542e68362260f84"
-  },
-  "logo": "logo.png",
-  "favicon": "favicon.png",
-  "title": "Lily Web",
-  "description": "example web description 1",
-  "keywords": "Technology, gaming",
-  "cssExtra": "",
-  "jsExtra": "",
-  "genericHeaderHTML": "",
-  "genericFooterHTML": ""
-},{
-  "_id": {
-    "$oid": "637d407ff542e68362260f8f"
-  },
-  "pageMain": null,
-  "idCompany": {
-    "$oid": "637d3586f542e68362260f83"
-  },
-  "logo": "logo.png",
-  "favicon": "favicon.png",
-  "title": "Evey",
-  "description": "example web description 1",
-  "keywords": "Technology, Data Science",
-  "cssExtra": "",
-  "jsExtra": "",
-  "genericHeaderHTML": "",
-  "genericFooterHTML": ""
+  "genericFooterHTML": "",
+  "pageMain": {
+    "$oid": "6393e0f2dcd48fd8d8a59e1b"
+  }
 }]

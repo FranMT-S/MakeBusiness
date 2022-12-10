@@ -4,19 +4,151 @@
   },
   "idUser": {
     "$oid": "637344b5f542e68362260e67"
-  }
+  },
+  "historical": [
+    {
+      "idProduct": {
+        "$oid": "638af10631a0809241057cfb"
+      },
+      "name": "Mouse",
+      "price": 12,
+      "quantity": 1,
+      "total": 12,
+      "date": {
+        "$date": {
+          "$numberLong": "1670579265080"
+        }
+      },
+      "_id": {
+        "$oid": "638af10631a0809241057cfb"
+      }
+    },
+    {
+      "idProduct": {
+        "$oid": "6384686fb48a26632059a10a"
+      },
+      "name": "teclado 2",
+      "price": 12,
+      "quantity": 1,
+      "total": 12,
+      "date": {
+        "$date": {
+          "$numberLong": "1670579265080"
+        }
+      },
+      "_id": {
+        "$oid": "6384686fb48a26632059a10a"
+      }
+    },
+    {
+      "idProduct": {
+        "$oid": "638af10631a0809241057cfb"
+      },
+      "name": "Mouse",
+      "price": 12,
+      "quantity": 1,
+      "total": 12,
+      "date": {
+        "$date": {
+          "$numberLong": "1670579265080"
+        }
+      },
+      "_id": {
+        "$oid": "638af10631a0809241057cfb"
+      }
+    },
+    {
+      "idProduct": {
+        "$oid": "6384686fb48a26632059a10a"
+      },
+      "name": "teclado 2",
+      "price": 12,
+      "quantity": 1,
+      "total": 12,
+      "date": {
+        "$date": {
+          "$numberLong": "1670579265080"
+        }
+      },
+      "_id": {
+        "$oid": "6384686fb48a26632059a10a"
+      }
+    },
+    {
+      "idProduct": {
+        "$oid": "6384686fb48a26632059a10a"
+      },
+      "name": "teclado 2",
+      "price": 12,
+      "quantity": 3,
+      "total": 36,
+      "date": {
+        "$date": {
+          "$numberLong": "1670633918667"
+        }
+      },
+      "_id": {
+        "$oid": "6384686fb48a26632059a10a"
+      }
+    },
+    {
+      "idProduct": {
+        "$oid": "638af10631a0809241057cfb"
+      },
+      "name": "Mouse3",
+      "price": 12,
+      "quantity": 4,
+      "total": 48,
+      "date": {
+        "$date": {
+          "$numberLong": "1670633918667"
+        }
+      },
+      "_id": {
+        "$oid": "638af10631a0809241057cfb"
+      }
+    },
+    {
+      "idProduct": {
+        "$oid": "638af10631a0809241057cfb"
+      },
+      "name": "Mouse3",
+      "price": 12,
+      "quantity": 1,
+      "total": 12,
+      "date": {
+        "$date": {
+          "$numberLong": "1670633918667"
+        }
+      },
+      "_id": {
+        "$oid": "638af10631a0809241057cfb"
+      }
+    },
+    {
+      "idProduct": {
+        "$oid": "6384686fb48a26632059a10a"
+      },
+      "name": "teclado 2",
+      "price": 12,
+      "quantity": 4,
+      "total": 48,
+      "date": {
+        "$date": {
+          "$numberLong": "1670633918667"
+        }
+      },
+      "_id": {
+        "$oid": "6384686fb48a26632059a10a"
+      }
+    }
+  ]
 },{
   "_id": {
-    "$oid": "637d2e78f542e68362260f59"
+    "$oid": "639410301be8efb9ec064225"
   },
   "idUser": {
-    "$oid": "637344b5f542e68362260e68"
-  }
-},{
-  "_id": {
-    "$oid": "637d2e78f542e68362260f5a"
+    "$oid": "639410301be8efb9ec064224"
   },
-  "idUser": {
-    "$oid": "637344b5f542e68362260e69"
-  }
+  "historical": []
 }]

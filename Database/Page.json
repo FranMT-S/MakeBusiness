@@ -1,0 +1,96 @@
+[{
+  "_id": {
+    "$oid": "638693751e735d4319095e6a"
+  },
+  "title": "tienda",
+  "useGenericFooter": true,
+  "useGenericHeader": false,
+  "idWeb": {
+    "$oid": "637d407ff542e68362260f8d"
+  },
+  "blocks": [
+    {
+      "size": 12,
+      "HTML": "<p style=\"text-align: center;\"><span style=\"font-family: Arial; background-color: transparent; font-size: 1rem; text-align: var(--bs-body-text-align);\">Mi pagina web</span></p>",
+      "position": 1,
+      "type": "dynamic",
+      "_id": {
+        "$oid": "6387a0173fdf159401aee666"
+      }
+    },
+    {
+      "size": 12,
+      "HTML": "<div class=\"text-center\">\n  <button class=\"btn btn-primary\" onclick=\"test()\"> Ejemplo de javascript</button>\n</div>\n\n<div class=\"text-center mt-5\" >\n  <button class=\"btn button-yellow\" onclick=\"test()\"> Ejemplo de javascript</button>\n</div>",
+      "position": 2,
+      "type": "pure",
+      "_id": {
+        "$oid": "63879b940ddcd92bc287ab55"
+      }
+    }
+  ],
+  "css": ".button-yellow{\n       background-color: yellow;\n       color: white;\n}",
+  "description": "tienda de tecnologia",
+  "js": "function test(){\n   console.log(\"hola\");\n}\n\n"
+},{
+  "_id": {
+    "$oid": "638fc21fb96521cbcbb901f9"
+  },
+  "title": "Home",
+  "useGenericFooter": false,
+  "useGenericHeader": false,
+  "idWeb": {
+    "$oid": "637d407ff542e68362260f8d"
+  },
+  "blocks": [
+    {
+      "size": 3,
+      "HTML": "<p style=\"text-align: center;\"><span style=\"font-family: Arial; background-color: transparent; font-size: 1rem; text-align: var(--bs-body-text-align);\">Test</span></p>",
+      "position": 1,
+      "type": "dynamic",
+      "_id": {
+        "$oid": "639408212e871095cedba96b"
+      }
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "639243dcd159bd6369d7e85b"
+  },
+  "title": "Landing Pages",
+  "useGenericFooter": false,
+  "useGenericHeader": false,
+  "idWeb": {
+    "$oid": "637d407ff542e68362260f8d"
+  },
+  "blocks": [
+    {
+      "size": 3,
+      "HTML": "",
+      "position": 1,
+      "type": "pure",
+      "_id": {
+        "$oid": "6394084a2e871095cedba974"
+      }
+    },
+    {
+      "size": 3,
+      "HTML": "",
+      "position": 2,
+      "type": "dynamic",
+      "_id": {
+        "$oid": "6394086f2e871095cedba979"
+      }
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "6393e0f2dcd48fd8d8a59e1b"
+  },
+  "title": "Login",
+  "useGenericFooter": false,
+  "useGenericHeader": true,
+  "idWeb": {
+    "$oid": "637d407ff542e68362260f8d"
+  },
+  "blocks": []
+}]

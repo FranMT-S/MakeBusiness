@@ -2,7 +2,7 @@
   "_id": {
     "$oid": "637d32a1f542e68362260f77"
   },
-  "name": "Free",
+  "name": "free",
   "description": "Licencia de prueba de productos por 1 semana",
   "price": 0,
   "annuity": "free",
@@ -26,7 +26,7 @@
   },
   "name": "Premium",
   "description": "Licencia de sin limites, aprovecha nuestro servicio sin restricciones",
-  "price": 330,
+  "price": 300,
   "annuity": "anual",
   "limitPages": 0,
   "limitProducts": 0,

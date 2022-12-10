@@ -1,57 +1,36 @@
 [{
   "_id": {
-    "$oid": "637344b5f542e68362260e66"
-  },
-  "userName": "company2",
-  "email": "company2@gmail.com",
-  "password": "1234",
-  "type": "company"
-},{
-  "_id": {
-    "$oid": "637344b5f542e68362260e65"
-  },
-  "userName": "company1",
-  "email": "company1@gmail.com",
-  "password": "1234",
-  "type": "company"
-},{
-  "_id": {
     "$oid": "637344b5f542e68362260e63"
   },
-  "userName": "admin1",
-  "email": "admin1@gmail.com",
+  "userName": "admin",
+  "email": "admin@gmail.com",
   "password": "1234",
-  "type": "admin"
-},{
-  "_id": {
-    "$oid": "637344b5f542e68362260e64"
-  },
-  "userName": "admin2",
-  "email": "admin2@gmail.com",
-  "password": "1234",
-  "type": "admin"
+  "type": "admin",
+  "image": "3f7b120e-9ea0-4e0a-b651-da8b80624809.png"
 },{
   "_id": {
     "$oid": "637344b5f542e68362260e67"
   },
-  "userName": "client1",
-  "email": "client1@gmail.com",
+  "userName": "client",
+  "email": "client@gmail.com",
   "password": "1234",
-  "type": "client"
+  "type": "client",
+  "image": "145f17ff-67bb-4ea4-a52b-76d59542c89e.png"
 },{
   "_id": {
-    "$oid": "637344b5f542e68362260e68"
+    "$oid": "6381a2664f12dfa4c47f9c0a"
   },
-  "userName": "client2",
-  "email": "client2@gmail.com",
+  "userName": "compania",
+  "email": "company@gmail.com",
   "password": "1234",
-  "type": "client"
+  "type": "company",
+  "image": "5ddf5d33-74d0-437a-aa98-f3406a154fbd.png"
 },{
   "_id": {
-    "$oid": "637344b5f542e68362260e69"
+    "$oid": "639410301be8efb9ec064224"
   },
-  "userName": "client3",
-  "email": "client3@gmail.com",
+  "userName": "test",
+  "email": "test@gmail.com",
   "password": "1234",
   "type": "client"
 }]
