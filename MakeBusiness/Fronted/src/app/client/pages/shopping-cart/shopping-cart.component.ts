@@ -75,13 +75,17 @@ export class ShoppingCartComponent implements OnInit {
       if (result.isConfirmed) {
           
           this.productCart.forEach( (product,index) =>{
-            console.log(product)
+         
             this.clientService.addProductHistory(this.authService.user._id,product).subscribe(res =>{
               if(res.ok){
-                console.log(res.client)
+                this.productCart.splice(index,1)
+                localStorage.setItem("products",JSON.stringify(this.productCart))
               }
+              
             })
           })
+
+          this.total = 0;
       } 
     })
   }

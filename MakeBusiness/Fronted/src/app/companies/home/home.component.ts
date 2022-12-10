@@ -11,6 +11,12 @@ import { CompanyService } from 'src/app/services/company.service';
 export class HomeComponent implements OnInit {
   optionButtons = [
     {
+      text:"Mi Empresa",
+      path:"company",
+      icon:"fa fa-solid fa-building ps-2"
+    },
+
+    {
       text:"Administrar Archivos",
       path:"files",
       icon:"fa fa-solid fa-file ps-2"

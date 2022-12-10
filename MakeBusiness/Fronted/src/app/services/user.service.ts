@@ -43,9 +43,16 @@ export class UserService {
     return this.http.post<UserResponse>(this.url,user,{headers})
  }
 
-  updateUser(id:string,user:User):Observable<UserResponse>{
+  updateUser(id:string,user:User | any):Observable<UserResponse>{
+    const data:FormData = new FormData();
+
+    if(user.userName) data.append('userName',user.userName);
+    if(user.email) data.append('email',user.email);
+    if(user.password) data.append('password',user.password);
+    if(user.image) data.append('image',user.image);
+
     const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
-    return this.http.put<UserResponse>(`${this.url}/${id}`,user,{headers})
+    return this.http.put<UserResponse>(`${this.url}/${id}`,data,{headers})
   }
 
 

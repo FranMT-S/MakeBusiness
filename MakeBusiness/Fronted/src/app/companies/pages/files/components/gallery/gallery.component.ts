@@ -3,6 +3,7 @@ import { fileCompany } from 'src/app/interfaces/fileCompany';
 import { CompanyService } from 'src/app/services/company.service';
 import { environment } from 'src/environments/environment';
 
+import Swal from 'sweetalert2'     
 
 @Component({
   selector: 'app-gallery',
@@ -58,12 +59,34 @@ export class GalleryComponent implements OnInit {
   }
 
   deleteFile(file:fileCompany){
-    this.companyService.deleteFile(this.companyService.getCurrentIDCompany,file._id).subscribe(res =>{
-        if(res.ok){
-          this.files =  this.files.filter(f => f._id != file._id )
-        }else{
-          alert("no se pudo eliminar")
-        }
+
+    Swal.fire({
+
+      text: "¿Desea eliminar este archivo?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: "No"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.companyService.deleteFile(this.companyService.getCurrentIDCompany,file._id).subscribe(res =>{
+          if(res.ok){
+            this.files =  this.files.filter(f => f._id != file._id )
+          }else{
+            Swal.fire({ 
+              background:'rgba(250,250,250,0.96)',
+              title: 'Oops!! no se pudo eliminar',
+              text: `${res.msg}`,                  
+              icon: 'error',
+              confirmButtonColor: '#3085d6'
+            });
+          }
+        })
+      }
     })
+
+
   }
 }

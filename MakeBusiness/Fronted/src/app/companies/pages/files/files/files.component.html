@@ -11,11 +11,11 @@
     
     <ng-template #fileForm let-modal>
         <div class="modal-header">
-            <h4 class="modal-title">Formulario</h4>
+            <h4 class="modal-title">Nuevo Archivo</h4>
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body">
-            <form (ngSubmit)="save(formSave)" #formSave="ngForm">
+            <form (ngSubmit)="save(formSave)" autocomplete="off" #formSave="ngForm">
                 <div class="mb-3">
                   <label for="" class="form-label">Nombre</label>
                   <input type="text" ngModel name="baseName" id="" class="form-control" placeholder="Nombre del archivo" aria-describedby="helpId">
@@ -30,7 +30,7 @@
                   </div> 
                   <div class="modal-footer">
                     <button type="button" class="btn btn-danger" (click)="close()">Cerrar</button>
-                    <button type="submit" class="btn btn-primary" >Guardar</button>
+                    <button type="submit" class="btn btn-primary" [ngClass]="{'disabled': formSave.invalid}" >Guardar</button>
                 </div>
             </form>   
         </div>
@@ -39,11 +39,11 @@
 
     <ng-template #fileFormUpdate let-modal>
         <div class="modal-header">
-            <h4 class="modal-title">Formulario</h4>
+            <h4 class="modal-title">Editar Archivo</h4>
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body">
-            <form (ngSubmit)="update(myFormUpdate)" #myFormUpdate="ngForm">
+            <form (ngSubmit)="update(myFormUpdate)" autocomplete="off" #myFormUpdate="ngForm">
                 <div class="mb-3">
                   <label for="" class="form-label">Nombre</label>
                   <input type="text"  name="baseName" id="" [ngModel]="fileUpdate.baseName" class="form-control" placeholder="Nombre del archivo" aria-describedby="helpId">
@@ -55,7 +55,7 @@
           
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" (click)="modal.close('Cerrar')">Cerrar</button>
-                    <button type="submit" class="btn btn-primary" >Guardar</button>
+                    <button type="submit" class="btn btn-primary" [ngClass]="{'disabled': myFormUpdate.invalid}" >Guardar</button>
                 </div>
             </form>   
         </div>

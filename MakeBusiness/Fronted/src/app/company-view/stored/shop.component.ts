@@ -69,6 +69,7 @@ export class ShopComponent implements OnInit {
         denyButtonText: `Ir al Login`,
       }).then((result) => {
          if (result.isDenied) {
+          this.authService.logOut();
           this.router.navigateByUrl("auth/login")
         }
       })

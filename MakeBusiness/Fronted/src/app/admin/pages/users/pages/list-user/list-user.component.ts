@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { map } from 'rxjs';
+import Swal from 'sweetalert2'   
+import { AuthService } from 'src/app/services/auth.service';
 
 
 
@@ -17,8 +19,9 @@ export class ListUserComponent implements OnInit {
 
 
   users:User[] = [];
+  url:string = `${environment.baseUrl}/uploads/users/` 
   noImage:string = `${environment.baseUrl}/uploads/users/no-user-02.png`
-  constructor(private router:Router,private userService:UserService) {
+  constructor(private router:Router,private userService:UserService,private authService:AuthService) {
     this.getUsers()
 
    }
@@ -30,9 +33,7 @@ export class ListUserComponent implements OnInit {
   getUsers(){
     this.userService.getAllUsers.subscribe( res =>{
       if(res.ok){
-        console.log()
-        this.users = res.users;
-        console.log(this.noImage)
+        this.users = res.users.filter(user => user._id != this.authService.user._id);
       }
     })
   }
@@ -43,16 +44,35 @@ export class ListUserComponent implements OnInit {
 
   deleteUser(user:User){
       
-    if (confirm("Desea eliminar el usuario " + user.userName)) {
+    Swal.fire({
+      text: "¿Desea eliminar el usuario?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: "No"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.deleteUser(user._id).subscribe( res =>{
+          if(res.ok){
+            this.getUsers();
+          }
+        },	({error}) =>{
+          Swal.fire({ 
+            background:'rgba(250,250,250,0.96)',
+            title: 'Oops!! hubo un error',
+            text: `${error.msg}`,                  
+            icon: 'error',
+            confirmButtonColor: '#3085d6'
+          });
+          console.log(error)
+        });
+      }
+    })
+
      
-      this.userService.deleteUser(user._id).subscribe( res =>{
-        if(res.ok){
-          this.getUsers();
-        }else{
-          alert("no se pudo eliminar el usuario")
-          console.log(res.error)
-        }
-      });
-    } 
+     
+     
   }
 }

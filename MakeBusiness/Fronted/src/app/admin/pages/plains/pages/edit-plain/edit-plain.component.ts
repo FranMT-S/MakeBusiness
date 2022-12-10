@@ -5,6 +5,9 @@ import { Plan } from 'src/app/interfaces/plains';
 import { PlanService } from 'src/app/services/plain.service';
 import { ValidatorService } from 'src/app/services/validator.service';
 
+import Swal from 'sweetalert2'   
+
+
 @Component({
   selector: 'app-edit-plain',
   templateUrl: './edit-plain.component.html',
@@ -68,10 +71,23 @@ export class EditPlainComponent implements OnInit {
     if(this.myForm.valid){
       this.planService.updatePlan(this.plan._id,this.myForm.value).subscribe(res =>{
         if(res.ok){
-      
-          this.router.navigateByUrl("admin/plans")
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Cambios Exitosos',
+            showConfirmButton: true,
+          }).then(()=>{
+            this.router.navigateByUrl("admin/plans")
+	        })
+          
         }else{
-          alert(res.msg)
+          Swal.fire({ 
+            background:'rgba(250,250,250,0.96)',
+            title: 'Oops!! hubo un error',
+            text: `${res.msg}`,                  
+            icon: 'error',
+            confirmButtonColor: '#3085d6'
+          });
           console.log(res.error)
         }
       })

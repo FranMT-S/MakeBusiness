@@ -55,13 +55,13 @@
                 </mat-form-field>
                 
                 <p>
-                  <button type="submit" class="btn btn-purple text-white mt-4">Registrarse</button>
+                  <button type="submit" class="btn btn-purple text-white mt-4" [ngClass]="{'disabled': myForm.invalid}">Registrarse</button>
                 </p>
 
                 
                 
                 <p class="mt-4">
-                  ¿Ya tienes un cuenta? <a [routerLink]="['/auth/login']" style="color:#4F72CD">Inicia Sesion</a>
+                  ¿Ya tienes un cuenta? <a [routerLink]="['/auth/login']" style="color:#4F72CD" >Inicia Sesion</a>
                 </p>
               </div>
           </div>  

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { ValidatorService } from 'src/app/services/validator.service';
+import Swal from 'sweetalert2'   
+
 
 @Component({
   selector: 'app-add-user',
@@ -33,20 +35,37 @@ export class AddUserComponent implements OnInit {
 
 
     if(this.myForm.valid){
-      console.log(this.myForm.value)
+     
       this.userService.newUser(this.myForm.value).subscribe(res =>{
         if(res.ok){
-          alert("Agregado con exito")
-          this.myForm.reset()
-       
-        }else{
-          alert("no se pudo ingresar el usuario")
-          console.log(res.error)
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Cambios Exitosos',
+            showConfirmButton: true,
+          }).then(()=>{
+            this.myForm.reset()
+	        })   
         }
+      },({error}) =>{
+        Swal.fire({ 
+          background:'rgba(250,250,250,0.96)',
+          title: 'Oops!! hubo un error',
+          text: `${error.msg}`,                  
+          icon: 'error',
+          confirmButtonColor: '#3085d6'
+        });
+        console.log(error)
       })
     }else{
-      alert("Ingrese los datos correctos")
-      console.log(this.myForm.valid)
+      Swal.fire({ 
+        background:'rgba(250,250,250,0.96)',
+        title: 'Oops!! hubo un error',
+        text: `Ingrese los datos correctamente`,                  
+        icon: 'error',
+        confirmButtonColor: '#3085d6'
+      });
+
       console.log(this.myForm.value)
     }
   }

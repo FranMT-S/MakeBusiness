@@ -32,10 +32,13 @@
   <!-- Contenido-->
     <mat-sidenav-content >
       <!-- NavBar-->
-      <mat-toolbar class="bg-purple">
+      <mat-toolbar class="bg-purple justify-content-between">
         <button mat-icon-button  (click)="sideNav.toggle()">
           <mat-icon class="text-white">menu</mat-icon>
         </button>
+
+        <app-avatar mat-icon-button>     
+        </app-avatar>
       </mat-toolbar>
       <div >
           <router-outlet></router-outlet>

@@ -88,6 +88,11 @@ export interface AuthResponse {
 
 
 
+export interface registerClientSend {
+  userName:string,
+  email:string,
+  password:string,
+}
 
 
 export interface registerCompanySend {

@@ -29,7 +29,7 @@
             
             </div>
 
-            <div class="mb-3 col-12">
+            <!-- <div class="mb-3 col-12">
                 <span class="form-label">Tipo: </span>
                 <select class="form-select form-select-lg"  formControlName="type" id="type" placeholder="test">
                     <option  value="">Tipo Usuario</option>
@@ -39,12 +39,11 @@
                 </select>
               <span *ngIf="fieldNotValid('type')" class="form-label form-text text-danger">selecione el tipo de usuario </span>
 
-            </div>
+            </div> -->
         </div>
-        <button type="submit" class="btn btn-purple">Guardar Usuario</button>
+        <button type="submit" class="btn btn-purple" [ngClass]="{'disabled': myForm.invalid}">Guardar Usuario</button>
 
     </form>
-    
 </div>
 
 

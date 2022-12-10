@@ -63,7 +63,7 @@
                 <span *ngIf="fieldNotValid('limitFiles')" class="form-label form-text text-danger">El campo no es valido </span>
             </div>
         </div>
-        <button type="submit"  class="btn btn-purple" (click)="save()">Guardar Plan</button>
+        <button type="submit"  class="btn btn-purple" (click)="save()" [ngClass]="{'disabled': myForm.invalid}">Guardar Plan</button>
 
     </form>
     

@@ -13,6 +13,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { PipesModule } from '../shared/pipes/pipes.module';
 import { HistoryPurchasesComponent } from './pages/history-purchases/history-purchases.component';
 import { FormsModule } from '@angular/forms';
+import { AvatarModule } from '../shared/avatar/avatar.module';
 
 
 
@@ -31,7 +32,8 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     NgxPaginationModule,
     PipesModule,
-    FormsModule
+    FormsModule,
+    AvatarModule
   ]
 })
 export class ClientModule { }

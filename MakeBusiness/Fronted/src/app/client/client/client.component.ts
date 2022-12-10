@@ -11,8 +11,9 @@ export class ClientComponent implements OnInit {
 
   favIcon: HTMLLinkElement | null = document.querySelector('#favIcon'); 
 
-  constructor() { 
-    this.favIcon!.href = `favicon.ico` 
+  constructor(private authService:AuthService) { 
+    this.favIcon!.href = `favicon.ico`
+    this.authService.validarToken().subscribe( res => res); 
   }
 
   ngOnInit(): void {

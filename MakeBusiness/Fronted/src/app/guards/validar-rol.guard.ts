@@ -67,7 +67,9 @@ export class ClientGuard  implements CanActivate,CanLoad,CanActivateChild{
 
   constructor( private authService: AuthService,private companyService:CompanyService,
                  private router: Router ){
-                this.usuario = this.authService.user;
+                  this.authService.validarToken().subscribe( valid =>{
+                    this.usuario = this.authService.user;
+                  })
     };
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
    

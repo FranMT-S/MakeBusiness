@@ -41,7 +41,7 @@
                 
             </div>
         </div>
-        <button type="submit" class="btn btn-purple">Guardar Usuario</button>
+        <button type="submit" class="btn btn-purple" [ngClass]="{'disabled': myForm.invalid}">Guardar Usuario</button>
 
     </form>
     

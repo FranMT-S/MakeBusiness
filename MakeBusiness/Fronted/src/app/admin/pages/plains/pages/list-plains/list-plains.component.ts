@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Plan } from 'src/app/interfaces/plains';
 import { PlanService } from 'src/app/services/plain.service';
+import Swal from 'sweetalert2'     
 
 
 @Component({
@@ -50,17 +51,37 @@ export class ListPlainsComponent implements OnInit {
 
   deletePlan(){
       
-    if (confirm("Desea eliminar el plan " + this.selectedPlain.name)) {
-     
-      this.planService.deletePlan(this.selectedPlain._id).subscribe( res =>{
-        if(res.ok){
-          this.getPlans();
-        }else{
-          alert("no se pudo eliminar el plan")
-          console.log(res.error)
+      Swal.fire({
+        text: "¿Desea eliminar este plan?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: "No"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.planService.deletePlan(this.selectedPlain._id).subscribe( res =>{
+            if(res.ok){
+              this.getPlans();
+            }else{
+              
+          Swal.fire({ 
+            background:'rgba(250,250,250,0.96)',
+            title: 'Oops!! No se pudo eliminar',
+            text: `${res.msg}`,                  
+            icon: 'error',
+            confirmButtonColor: '#3085d6'
+          });
+
+              console.log(res.error)
+            }
+          });
         }
-      });
-    } 
+      })
+
+
+  
   }
 
   selectRow(row:Plan){

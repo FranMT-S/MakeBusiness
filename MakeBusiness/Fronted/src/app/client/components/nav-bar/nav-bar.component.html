@@ -15,9 +15,9 @@
             <div class="ms-5 logo-option" *ngIf="type == 'client'">
                 <img src="../../../../assets/clients/tag-price.png" class="h-100 w-100 cursor-pointer"  alt="logo.png" (click)="navegate('historical')">
             </div>
-            <div class="ms-5 logo-option">
-                <img src="../../../../assets/clients/user.png" class="h-100 w-100 cursor-pointer"  alt="logo.png" >
-            </div>
+            <app-avatar class="mx-4 mt-2" mat-icon-button *ngIf="type == 'client'">     
+            </app-avatar>
+            
         </div>
        
     </div>

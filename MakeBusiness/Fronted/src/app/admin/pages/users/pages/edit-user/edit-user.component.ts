@@ -6,6 +6,8 @@ import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { ValidatorService } from 'src/app/services/validator.service';
 // import { switchMap, tap } from 'rxjs/operators';
+import Swal from 'sweetalert2'   
+
 
 @Component({
   selector: 'app-edit-user',
@@ -20,8 +22,7 @@ export class EditUserComponent implements OnInit {
   myForm:FormGroup = this.fb.group({
     userName   : ["",[Validators.required]],
     password: ["",[Validators.required]],
-    email: ["",[Validators.required,Validators.pattern(this.validatorService.emailPattern)]],
-    type: ["",[Validators.required,this.validatorService.notBlank]],
+    email: ["",[Validators.required,Validators.pattern(this.validatorService.emailPattern)]]
   });
 
   constructor(private activatedRoute:ActivatedRoute,private userService:UserService,
@@ -47,7 +48,6 @@ export class EditUserComponent implements OnInit {
             userName: this.user.userName,
             password: this.user.password,
             email: this.user.email,
-            type: this.user.type,
           })
         
       
@@ -65,21 +65,38 @@ export class EditUserComponent implements OnInit {
    
     if(this.myForm.valid){
 
-      this.userService.updateUser(this.user._id,this.myForm.value).subscribe(res =>{
-        
-        if(res.ok){
-          alert("Modificado con exito")
-          this.router.navigateByUrl("admin/users")
-        }else{
-          alert(res.msg)
-          console.log(res.error)
-        }
-      })
+        this.userService.updateUser(this.user._id,this.myForm.value).subscribe(res =>{   
+          if(res.ok){
+            
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Cambios Exitosos',
+              showConfirmButton: true,
+            }).then(()=>{
+              this.router.navigateByUrl("admin/users")
+       
+            })
+          }
+        },({error}) =>{
+          Swal.fire({ 
+            background:'rgba(250,250,250,0.96)',
+            title: 'Oops!! hubo un error',
+            text: `${error.msg}`,                  
+            icon: 'error',
+            confirmButtonColor: '#3085d6'
+          });
+          console.log(error)
+        })
+          
     }else{
-      alert("Ingrese los datos correctos")
-      console.log(this.myForm.valid)
-      console.log(this.myForm.value)
+      Swal.fire({ 
+        background:'rgba(250,250,250,0.96)',
+        title: 'Oops!! hubo un error',
+        text: `Ingrese los datos correctamente`,                  
+        icon: 'error',
+        confirmButtonColor: '#3085d6'
+      });
     }
-
   }
 }

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { webCompany } from 'src/app/interfaces/web';
 import { CompanyService } from 'src/app/services/company.service';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2'     
+
 
 @Component({
   selector: 'app-edit-web',
@@ -38,7 +40,7 @@ export class EditWebComponent implements OnInit {
 
     this.companyService.getWeb(this.companyService.getCurrentIDCompany).subscribe( res=>{
       if(res.ok){
-        console.log(res.web)
+    
         this.web = res.web;
         this.faviconURL = `${environment.baseUrl}/uploads/web/${this.web.favicon}`
         this.logoURL = `${environment.baseUrl}/uploads/web/${this.web.logo}`
@@ -68,7 +70,13 @@ export class EditWebComponent implements OnInit {
       return; 
     
     if(!allow.includes(this.favicon.type)) {
-       alert("tipo de archivo no valido");
+      Swal.fire({ 
+        background:'rgba(250,250,250,0.96)',
+        title: 'Oops!! hubo un error',
+        text: `Tipo de archivo no valido`,                  
+        icon: 'error',
+        confirmButtonColor: '#3085d6'
+      });
        return;
     }
     const reader = new FileReader();
@@ -86,7 +94,13 @@ export class EditWebComponent implements OnInit {
       return; 
   
     if(!allow.includes(this.logo.type)) {
-       alert("tipo de archivo no valido");
+      Swal.fire({ 
+        background:'rgba(250,250,250,0.96)',
+        title: 'Oops!! hubo un error',
+        text: `Tipo de archivo no valido`,                  
+        icon: 'error',
+        confirmButtonColor: '#3085d6'
+      });
        return;
     }
     const reader = new FileReader();
@@ -124,17 +138,36 @@ export class EditWebComponent implements OnInit {
         
         if(res.ok){
           
-          alert("Modificado con exito") 
-          this.router.navigateByUrl(`admin-companies/${localStorage.getItem("_web")}`) 
-        }else{
-          alert(res.msg)
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Cambios Exitosos, redireccionando a Home',
+            showConfirmButton: true,
+          }).then(()=>{
+            this.router.navigateByUrl(`admin-companies/${localStorage.getItem("_web")}`) 
+          })
+         
+        }else{  
+          Swal.fire({ 
+            background:'rgba(250,250,250,0.96)',
+            title: 'Oops!! hubo un error',
+            text: `${res.msg}`,                  
+            icon: 'error',
+            confirmButtonColor: '#3085d6'
+          });
           console.log(res.error)
         }
       })
     }else{
       console.log(this.myForm.valid)
       console.log(this.myForm.value)
-      alert("Ingrese los datos correctos")
+      Swal.fire({ 
+        background:'rgba(250,250,250,0.96)',
+        title: 'Oops!! hubo un error',
+        text: `Datos mal ingresados`,                  
+        icon: 'error',
+        confirmButtonColor: '#3085d6'
+      });
     }
   }
 }

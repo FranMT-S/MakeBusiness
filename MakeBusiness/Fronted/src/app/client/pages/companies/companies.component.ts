@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Company, CompanyWithWeb } from 'src/app/interfaces/company';
 import { CompanyWithWebResponse } from 'src/app/interfaces/response';
+import { AuthService } from 'src/app/services/auth.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { environment } from 'src/environments/environment';
 
@@ -17,7 +18,9 @@ export class CompaniesComponent implements OnInit {
   companies:CompanyWithWeb[] = [  ]
   
 
-  constructor(private companyService:CompanyService,private router:Router) {
+  constructor(private companyService:CompanyService,private router:Router, private authService:AuthService) {
+   
+
     this.companyService.getAllCompanyWithWebAndPages.subscribe(res =>{
       if(res.ok){
         this.companies = res.companies;
@@ -32,6 +35,8 @@ export class CompaniesComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.authService.validarToken().subscribe();
+
   }
 
 }

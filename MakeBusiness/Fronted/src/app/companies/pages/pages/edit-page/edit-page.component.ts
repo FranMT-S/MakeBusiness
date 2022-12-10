@@ -12,6 +12,7 @@ import { CompanyService } from 'src/app/services/company.service';
 import { environment } from 'src/environments/environment';
 
 import Swal from 'sweetalert2'
+import { MatSelect } from '@angular/material/select';
 
 // import { HighlightLoader, HighlightAutoResult } from 'ngx-highlightjs';
 // const themeGithub: string = 'node_modules/highlight.js/styles/github.css';
@@ -36,6 +37,7 @@ export class EditPageComponent implements OnInit {
   
   pages:pageCompany[] = [];
   border = true;
+  tempID = "";
 
   // Configuraciones Bloques
   blocks:Block[] = [];
@@ -49,6 +51,7 @@ export class EditPageComponent implements OnInit {
   // ViewChild
   @ViewChild('editor') editor = HTMLElement;
   @ViewChild('formNewBlock') formNewBlock!:NgForm;
+  @ViewChild('slcPage') slcPage!:HTMLSelectElement;
  
 
 
@@ -112,18 +115,20 @@ export class EditPageComponent implements OnInit {
       this.pureActive = 1
   }
 
-  getPages(){
+  getPages(idPageReload:string = ""){
     this.companyService.getWebWithPages(this.companyService.getCurrentIDCompany).subscribe(res =>{
       if(res.ok){
-
         this.pages = res.web.pages;
         this.web = res.web;
         this.favIcon!.href = `${environment.baseUrl}/uploads/web/${this.web!.favicon}` 
-
+        
+        if(idPageReload != "") this.pageSelected = this.web.pages.find(p => p._id = idPageReload)
         this.pageMain = this.web.pages.find(page => page._id == this.web?.pageMain);
         if(this.pages.length > 0){
           this.pageSelected ??= this.pages[0]; 
           this.blocks = this.pageSelected!.blocks.map(block => {block.editing = false; return block} )
+        
+          
           this.loadJsAndCSS();
         }
       }
@@ -139,7 +144,6 @@ export class EditPageComponent implements OnInit {
   onChange(newValue:pageCompany) {
     this.pageSelected = newValue;
     this.blocks = this.pageSelected?.blocks ?? []
-    console.log("paso")
     this.loadJsAndCSS();
   }
 
@@ -185,17 +189,27 @@ export class EditPageComponent implements OnInit {
   }
 
   newPage(form:NgForm){
-    if(form.valid){
-      const page:pageCompany = form.value
+    if(this.pages.length < 5){
+      if(form.valid){
+        const page:pageCompany = form.value
+      
+        this.companyService.newPage(this.companyService.getCurrentIDCompany,page).subscribe( res =>{
     
-      this.companyService.newPage(this.companyService.getCurrentIDCompany,page).subscribe( res =>{
-  
-        if(res.ok){
-          this.getPages();
-          this.modalService.dismissAll()
-        }
+          if(res.ok){
+            this.getPages();
+            this.modalService.dismissAll()
+          }
 
-      })
+        })
+      }
+      else{
+              Swal.fire({ background:'rgba(250,250,250,0.96)',
+              title: 'Oops!!',
+              text: `Limite 5 paginas`,                  
+              icon: 'error',
+              confirmButtonColor: '#3085d6'
+        });
+      }
     }
   }
 
@@ -232,26 +246,31 @@ export class EditPageComponent implements OnInit {
   
   
   newBlock(form:NgForm){
-    
-    if(this.pages.length < 5)
-      if(form.valid){
-        const block:Block = form.value
-        
-        this.companyService.newBlock(this.companyService.getCurrentIDCompany,this.pageSelected!._id,block).subscribe( res =>{
-          if(res.ok){  
-            this.blocks.push(res.block)
-            this.modalService.dismissAll()
-            
-          }
-        })
-      }
-    else
-      Swal.fire({ background:'rgba(250,250,250,0.96)',
+    if(this.pageSelected){  
+        if(form.valid){
+          const block:Block = form.value
+          
+          this.companyService.newBlock(this.companyService.getCurrentIDCompany,this.pageSelected!._id,block).subscribe( res =>{
+            if(res.ok){  
+              this.blocks.push(res.block)
+              this.modalService.dismissAll()
+              
+            }
+          })
+        }
+       
+    }else{
+      Swal.fire(
+        { 
+            background:'rgba(250,250,250,0.96)',
             title: 'Oops!!',
-            text: `Limite 5 paginas`,                  
+            text: `No hay ninguna pagina selecionada`,                  
             icon: 'error',
             confirmButtonColor: '#3085d6'
-    });
+      });
+    }
+   
+     
 
 
   }
@@ -267,15 +286,17 @@ export class EditPageComponent implements OnInit {
       this.companyService.updatePage(this.companyService.getCurrentIDCompany,this.pageSelected!._id, form.value).subscribe( res =>{
 
           if(res.ok){
+            
             Swal.fire({
               position: 'center',
               icon: 'success',
               title: 'Cambios Exitosos',
               showConfirmButton: true,
-            }).then( result =>{
-         
+            }).then( result =>{    
+              this.tempID = this.pageSelected!._id;
               this.pageSelected = res.page;
               this.modalService.dismissAll()
+              this.getPages(this.tempID);
             })
          
           

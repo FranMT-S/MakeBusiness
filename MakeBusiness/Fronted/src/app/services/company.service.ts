@@ -82,6 +82,12 @@ export class CompanyService {
     return this.http.put<CompanyResponse>(`${this.url}/${company._id}`,{state: !company.state},{headers})
   }
 
+  updateCompany(idCompany:string,company:Company):Observable<CompanyResponse>{
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+
+    return this.http.put<CompanyResponse>(`${this.url}/${idCompany}`,company,{headers})
+  }
+
 
   deleteCompany(company:Company):Observable<CompanyResponse>{ 
     const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')

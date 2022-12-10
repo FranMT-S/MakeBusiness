@@ -1,0 +1,15 @@
+<div style="width: 60px; height: 60px;" class="cursor-pointer" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <img class="w-100 h-100 rounded-circle" [src]="url" alt="" srcset="">
+</div>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item  (click)="navigated()" >
+      <mat-icon>person</mat-icon>
+      <span>Editar Perfil</span>
+    </button>
+    <button mat-menu-item (click)="logOut()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Cerrar Sesion</span>
+    </button>
+   
+</mat-menu>

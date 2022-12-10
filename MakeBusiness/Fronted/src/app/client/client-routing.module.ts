@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ValidarAuthGuard } from '../guards/validar-Auth.guard';
 import { ClientGuard } from '../guards/validar-rol.guard';
 import { ValidarTokenGuard } from '../guards/validar-token.guard';
 import { ClientComponent } from './client/client.component';
@@ -11,6 +12,9 @@ const routes: Routes = [
   {
     path:"",
     component:ClientComponent,
+
+    canActivate:[ValidarAuthGuard],
+    canLoad:[ ValidarAuthGuard],
     children : [
       {path:"companies",component:CompaniesComponent},
       {

@@ -9,6 +9,8 @@ const Company = require("../models/company")
 const Web = require("../models/web")
 const User = require("../models/user")
 const Page = require("../models/page");
+const File = require("../models/file");
+const Product = require("../models/product");
 const { default: mongoose } = require('mongoose');
 const { Block } = require('../models/block');
 
@@ -219,14 +221,18 @@ const deleteCompany = async (req = request, res = response) =>{
     try{
 
         const company = await Company.findByIdAndRemove(req.params.id);
-        await Web.findOneAndRemove({idCompany: req.params.id})
+      
         if(!company){
             return  res.status(400).json({
                 ok: false,
                 msg: "la compania ya fue eliminado o no esta registrada."
             })
         }
-        
+        await User.findByIdAndRemove(company.idUser)
+        const web = await Web.findOneAndRemove({idCompany: req.params.id})
+        await File.deleteMany({idCompany: req.params.id})
+        await Product.deleteMany({idCompany: req.params.id})
+        await Page.deleteMany({idWeb:web._id})
         
         return res.status(200).json({
             ok: true,
