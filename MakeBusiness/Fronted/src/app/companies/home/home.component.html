@@ -7,10 +7,12 @@
     <mat-sidenav #sideNav class="sidenav h-100 bg-purple"  mode="side">
       <div class="d-flex flex-column h-100 justify-content-between overflow-hidden">
         <mat-toolbar class="justify-content-between bg-purple-deg-1 p-0 sidenav__header"  >
-          <img src="../../../assets/Logo V3.png"   class="sidenav__logo ms-3 cursor-pointer">
+          <img src="../../../assets/Logo V3.png"  [routerLink]="['/landing-page']"  class="sidenav__logo ms-3 cursor-pointer">
           <button mat-icon-button class="text-white" (click)="sideNav.toggle()">
             <mat-icon>menu</mat-icon>
           </button>
+
+          
         </mat-toolbar>    
 
         <div class="sidenav__options bg-body  py-5  d-flex flex-column container">
@@ -22,6 +24,8 @@
               </button>
         </div>
 
+        
+
         <mat-toolbar class="justify-content-between bg-purple p-0 sidenav__footer ">
           <!-- <img src="../../../assets/Logo V3.png" class="sidenav__logo ms-3"> -->
     
@@ -32,14 +36,20 @@
   <!-- Contenido-->
     <mat-sidenav-content >
       <!-- NavBar-->
-      <mat-toolbar class="bg-purple">
+      <mat-toolbar class="bg-purple justify-content-between">
         <button mat-icon-button  (click)="sideNav.toggle()">
           <mat-icon class="text-white">menu</mat-icon>
         </button>
+
+        <app-avatar mat-icon-button>     
+        </app-avatar>
       </mat-toolbar>
+
+      
       <div >
           <router-outlet></router-outlet>
       </div>
 
     </mat-sidenav-content>
 </mat-sidenav-container>
+

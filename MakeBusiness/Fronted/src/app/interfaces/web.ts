@@ -1,4 +1,5 @@
 import * as internal from "stream"
+import { page, pageCompany } from "./page";
 
 
 export interface webCompany {
@@ -13,4 +14,9 @@ export interface webCompany {
     jsExtra?: string,
     genericHeaderHTML?: string,
     genericFooterHTML?: string,
+}
+
+export interface WebWithPage extends webCompany{
+    pages:pageCompany[];
+    
 }

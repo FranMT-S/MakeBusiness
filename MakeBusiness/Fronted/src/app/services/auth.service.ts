@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, ValidationErrors } from '@angular/forms';
 
 import { User } from '../interfaces/user';
-import { AuthResponse, basicResponse, LoginResponse, registerCompanySend } from '../interfaces/response';
+import { AuthResponse, basicResponse, LoginResponse, registerClientSend, registerCompanySend } from '../interfaces/response';
 
 @Injectable({
   providedIn: 'root'
@@ -58,20 +58,15 @@ export class AuthService {
     this.router.navigateByUrl("/auth/login")
   }
 
-  register( form:FormGroup ){
-    const url = `${this._baseUrl}/usuarios`
-    const headers = new HttpHeaders()
-      .append('x-token', localStorage.getItem('token') || '');
-    return this.http.post<AuthResponse>(url, form.value, { headers })
-      .pipe(
-        map(resp => resp.ok),
-        catchError( err => of(err.error.msg))
-      ); 
-  }
+ 
 
   registerCompany( companySend:registerCompanySend ){
     const url = `${this._baseUrl}/login/register/company`
+    return this.http.post<basicResponse>(url,companySend)
+  }
 
+  registerClient( companySend:registerClientSend ){
+    const url = `${this._baseUrl}/login/register/client`
     return this.http.post<basicResponse>(url,companySend)
   }
 
@@ -95,6 +90,30 @@ export class AuthService {
         catchError (err => of(false))
       );
   }
+
+  validarNoToken():Observable<boolean> {
+
+    const url = `${ this._baseUrl }/login/renew`;
+    const headers = new HttpHeaders()
+      .set('x-token', localStorage.getItem('token') || '');
+
+    return this.http.get<AuthResponse>( url, { headers } )
+      .pipe(
+        map( resp => {
+          if (localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+            return true;
+          }else{
+            localStorage.setItem("token", resp.token!)
+            const {...data} = resp.data;
+            this._user = data;
+            return false;
+          }
+     
+        }),
+        catchError (err => of(true))
+      );
+  }
+
 
   getImageUrl() {
     return `${this._baseUrl}/uploads/users/${this.user.image}`;

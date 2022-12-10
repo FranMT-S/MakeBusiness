@@ -1,21 +1,25 @@
 
 <mat-sidenav-container [hasBackdrop]="false" class="h-100">
-    
-
     <mat-sidenav #sidenav opened mode="side" style="width: 30vh;" class="d-flex flex-column pt-4 px-2">     
         <i class="fa fa-solid fa-arrow-left cursor-pointer ms-2 hover-zoom mb-4 text-primary fs-4" (click)="back()"></i>
         <p class="ms-2 fw-semibold"> Opciones</p>
-        <button class="btn btn-outline-primary " (click)="open(addPageForm)"> Agregar Pagina</button>
+        <button class="btn btn-outline-primary " (click)="openNewPage(addPageForm)"> Agregar Pagina</button>
+        <button class="btn btn-outline-success mt-1" (click)="openFullScreen(editPageForm)"> Editar Pagina</button>
         <button class="btn btn-outline-danger  mt-1 " (click)="deletePage()"> Borrar pagina</button>
 
         <hr>
         <p class="ms-2  mt-4 fw-semibold"> Paginas</p>
-        <mat-select class=" p-2" placeholder="Paginas" (ngModelChange)="onChange($event)" [(ngModel)]="pageSelected" name="page">
+        <mat-select class=" p-2" placeholder="Paginas" (ngModelChange)="onChange($event)" #slcPage [(ngModel)]="pageSelected" name="page">
             <mat-option *ngFor="let page of pages" [value]="page">
                 {{page.title | titlecase}}         
             </mat-option>
         </mat-select>
-
+        <p class="ms-2  mt-4 fw-semibold"> Pagina Principal</p>
+        <mat-select class=" p-2" placeholder="Pagina Principal" (ngModelChange)="onChangePageMain($event)" [(ngModel)]="pageMain" name="page">
+            <mat-option *ngFor="let page of pages" [value]="page">
+                {{page.title | titlecase}}         
+            </mat-option>
+        </mat-select>
         <hr>
         <div class="mt-4" *ngIf="pageSelected">
             <p class="ms-2 fw-semibold"> Bloques</p>
@@ -35,31 +39,22 @@
     <mat-sidenav-content style="height:91vh">
         <div>
             <div class="container-fluid">
-                <!-- <div class="row  position-fixed editor-container bg-light" style="width: 82%;"  
-                    [ngClass]="{'visible': pureActive == 0}"
-                    #editor
-                >
-                    <angular-editor 
-                    #editor [placeholder]="'Ingrese su texto'" 
-                    [config]="editorConfig" 
-                    [(ngModel)]="blockSelected.HTML"              
-                    >
-                    </angular-editor>
-                </div> -->
+                <div class="row" [ngClass]="{'block-container-active': editing}">
+                    <nav class="navbar  navbar-dark bg-dark navbar-expand-lg navbar-light bg-light mb-2 ">
 
-                <!-- <div class="row  position-fixed editor-container bg-light ps-2 pt-2" style="width: 82%;"  
-                    [ngClass]="{'visible': pureActive == 1}"
-                    #editor>
-                
-                    <textarea 
-                    #editorPure [placeholder]="'Ingrese su texto'" 
-                    style="height: 300px;" tabindex="-1" resize="none"
-                    [(ngModel)]="blockSelected.HTML" 
-                    class="editor-textarea "             
-                    >
-                    </textarea>
-                </div> -->
-                <div class="row" [ngClass]="{'block-container-active': editing}">           
+                        <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo01">
+                          <a class="navbar-brand" href="#"></a>
+                          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <li class="nav-item active" *ngFor="let page of pages">
+                                <a class="nav-link cursor-pointer" (click)="onChange(page)">{{page.title | titlecase}} </a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" > <i class="cursor-pointer fa-solid fa-store text-white"></i></a> 
+                            </li>
+                          </ul>
+          
+                        </div>
+                      </nav>           
                     <div 
                         #editable
                         *ngFor="let block of blocks" 
@@ -90,7 +85,7 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <form (ngSubmit)="newPage(formNewPage)" #formNewPage="ngForm">
+        <form (ngSubmit)="newPage(formNewPage)" autocomplete="off"  #formNewPage="ngForm">
             <div class="mb-3">
               <label for="" class="form-label">Titulo</label>
               <input type="text" ngModel required name="title" id="" class="form-control" placeholder="Nombre de la pagina" aria-describedby="helpId">
@@ -103,16 +98,49 @@
     </div>
 </ng-template>
 
+<ng-template #editPageForm let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Editar Pagina</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="bg-light modal-body">
+        <form (ngSubmit)="editPage(formEditPage)" autocomplete="off" #formEditPage="ngForm">
+            <div class="mb-3">
+              <label for="" class="form-label">Titulo</label>
+              <input type="text" [ngModel]="pageSelected!.title" required name="title" id="" class="form-control" placeholder="Nombre de la pagina" aria-describedby="helpId">
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Javascript</label>
+                <textarea class="form-control" 
+                    ngModel  name="js" id="js" class="form-control" 
+                   [ngModel]="pageSelected!.js" rows="3" style="height: 200px;">
+                </textarea>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">CSS</label>
+                <textarea class="form-control" 
+                    ngModel  name="css" id="css" class="form-control" 
+                   [ngModel]="pageSelected!.css" rows="3" style="height: 200px;">
+                </textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="modal.close('Cerrar')">Cerrar</button>
+                <button type="submit" class="btn btn-primary" [ngClass]="{'disabled': formEditPage.invalid}" >Guardar</button>
+            </div>
+        </form>   
+    </div>
+</ng-template>
+
+
 <ng-template #addBlockForm let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Agregar Bloque</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <form (ngSubmit)="newBlock(formNewBlock)" #formNewBlock="ngForm">
+        <form (ngSubmit)="newBlock(formNewBlock)" autocomplete="off" #formNewBlock="ngForm">
             <div class="mb-3">
-              <label for="" class="form-label">Tamaño</label>
-          
+              <label for="" class="form-label">Tamaño</label>      
                 <input type="number" min="1" max="12"   class="form-control"
                 required  placeholder="Tamaño" ngModel=1 name="size" >
 
@@ -144,7 +172,7 @@
 
 
 <ng-template #editBlockForm let-modal>
-    <form (ngSubmit)="editBlock(formEditBlock!)" #formEditBlock="ngForm">
+    <form (ngSubmit)="editBlock(formEditBlock!)" autocomplete="off" #formEditBlock="ngForm">
     
         <div class="modal-header">
             <div class="d-flex flex-column">
@@ -153,7 +181,7 @@
             </div>
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
-        <div class="modal-body">
+        <div class="bg-light modal-body">
             <div class="mb-3">
               <label for="" class="form-label text-success fw-semibold ">Tamaño</label>
           
@@ -182,13 +210,25 @@
                 
                 <div class="mb-3">
                   <label for="" class="form-label"></label>
-                  <textarea class="form-control" [(ngModel)]="htmlContent" name="HTML" id="HTML" rows="3"></textarea>
+                  <textarea 
+                         class="form-control"  *ngIf="pureActive == 1"
+                     [(ngModel)]="htmlContent" name="HTML" id="HTML" rows="3" style="height: 200px;">
+                  </textarea>
+                   
+                  <angular-editor 
+                        class="form-control"
+                        *ngIf="pureActive == 0"
+                        [placeholder]="'Ingrese su texto'" 
+                        [config]="editorConfig" 
+                        [(ngModel)]="htmlContent" 
+                        name="HTML">
+                  </angular-editor>
                 </div>
             </div>
             <hr *ngIf="HtmlVisual">
             <div *ngIf="HtmlVisual" 
             class="mx-auto block position-relative"
-            [class]="'col-' + blockSelected!.size"
+            [class]="pageSelected!.css + ' ' + 'col-' + blockSelected!.size"
             [ngClass]="{'border': borderEditing}"
             [innerHTML]="htmlContent | safeHtml" >
                             

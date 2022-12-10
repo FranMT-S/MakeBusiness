@@ -9,6 +9,7 @@ import { UsersModule } from './pages/users/users.module';
 import { HomeComponent } from './home/home.component';
 import { MaterialModule } from '../material/material.module';
 import { PipesModule } from '../shared/pipes/pipes.module';
+import { AvatarModule } from '../shared/avatar/avatar.module';
 
 
 
@@ -26,7 +27,8 @@ import { PipesModule } from '../shared/pipes/pipes.module';
     TemplatesModule,
     UsersModule,
     MaterialModule,  
-    PipesModule
+    PipesModule,
+    AvatarModule
   ],
 
 })

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CompanyGuard } from '../guards/validar-rol.guard';
 import { HomeComponent } from './home/home.component';
+import { CompanyComponent } from './pages/company/company.component';
 import { EditPageComponent } from './pages/pages/edit-page/edit-page.component';
 
 const routes: Routes = [
@@ -20,14 +21,21 @@ const routes: Routes = [
         loadChildren: () => import('./pages/products/products.module').then(module => module.ProductsModule)
       },
       {
+        path:"company",
+        component:CompanyComponent
+      },
+      {
         path:"web-config",
         loadChildren: () => import('./pages/web-config/web-config.module').then(module => module.WebConfigModule)
       },
+      { path: "", redirectTo: "company", pathMatch: "full"},
     ]
-  },      {
+  }, 
+  {
     path:"pages",
     loadChildren: () => import('./pages/pages/pages.module').then(module => module.PagesModule)
   },
+ 
 
 ];
 

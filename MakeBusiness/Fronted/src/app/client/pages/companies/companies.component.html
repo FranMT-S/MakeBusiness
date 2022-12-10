@@ -1,19 +1,17 @@
-<div class="main-container">
 
-    <div class="container container-companies">
 
-        <div class="search-company">
+        <!-- <div class="search-company">
             <label id="label-input-search" for="input-search" class="form-label">Buscar</label>
             <input type="email" class="form-control" id="input-search" placeholder="Nombre">
-        </div>
+        </div> -->
 
-        <div class="container companies">
+        <!-- <div class="container companies">
             <div class="row">
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let company of companies | paginate: { itemsPerPage: 8, currentPage: page }">
                     <div class="card m-3">
                         <h5 class="name-company">{{company.nameCompany}}</h5>
                         <h6 class="category-company">{{company.category}}</h6>
-                        <img [src]="company.image" class="card-img-top" [alt]="company.nameCompany">
+                        <img [src]="url + '/' + company.web.logo" class="card-img-top" [alt]="company.nameCompany">
                         <div class="card-body">
                           <p class="description-company">{{company.description}}</p>
                           <button type="button" class="btn btn-explorar">Explorar</button>
@@ -27,9 +25,40 @@
             nextLabel="Siguiente"
             class="pagination"
             ></pagination-controls>
+        </div> -->
+      
+        <div class="container w-100">
+            <div class="row mt-5">
+                <div class="col-12 col-sm-6 col-md-4 col-xl-4 mb-3 pe-sm-3 text-break " 
+                *ngFor="let company of companies | paginate: { itemsPerPage: 4, currentPage: page }">
+                    <mat-card  class="avatar-card h-100">
+                        <mat-card-header class="justify-content-center wrap" >
+       
+                          <mat-card-title class="text-center">{{company.nameCompany}}</mat-card-title>
+                          <mat-card-subtitle>{{company.category}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content class="ms-4 avatar-card-information break-word text-center">
+                            <img [src]="url + '/' + company.web.logo" class="card-img-top"
+                                style="width: 200px; height:200px; border-radius: 20px;"
+                            [alt]="company.nameCompany">
+   
+                        </mat-card-content>
+
+                        <mat-card-actions>
+                            <p class=" text-deg-purple-1 description-company">{{company.description}}</p>
+                            <button type="button" class="btn btn-explorar" (click)="navigated(company)">Explorar</button>
+                        </mat-card-actions>
+
+                      </mat-card>
+                </div>
+            </div>
+
+            <pagination-controls 
+            (pageChange)="page = $event" 
+            previousLabel="Anterior" 
+            nextLabel="Siguiente"
+            class="pagination"
+            ></pagination-controls>
         </div>
       
-      
-    </div>
-
-</div>
+  

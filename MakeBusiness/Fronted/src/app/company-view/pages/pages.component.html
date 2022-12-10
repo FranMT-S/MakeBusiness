@@ -1,0 +1,11 @@
+<div 
+    #editable
+    *ngFor="let block of blocks" 
+    [id]="'block-' + block._id"  
+    [class]="'block position-relative ' + 'col-' + block.size"
+    >
+
+    <div [innerHTML]="block.HTML | safeHtml" >
+        
+    </div>
+</div>

@@ -9,7 +9,7 @@ import { Product } from '../interfaces/product';
 import { Company } from '../interfaces/company';
 import { fileCompany, fileSend } from '../interfaces/fileCompany';
 import { webCompany } from '../interfaces/web';
-import { BlockResponse, CompanyResponse, FileResponse, PageResponse, ProductResponse, WebResponse } from '../interfaces/response';
+import { BlockResponse, CompanyResponse, CompanyWithWebResponse, FileResponse, PageResponse, ProductResponse, WebResponse, WebWithPagesResponse } from '../interfaces/response';
 
 
 
@@ -28,10 +28,14 @@ export class CompanyService {
 
   
   get getAllCompany():Observable<CompanyResponse>{
-  
     return this.http.get<CompanyResponse>(this.url)
- 
   }
+
+  get getAllCompanyWithWebAndPages():Observable<CompanyWithWebResponse>{
+    return this.http.get<CompanyWithWebResponse>(`${this.url}/with-webs`)
+  }
+
+  
 
   get getCurrentIDCompany(){
     return this.currentIDCompany
@@ -70,10 +74,18 @@ export class CompanyService {
     return this.http.get<CompanyResponse>(`${this.url}/user/${id}`);
   }
 
+
+
   changeStateCompany(company:Company):Observable<CompanyResponse>{
     const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
 
     return this.http.put<CompanyResponse>(`${this.url}/${company._id}`,{state: !company.state},{headers})
+  }
+
+  updateCompany(idCompany:string,company:Company):Observable<CompanyResponse>{
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+
+    return this.http.put<CompanyResponse>(`${this.url}/${idCompany}`,company,{headers})
   }
 
 
@@ -166,6 +178,15 @@ export class CompanyService {
     return this.http.get<WebResponse>(`${this.url}/${idCompany}/web`)
   }
 
+  getWebWithPages(idCompany:string):Observable<WebWithPagesResponse>{
+    return this.http.get<WebWithPagesResponse>(`${this.url}/${idCompany}/web-pages`)
+  }
+
+  updateMainPage(idCompany:string,idPage:string){
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+    return this.http.put<WebResponse>(`${this.url}/${idCompany}/web`,{pageMain:idPage},{headers})
+  }
+
   updateWeb(idCompany:string,web:webCompany | any):Observable<WebResponse>{
     const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
     const data:FormData = new FormData();
@@ -201,6 +222,11 @@ export class CompanyService {
   deletePage(idCompany:string,idPage:String):Observable<PageResponse>{
     const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
     return this.http.delete<PageResponse>(`${this.url}/${idCompany}/web/pages/${idPage}`,{headers})
+  }
+
+  updatePage(idCompany:string,idPage:String,page:pageCompany):Observable<PageResponse>{
+    const headers = new HttpHeaders().append('x-token', localStorage.getItem('token') || '')
+    return this.http.put<PageResponse>(`${this.url}/${idCompany}/web/pages/${idPage}`,page,{headers})
   }
 
   // Block

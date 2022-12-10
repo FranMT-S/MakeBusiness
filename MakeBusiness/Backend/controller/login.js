@@ -95,6 +95,8 @@ const registerCompany = async(req = request, res = response) => {
         const company = new Company({nameCompany,idUser:user._id,idPlan:plan._id});
         const web = new Web({title:nameCompany,idCompany:company._id});
 
+
+        
         await user.save()
         await company.save()
         await web.save()

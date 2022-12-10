@@ -128,7 +128,7 @@ const updateProduct = async (req = request, res = response) =>{
             })
         }
 
-        console.log(req.files)
+     
         if(req.files && req.files.image){
             //procesar el archivo
             const {image} = req.files;
@@ -155,9 +155,7 @@ const updateProduct = async (req = request, res = response) =>{
             });
              
              data.image = nameImage;
-             console.log("///")
-             console.log(nameImage)
-             console.log(data)
+   
         }
         
 

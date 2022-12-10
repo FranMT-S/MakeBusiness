@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
 
   hide = true;
   myForm:FormGroup = this.fb.group({
-    email   : ["compania3@gmail.com",[Validators.required,Validators.pattern(this.validatorService.emailPattern)]],
-    password: ["1234",[Validators.required]]
+    email   : ["",[Validators.required,Validators.pattern(this.validatorService.emailPattern)]],
+    password: ["",[Validators.required]]
   });
 
   constructor(private router:Router, private authService:AuthService,

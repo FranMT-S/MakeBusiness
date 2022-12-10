@@ -5,6 +5,8 @@ import { Product } from 'src/app/interfaces/product';
 import { CompanyService } from 'src/app/services/company.service';
 import { ValidatorService } from 'src/app/services/validator.service';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2'     
+
 
 @Component({
   selector: 'app-edit-product',
@@ -78,7 +80,13 @@ export class EditProductComponent implements OnInit {
     }
     if(!allow.includes(this.uploadImage.type)) {
       this.myForm.get("image")?.markAsPristine();
-       alert("tipo de archivo no valido");
+      Swal.fire({ 
+        background:'rgba(250,250,250,0.96)',
+        title: 'Oops!! hubo un error',
+        text: `Tipo de archivo no valido`,                  
+        icon: 'error',
+        confirmButtonColor: '#3085d6'
+      });
        return;
     }
     const reader = new FileReader();
@@ -105,21 +113,41 @@ export class EditProductComponent implements OnInit {
       }
 
       this.companyService.updateProduct(this.idProduct,product).subscribe(res =>{
-        console.log(res)
+       
         if(res.ok){
-          alert("Modificado con exito ")
-          this.router.navigateByUrl(`admin-companies/${localStorage.getItem("_web")}/products/list`)
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Cambios Exitosos',
+            showConfirmButton: true,
+          }).then( ()=>{
+            this.router.navigateByUrl(`admin-companies/${localStorage.getItem("_web")}/products/list`)
+
+          })
+
          
        
         }else{
-          alert(res.msg)
+          Swal.fire({ 
+            background:'rgba(250,250,250,0.96)',
+            title: 'Oops!! hubo un error',
+            text: `${res.msg}`,                  
+            icon: 'error',
+            confirmButtonColor: '#3085d6'
+          });
           console.log(res.error)
         }
       })
     }else{
       console.log(this.myForm.valid)
       console.log(this.myForm.value)
-      alert("Ingrese los datos correctos")
+      Swal.fire({ 
+        background:'rgba(250,250,250,0.96)',
+        title: 'Oops!! hubo un error',
+        text: `Ingrese los datos correctos`,                  
+        icon: 'error',
+        confirmButtonColor: '#3085d6'
+      });
     }
   }
 }

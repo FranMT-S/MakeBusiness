@@ -62,7 +62,7 @@
           </div>
        
     </div>
-    <button type="submit" class="btn btn-purple">Guardar Plan</button>
+    <button type="submit" class="btn btn-purple" [ngClass]="{'disabled': myForm.invalid}">Guardar Plan</button>
 
 </form>
     

@@ -189,20 +189,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 // estilos de los bloques
-.block{
-    min-height: 100px;
-    
-    &:hover &__detail{
-        visibility: visible !important;      
-    }
-
-    
-
-}
-
-.block__detail{      
-    visibility: hidden !important;
-}
 
 // Hightligh
 

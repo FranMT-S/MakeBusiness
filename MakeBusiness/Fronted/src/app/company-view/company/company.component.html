@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="row">
+        <nav class="navbar  navbar-dark bg-dark navbar-expand-lg navbar-light bg-light mb-2 ">
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo01">
+              <a class="navbar-brand" href="#"></a>
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item active">
+                  <a class="nav-link" [routerLink]="['/clients/companies']" routerLinkActive="router-link-active" > <i class="cursor-pointer fa-solid fa-arrow-left text-white"></i></a> 
+              </li>
+                <li class="nav-item active" *ngFor="let page of pages">
+                    <a class="nav-link cursor-pointer" (click)="navigated(page._id)">{{page.title | titlecase}} </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" (click)="navigated('shop')"> <i class="cursor-pointer fa-solid fa-store text-white"></i></a> 
+                </li>
+              </ul>
+
+            </div>
+          </nav>           
+    
+    </div>
+</div>
+<router-outlet></router-outlet>

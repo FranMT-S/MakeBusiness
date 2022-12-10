@@ -10,9 +10,9 @@
                   </div>
                 <mat-form-field appearance="legacy" color="accent">
                     <mat-label >Nombre</mat-label>
-                    <input matInput placeholder="" formControlName="name">
+                    <input matInput placeholder="" formControlName="userName">
                     <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-                    <mat-hint *ngIf="fieldNotValid('name')" class="form-label form-text text-danger">El campo no es valido </mat-hint>                   
+                    <mat-hint *ngIf="fieldNotValid('userName')" class="form-label form-text text-danger">El campo no es valido </mat-hint>                   
 
                 </mat-form-field>
                 
@@ -38,7 +38,7 @@
                 </mat-form-field>
 
                 <p>
-                    <button type="submit" class="btn btn-purple text-white mt-4">Registrarse</button>
+                    <button type="submit" class="btn btn-purple text-white mt-4 " [ngClass]="{'disabled': myForm.invalid}">Registrarse</button>
                 </p>
 
                 <p class="mt-4">

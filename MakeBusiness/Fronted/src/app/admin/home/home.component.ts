@@ -23,11 +23,11 @@ export class HomeComponent implements OnInit {
                     path:"plans",
                     icon:"fa fa-solid fa-money-bill-transfer"
                   },
-                  {
-                    text:"Plantillas",
-                    path:"templates",
-                    icon:"fa fa-solid fa-pen-to-square"
-                  },
+                  // {
+                  //   text:"Plantillas",
+                  //   path:"templates",
+                  //   icon:"fa fa-solid fa-pen-to-square"
+                  // },
 
                   ]
 

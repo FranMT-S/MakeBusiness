@@ -9,6 +9,7 @@ import { BeforeSlideDetail } from 'lightgallery/lg-events';
 import { fileCompany, fileSend } from 'src/app/interfaces/fileCompany';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
+import Swal from 'sweetalert2'     
 
 
 
@@ -85,7 +86,14 @@ export class FilesComponent implements OnInit {
           this.getFiles();
           this.modalService.dismissAll()
         }else{
-          alert("Hubo un error al subir el archivo")
+          
+          Swal.fire({ 
+            background:'rgba(250,250,250,0.96)',
+            title: 'Oops!! hubo un error',
+            text: `No se pudo subir el archivo`,                  
+            icon: 'error',
+            confirmButtonColor: '#3085d6'
+          });
         }
        })   
     }
@@ -100,14 +108,26 @@ export class FilesComponent implements OnInit {
   update(form:NgForm){
 
     if(form.valid){
-     
-
       this.companyService.updateFile(this.companyService.getCurrentIDCompany,this.fileUpdate._id,form.value).subscribe( res=>{
         if(res.ok){
-          this.getFiles();
-          this.modalService.dismissAll()
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Cambios Exitosos',
+            showConfirmButton: true,
+          }).then(()=>{
+            this.modalService.dismissAll()
+            this.getFiles();    
+	        })
+         
         }else{
-          alert("Hubo un error al actualizar el archivo")
+          Swal.fire({ 
+            background:'rgba(250,250,250,0.96)',
+            title: 'Oops!! hubo un error al actualizar',
+            text: `${res.msg}`,                  
+            icon: 'error',
+            confirmButtonColor: '#3085d6'
+          });
         }
        })   
     }

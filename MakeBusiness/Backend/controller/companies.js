@@ -9,6 +9,8 @@ const Company = require("../models/company")
 const Web = require("../models/web")
 const User = require("../models/user")
 const Page = require("../models/page");
+const File = require("../models/file");
+const Product = require("../models/product");
 const { default: mongoose } = require('mongoose');
 const { Block } = require('../models/block');
 
@@ -17,6 +19,67 @@ const { Block } = require('../models/block');
 const getCompanies = async (req = request, res = response) =>{
     try{
         const companies = await Company.find({});
+        return res.status(200).json({
+            ok: true,
+            companies
+        });
+
+    }catch (error){
+        return res.status(400).json({
+            ok:false,
+            msg:"hubo un error al obtener las companias",
+            error:error
+        })
+    }
+}
+
+const getCompaniesAndWeb = async (req = request, res = response) =>{
+    try{
+        const companies = await Company.aggregate([
+            {
+                "$lookup" : {
+                    "localField" : "_id",
+                    "from" : "Web",
+                    "foreignField" : "idCompany",
+                    "as" : "web"
+                }
+            }, 
+            {
+                "$unwind" : {
+                    "path" : "$web",
+                    "preserveNullAndEmptyArrays" : false
+                }
+            }, 
+                        
+            {
+                "$lookup" : {
+                    "localField" : "web._id",
+                    "from" : "Page",
+                    "foreignField" : "idWeb",
+                    "as" : "page"
+                }
+            },
+ 
+            {
+                "$project" : {
+                    "_id" : 1,
+                    "nameCompany" : 1,
+                    "description" : 1,
+                    "category" : 1,
+                    "state" : 1,
+                    "web._id":1,
+                    "web.logo" : 1,
+                    "web.keywords" : 1,
+                    "web.description" : 1,  
+                    "web.pageMain": 1,
+                    "page._id":1          
+                }
+            },
+ 
+        ] )
+
+
+        
         return res.status(200).json({
             ok: true,
             companies
@@ -158,14 +221,18 @@ const deleteCompany = async (req = request, res = response) =>{
     try{
 
         const company = await Company.findByIdAndRemove(req.params.id);
-        await Web.findOneAndRemove({idCompany: req.params.id})
+      
         if(!company){
             return  res.status(400).json({
                 ok: false,
                 msg: "la compania ya fue eliminado o no esta registrada."
             })
         }
-        
+        await User.findByIdAndRemove(company.idUser)
+        const web = await Web.findOneAndRemove({idCompany: req.params.id})
+        await File.deleteMany({idCompany: req.params.id})
+        await Product.deleteMany({idCompany: req.params.id})
+        await Page.deleteMany({idWeb:web._id})
         
         return res.status(200).json({
             ok: true,
@@ -349,12 +416,18 @@ const newPage = async (req = request, res = response) =>{
         if(!web){
             return res.status(400).json({
                 ok:false,
-                msg:"no se pudo encontrar la pagina"        
+                msg:"no se pudo encontrar la web"        
             })
         }
-        
+
         const page = new Page({idWeb:web._id, title:req.body.title})
+
         await page.save();
+
+        if(!web.pageMain){
+            web.pageMain = page._id
+            await web.save()
+        }
 
         return res.status(200).json({
             ok:true,
@@ -375,13 +448,13 @@ const getPage = async (req = request, res = response) =>{
     try{
         const {id, idPage} = req.params;
 
-        // const web = await Web.findOne({idCompany:id});
-        // if(!web){
-        //     return res.status(400).json({
-        //         ok:false,
-        //         msg:"No se pudo encontrar la web de la pagina buscado"
-        //     })
-        // }
+        const web = await Web.findOne({idCompany:id});
+        if(!web){
+            return res.status(400).json({
+                ok:false,
+                msg:"No se pudo encontrar la web de la pagina buscado"
+            })
+        }
         
         const page = await Page.findById(idPage);
 
@@ -443,7 +516,7 @@ const getWebWithPages = async (req = request, res = response) =>{
                                         from:"Page",
                                         localField:"_id",
                                         foreignField:"idWeb",
-                                        as:"Pages"
+                                        as:"pages"
                                     }
                                 },
                                 {
@@ -486,6 +559,14 @@ const deletePage = async (req = request, res = response) =>{
                 msg: "la pagina ya fue eliminado o no esta registrada."
             })
         }
+
+        const web = await Web.findById(page.idWeb);              
+        if(!web){
+            if(web.pageMain == page._id){
+                web.pageMain = null;
+                web.save();
+            }
+        }
         
         return res.status(200).json({
             ok: true,
@@ -504,14 +585,13 @@ const deletePage = async (req = request, res = response) =>{
 
 
 const updatePage = async (req = request, res = response) =>{
-
     try{     
         const newData = req.body;
-        const update = await Page.findByIdAndUpdate(req.params.idPage,newData);
+        const page = await Page.findByIdAndUpdate(req.params.idPage,newData,{new:true});
         return res.status(200).json({
             ok: true,
             msg: "archivo actualizado con exito.",
-            update
+            page
         })
     }catch (error){
         return res.status(400).json({
@@ -555,7 +635,8 @@ const newBlock = async (req = request, res = response) =>{
    
         return res.status(200).json({
             ok:true,
-            page
+            page,
+            block
         })
   
     }catch (error){
@@ -689,8 +770,8 @@ const updateBlock = async (req = request, res = response) =>{
         return res.status(200).json({
             ok: true,
             msg: "bloque actualizado con exito.",
-            block
-
+            block,
+            blocks: updatePage.blocks
         })
     }catch (error){
         return res.status(400).json({
@@ -704,7 +785,9 @@ const updateBlock = async (req = request, res = response) =>{
 module.exports =  {
                     getCompanies,
                     getCompany,
+                    getCompaniesAndWeb,
                     getCompanyByUser,
+                    getWebWithPages,
                     newCompany,
                     deleteCompany,
                     updateCompany,

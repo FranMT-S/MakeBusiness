@@ -4,6 +4,8 @@ import { CompanyService } from 'src/app/services/company.service';
 import { ValidatorService } from 'src/app/services/validator.service';
 import { environment } from 'src/environments/environment';
 
+import Swal from 'sweetalert2'     
+
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -42,7 +44,13 @@ export class AddProductComponent implements OnInit {
     }
     if(!allow.includes(this.uploadImage.type)) {
       this.myForm.get("image")?.markAsPristine();
-       alert("tipo de archivo no valido");
+      Swal.fire({ 
+        background:'rgba(250,250,250,0.96)',
+        title: 'Oops!! hubo un error',
+        text: `Tipo de archivo no valido`,                  
+        icon: 'error',
+        confirmButtonColor: '#3085d6'
+      });
        return;
     }
 
@@ -74,16 +82,37 @@ export class AddProductComponent implements OnInit {
       this.companyService.addProduct(product).subscribe(res =>{
         console.log(res)
         if(res.ok){
-          alert("Agregado con exito")
-          this.myForm.reset()
-          this.imageUrl = `${environment.baseUrl}/uploads/other/img-default.png`;
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Agregado con exito',
+            showConfirmButton: true,
+          }).then(()=>{
+            this.myForm.reset()
+            this.imageUrl = `${environment.baseUrl}/uploads/other/img-default.png`;
+          })
+         
         }else{
-          alert(res.msg)
+         
+          Swal.fire({ 
+            background:'rgba(250,250,250,0.96)',
+            title: 'Oops!! hubo un error',
+            text: `${res.msg}`,                  
+            icon: 'error',
+            confirmButtonColor: '#3085d6'
+          });
           console.log(res.error)
         }
       })
     }else{
-      alert("Ingrese los datos correctos")
+     
+      Swal.fire({ 
+        background:'rgba(250,250,250,0.96)',
+        title: 'Oops!! hubo un error',
+        text: `Ingrese los datos correctos`,                  
+        icon: 'error',
+        confirmButtonColor: '#3085d6'
+      });
     }
 
   

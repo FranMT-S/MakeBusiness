@@ -8,6 +8,8 @@ import { Product } from 'src/app/interfaces/product';
 import { CompanyService } from 'src/app/services/company.service';
 import { environment } from 'src/environments/environment';
 
+import Swal from 'sweetalert2'     
+
 @Component({
   selector: 'app-list-products',
   templateUrl: './list-products.component.html',
@@ -75,14 +77,35 @@ export class ListProductsComponent implements OnInit {
   deleteProduct(){
     let id = this.selectedRowIndex;
    
-    this.companyService.deleteProduct(id).subscribe(res =>{
-      if(res.ok){
-        this.getProducts();
-      }else{
-        alert("no se pudo eliminar el plan")
-        console.log(res.error)
+
+    Swal.fire({
+
+      text: "¿Desea eliminar esta producto?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: "No"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.companyService.deleteProduct(id).subscribe(res =>{
+          if(res.ok){
+            this.getProducts();
+          }else{  
+            Swal.fire({ 
+              background:'rgba(250,250,250,0.96)',
+              title: 'Oops!! hubo un error',
+              text: `no se pudo eliminar`,                  
+              icon: 'error',
+              confirmButtonColor: '#3085d6'
+            });
+            console.log(res.error)
+          }
+        })
       }
     })
+ 
   }
   
 

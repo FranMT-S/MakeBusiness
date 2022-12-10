@@ -14,8 +14,11 @@ export interface Product {
 export interface ProductHistory{
     _id: string,
     name: string,   
+    image?: string | File;
     price: number;
     quantity: number;
     total: number;
     date: Date;
 }
+
+

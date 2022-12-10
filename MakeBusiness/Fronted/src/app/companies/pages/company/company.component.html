@@ -1,0 +1,47 @@
+<div class="m-5" >  
+  
+
+
+    <form class="form-edit mx-auto text-center py-5 bg-body rounder"
+            [formGroup]="myForm" autocomplete="off" (ngSubmit)="save()">
+        
+        <div class="row w-50 mx-auto mb-4" *ngIf="company">
+            <h1>Informacion de su empresa</h1>
+            <div class="mb-3 col-md-12 ">
+              <span class="form-label">Nombre de la compania </span>
+              <input type="text"
+                class="form-control"  formControlName="nameCompany" id="nameCompany" aria-describedby="helpId" placeholder="" >
+                <span *ngIf="fieldNotValid('nameCompany')" class="form-label form-text text-danger">El campo no es valido </span>
+            </div>
+    
+            <div class="mb-3 col-md-12">
+              <span class="form-label">Descripción </span>
+              <textarea type="text" class="form-control text-center" formControlName="description" id="description" placeholder="" ></textarea>
+              <span *ngIf="fieldNotValid('description')" class="form-label form-text text-danger">El campo no es valido </span>
+            </div>
+
+            <div class="mb-3 col-md-12">
+                <span class="form-label">Categoria </span>
+                <input type="text"   class="form-control" formControlName="category" id="category" placeholder="" />        
+                <span *ngIf="fieldNotValid('category')" class="form-label form-text text-danger">El campo no es valido </span> 
+            </div>
+
+            <div class="mb-3 col-md-12">
+                <span class="form-label">Localizacion </span>
+                <input type="text"   class="form-control" formControlName="location" id="location" placeholder="" />        
+               
+            </div>
+
+            <div class="mb-3 col-md-12">
+                <span class="form-label">Telefono </span>
+                <input type="text"   class="form-control" formControlName="phone" id="phone" placeholder="" />        
+            </div>
+
+
+        </div>
+        <button type="submit" class="btn btn-purple" [ngClass]="{'disabled': myForm.invalid}">Guardar Cambios</button>
+        
+    </form>
+    
+</div>
+

@@ -11,6 +11,12 @@ import { CompanyService } from 'src/app/services/company.service';
 export class HomeComponent implements OnInit {
   optionButtons = [
     {
+      text:"Mi Empresa",
+      path:"company",
+      icon:"fa fa-solid fa-building ps-2"
+    },
+
+    {
       text:"Administrar Archivos",
       path:"files",
       icon:"fa fa-solid fa-file ps-2"
@@ -32,8 +38,12 @@ export class HomeComponent implements OnInit {
     },
 
     ]
+  favIcon: HTMLLinkElement | null = document.querySelector('#favIcon'); 
+
+
   constructor(private companyService: CompanyService, private activatedRoute:ActivatedRoute) { 
 
+    this.favIcon!.href = `favicon.ico` 
 
      this.activatedRoute.params.subscribe( (params:Params) => {
       let id = params['id']   

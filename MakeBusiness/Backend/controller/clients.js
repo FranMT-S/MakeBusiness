@@ -1,5 +1,7 @@
-const {request, response} = require("express")
-const Client = require("../models/client")
+const {request, response} = require("express");
+const { default: mongoose } = require("mongoose");
+const Client = require("../models/client");
+const  {ProductHistory} =  require("../models/productHistory");
  
 
 
@@ -22,7 +24,7 @@ const getClients = async (req = request, res = response) =>{
 
 const getClient = async (req = request, res = response) =>{
     try{
-        const client = await Client.findOne({idUser:req.params.idUser});
+        const client = await Client.findOne({idUser:mongoose.Types.ObjectId(req.params.idUser)});
         if(!client){
             return res.status(400).json({
                 ok:false,
@@ -52,21 +54,33 @@ const getClient = async (req = request, res = response) =>{
 const updateHistorical = async (req = request, res = response) =>{
 
     try{
-      
-        const client = await Client.findOne({idUser:req.params.idUser})
+        const data = req.body
+        data.total = data.price * data.quantity
+        
+        const clients = await Client.find({idUser:mongoose.Types.ObjectId(req.params.idUser)});
+        const client = clients[0]
+        
+        const productHistory = new ProductHistory(data);
+    
+         client.historical.push(productHistory);
+         await client.save();
 
-        return res.status(200).json({
+         return res.status(200).json({
             ok: true,
             msg: "historico actualizado con exito.",
-            client: client
+            client,
+            product: productHistory
         })
+
+      
+   
         
     
     }catch (error){
         return res.status(400).json({
             ok:false,
             msg:"No se pudo actualizar el historico",
-            error:error
+            error
         })
     }
 }

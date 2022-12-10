@@ -1,0 +1,40 @@
+<div class="container w-100" *ngIf="products.length > 0;else noProducts" >
+    <div class="row mt-5">
+        <div class="col-12 col-sm-6 col-md-4 col-xl-4 mb-3 pe-sm-3 text-break " 
+        *ngFor="let product of products | paginate: { itemsPerPage: 4, currentPage: page }">
+            <mat-card  class="avatar-card h-100">
+                <mat-card-header class="justify-content-center wrap" >
+        
+                <mat-card-title class="text-center">{{product.name | titlecase}}</mat-card-title>
+                <mat-card-subtitle>{{product.categories | titlecase}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content class="ms-4 avatar-card-information break-word text-center">
+                    <img [src]="url + '/' + product.image" class="card-img-top"
+                        style="width: 200px; height:200px; border-radius: 20px;"
+                    [alt]="product.name">
+                    <p class="fs-6 fw-semibold text-center mt-4">Precio: {{product.price}} Lps.</p>
+                    <p class="text-capitalize fw-semibold text-deg-purple-1 description-product" style="font-size: 1.1em;"
+                    >{{product.description}}
+                </p>
+                </mat-card-content>
+        
+                <mat-card-actions class="text-center">
+                    <button type="button" class="btn btn-primary mb-4" (click)="addShoppingCar(product)">Agregar al carrito de compra</button>
+                </mat-card-actions>
+        
+            </mat-card>       
+        </div>
+        <pagination-controls 
+        (pageChange)="page = $event" 
+        previousLabel="Anterior" 
+        nextLabel="Siguiente"
+        class="pagination justify-content-center"
+        ></pagination-controls>
+    </div>
+</div>
+
+
+<ng-template #noProducts>
+    <h1 class="text-center mt-5">No hay productos</h1>
+</ng-template>
+

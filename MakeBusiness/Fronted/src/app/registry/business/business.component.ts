@@ -71,14 +71,16 @@ export class BusinessComponent implements OnInit {
               title: 'Correcto',
             })
             this.router.navigateByUrl('/auth/login');
-          }else{
-            Swal.fire({ background:'rgba(250,250,250,0.96)',
-            title: 'Oops!!',
-            text: `${res.msg}`,                  
+          }
+        },({error}) =>{
+          Swal.fire({ 
+            background:'rgba(250,250,250,0.96)',
+            title: 'Oops!! hubo un error',
+            text: `${error.msg}`,                  
             icon: 'error',
             confirmButtonColor: '#3085d6'
-            });
-          }
+          });
+          console.log(error)
         })
     }else{
       Swal.fire({ background:'rgba(250,250,250,0.96)',

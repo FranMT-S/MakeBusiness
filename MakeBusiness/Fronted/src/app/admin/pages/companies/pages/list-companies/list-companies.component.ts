@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Company } from 'src/app/interfaces/company';
 
 import { CompanyService } from 'src/app/services/company.service';
-
+import Swal from 'sweetalert2'     
 
 
 
@@ -60,24 +60,48 @@ export class ListCompaniesComponent implements OnInit {
       
       this.companyService.changeStateCompany(company).subscribe( res =>{
         if(!res.ok){
-          alert("No cambiar el estado")
+          Swal.fire({ 
+            background:'rgba(250,250,250,0.96)',
+            title: 'No se pudo cambiar el estado',               
+            icon: 'error',
+            confirmButtonColor: '#3085d6'
+          });
+
         }      
       });
   }
 
   deleteCompany(){
       
-    if (confirm("Desea eliminar la empresa " + this.selectedCompany.nameCompany)) {
-     
-      this.companyService.deleteCompany(this.selectedCompany).subscribe( res =>{
-        if(res.ok){
-          this.dataSource.data = this.dataSource.data.filter( company => company._id != this.selectedCompany._id)
-        }else{
-          alert("no se pudo eliminar la empresa")
-          console.log(res.error)
-        }
-      });
-    } 
+    Swal.fire({
+      text: "¿Desea eliminar esta compania?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: "No"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.companyService.deleteCompany(this.selectedCompany).subscribe( res =>{
+          if(res.ok){
+            this.dataSource.data = this.dataSource.data.filter( company => company._id != this.selectedCompany._id)
+
+          }else{
+            Swal.fire({ 
+              background:'rgba(250,250,250,0.96)',
+              title: 'Oops!! No se pudo eliminar',
+              text: `${res.msg}`,                  
+              icon: 'error',
+              confirmButtonColor: '#3085d6'
+            });
+            console.log(res.error)
+          }
+        });
+      }
+    })
+
+
   }
 
 }

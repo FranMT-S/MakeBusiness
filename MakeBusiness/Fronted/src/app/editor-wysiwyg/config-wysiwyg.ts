@@ -5,7 +5,7 @@ export const editorConfig:AngularEditorConfig = {
     spellcheck: true,
     height: '15rem',
     minHeight: '5rem',
-    placeholder: 'Enter text here...',
+    placeholder: 'Ingrese su contenido',
     translate: 'no',
     defaultParagraphSeparator: 'p',
     defaultFontName: 'Arial',
@@ -40,5 +40,6 @@ export const editorConfig:AngularEditorConfig = {
     sanitize: false,
     toolbarPosition: 'top',
     toolbarHiddenButtons: [
+      [],['insertImage']
     ]
 };

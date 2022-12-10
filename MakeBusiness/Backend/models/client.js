@@ -1,5 +1,5 @@
 const { Schema, model} = require("mongoose");
-const { productHistorySchema:Product } = require("./productHistory");
+const { productHistorySchema } = require("./productHistory");
 
 
 const clientSchema = Schema({
@@ -8,7 +8,7 @@ const clientSchema = Schema({
                         ref: 'User',
                         required: true,
                     },
-                    historical:[Product],
+                    historical:[productHistorySchema],
                                               
             },{ collection: 'Client',versionKey: false })
 

@@ -27,7 +27,7 @@ const pageSchema = Schema({
                     useGenericHeader: {
                         type: Boolean,
                         require:false,
-                        default: false
+                        default: true
                     },
                     idWeb: {
                         type: Schema.Types.ObjectId,

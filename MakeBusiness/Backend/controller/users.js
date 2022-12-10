@@ -3,8 +3,16 @@ const User = require("../models/user")
 const Company = require("../models/company")
 const Web = require("../models/web")
 const Client = require("../models/client")
- 
+const { ProductHistory } = require('../models/productHistory');
+const Page = require("../models/page")
+
+const File = require("../models/file");
+const Product = require("../models/product");
+const path = require('path');
+const fs = require('fs');
+
 const { v4: uuidv4 } = require('uuid');
+const { Mongoose, default: mongoose } = require("mongoose")
 
 const getUsers = async (req = request, res = response) =>{
     try{
@@ -106,6 +114,7 @@ const updateUser = async (req = request, res = response) =>{
     try{
       
         const {email} = req.body;
+        const data = req.body
 
         const emailUser = await User.findOne({"email":email});
       
@@ -118,9 +127,43 @@ const updateUser = async (req = request, res = response) =>{
                 })
             }
         }
+
+     
+    
+        if(req.files && req.files.image){
+            //procesar el archivo
+         
+           
+            const {image} = req.files;
+            const partsName = image.name.split('.')
+            const fileEXtension = partsName[partsName.length - 1];
+            const userP = await User.findById(req.params.id);
+            // Nombre archivo
+            const nameImage = `${ uuidv4() }.${ fileEXtension }`;
+            
+            //Generar el nombre del archivo usando el Id de la nueva instancia
+            const path = `./upload/users/${ nameImage }`;
+            
+            if(userP.image)
+                if (userP.image != "" && fs.existsSync(`./upload/users/${ userP.image }`)) 
+                    fs.unlinkSync(`./upload/users/${ userP.image }`)
+                
+            
+            image.mv(path, (err) => {
+                if (err) {
+                    return res.status(500).json({
+                        ok: false,
+                        msg: 'Error al actualizar la imagen en la ruta destino "users"'
+                    });
+                }
+            });
+            
+            data.image = nameImage;
+        }
         
+   
        
-        const user = await User.findByIdAndUpdate(req.params.id, req.body,{ new: true});
+        const user = await User.findByIdAndUpdate(req.params.id, data,{ new: true});
         
         if(!user){
             return res.status(400).json({
@@ -158,11 +201,18 @@ const deleteUser = async (req = request, res = response) =>{
         }
 
         if(user.type == "company"){
-            const company = await Company.findByIdAndRemove({idUser: user._id})
-            const web = await Web.findByIdAndRemove({title:company.nameCompany, idCompany:company._id});         
+   
+            const company = await Company.findOneAndRemove({idUser: user._id})
+            const web =   await Web.findOneAndRemove({idCompany:company._id})        
             // Guardar Compania y web
-            await company.save();
-            await web.save();
+  
+            await File.deleteMany({idCompany: company.id})
+            await Product.deleteMany({idCompany: company.id})
+            await Page.deleteMany({idWeb:web._id})
+        }
+
+        if(user.type == "client"){
+            await Client.findOneAndRemove({idUser:user._id})         
         }
         
         
