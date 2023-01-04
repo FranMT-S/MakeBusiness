@@ -7,3 +7,12 @@ Simulador de un editor de paginas web para empresas
 admin@gmail.com - 1234
 company@gmail.com - 1234
 client@gmail.com - 1234
+
+Tecnologias implementadas:
+---
+* Angular
+* NodeJS
+* express
+* mongoDB
+
+Link demo: https://fran-makebusiness.onrender.com/
