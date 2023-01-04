@@ -34,6 +34,11 @@ app.use("/api/login", require('./routers/login.router'));
 app.use("/api/clients", require('./routers/clients.router'));
 
 
+// Manejar cualquier otra ruta
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public/index.html'));
+});
+
 app.listen(process.env.PORT, () => {
     console.log("servidor levantado en el puerto: " + process.env.PORT)
 })
