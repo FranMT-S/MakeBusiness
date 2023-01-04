@@ -11,6 +11,8 @@ const router = Router();
 
 router.get("/renew", validarJWT, revalidarToken);
 
+router.get("/test", (req,res) => { res.send("este es un test")});
+
 
 router.post("/", [
         check("email", "El correo es invalido, o verifique que el campo no este vacío.").isEmail(),

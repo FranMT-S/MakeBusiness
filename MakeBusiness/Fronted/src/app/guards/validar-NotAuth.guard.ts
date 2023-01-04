@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { CompanyService } from '../services/company.service';
@@ -16,6 +16,11 @@ export class ValidarNotAuth implements CanActivate, CanLoad,CanActivateChild {
 
 
   canActivate(): Observable<boolean> | boolean{
+
+    if (localStorage.getItem('token') === null) {
+      return of(true);
+    }
+
     return this.authService.validarNoToken()
       .pipe(
         tap( valid => {
@@ -34,11 +39,17 @@ export class ValidarNotAuth implements CanActivate, CanLoad,CanActivateChild {
             }
             else 
               this.router.navigateByUrl('/auth/login');    
+          }else{
+            this.router.navigateByUrl('/auth/login');    
           }
         })
       );
   }
   canLoad(): Observable<boolean> | boolean{
+    if (localStorage.getItem('token') === null) {
+      return of(true);
+    }
+
     return this.authService.validarNoToken()
       .pipe(
         tap( valid => {
@@ -57,6 +68,8 @@ export class ValidarNotAuth implements CanActivate, CanLoad,CanActivateChild {
             }
             else 
               this.router.navigateByUrl('/auth/login');    
+          }else{
+            this.router.navigateByUrl('/auth/login');    
           }
         })
       );

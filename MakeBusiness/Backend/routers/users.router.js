@@ -15,6 +15,7 @@ router.use(expressFileUpload({
     createParentPath:true
 }));
 
+router.get("/test", (req,res) => { res.send("este es un test")});
 
 router.get("/",getUsers)
 router.get("/:id",getUser)

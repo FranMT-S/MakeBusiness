@@ -14,6 +14,8 @@ router.use(expressFileUpload({
     createParentPath:true
 }));
 
+router.get("/test", (req,res) => { res.send("este es un test")});
+
 // Archivos
 router.post('/:idCompany',validarJWT,fileValidate,  fileUpload);
 router.get('/:idCompany', returnFiles);
